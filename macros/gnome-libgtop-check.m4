@@ -63,7 +63,7 @@ AC_DEFUN([GNOME_LIBGTOP_HOOK],
 	fi
 
 	AC_PATH_PROG(LIBGTOP_CONFIG, libgtop-config, no)
-	min_libgtop_version=ifelse([$1], ,0.25.0,$1)
+	min_libgtop_version=ifelse([$1], ,0.25.1,$1)
 	AC_MSG_CHECKING(for libgtop - version >= $min_libgtop_version)
 	no_libgtop=""
 	if test "$LIBGTOP_CONFIG" = "no" ; then
