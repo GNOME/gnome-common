@@ -37,7 +37,6 @@
 #if 0
 #include <stdlib.h>
 #endif
-#include "ansidecl.h"
 
 /* FIXME: It'd be nice to configure around these, but the include files are too
    painful.  These macros should at least be more portable than hardwired hex
@@ -63,11 +62,11 @@
  */
 long
 strtol(nptr, endptr, base)
-	CONST char *nptr;
+	const char *nptr;
 	char **endptr;
 	register int base;
 {
-	register CONST char *s = nptr;
+	register const char *s = nptr;
 	register unsigned long acc;
 	register int c;
 	register unsigned long cutoff;
