@@ -19,7 +19,7 @@ fi
   DIE=1
 }
 
-(grep "^AM_PROG_INTLTOOL" $srcdir/configure.in >/dev/null) && {
+(grep "^AC_PROG_INTLTOOL" $srcdir/configure.in >/dev/null) && {
   (intltoolize --version) < /dev/null > /dev/null 2>&1 || {
     echo
     echo "**Error**: You must have \`intltoolize' installed to compile $PKG_NAME."
@@ -117,6 +117,10 @@ do
 	  echo "Making $dr/aclocal.m4 writable ..."
 	  test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
         fi
+      fi
+      if grep "^AC_PROG_INTLTOOL" configure.in >/dev/null; then
+        echo "Running intltoolize..."
+	intltoolize --copy --force --automake
       fi
       if grep "^AM_PROG_XML_I18N_TOOLS" configure.in >/dev/null; then
         echo "Running xml-i18n-toolize..."
