@@ -1,3 +1,10 @@
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
+	* gnome-pkgconfig.m4 (GNOME_CHECK_PKGCONFIG): Require pkg-config 0.7.0
+	and fix download URL.
+
+	* gnome-platform.m4: Require pkgconfig on the GNOME 2.0 platform.
+
 2001-06-01  Peter Williams  <peterw@ximian.com>
 
 	* autogen.sh: s,Gnome,$PKG_NAME,g
