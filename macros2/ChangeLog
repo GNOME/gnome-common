@@ -1,3 +1,9 @@
+2003-08-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Show the version found for the various build tools
+	like automake, autoconf, libtool, etc. Patch from Steve Chaplin
+	(bug #119533).
+
 2003-08-05  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* compile-flags.m4: Continuing to try and get the flags passed

@@ -94,7 +94,7 @@ version_check() {
 	    vc_actual_version=`$vc_checkprog --version | head -1 | \
                                sed 's/^.*[ 	]\([0-9.]*[a-z]*\).*$/\1/'`
 	    if compare_versions $vc_min_version $vc_actual_version; then
-		echo "found."
+		echo "found $vc_actual_version"
 		# set variable
 		eval "$vc_variable=$vc_checkprog"
 		vc_status=0
