@@ -1,7 +1,11 @@
 #!/bin/sh
 
 if test -z "$GNOME_DATADIR" ; then
-  GNOME_DATADIR=`gnome-config --datadir`
+  if test -z "$GNOME_DIR" ; then
+    GNOME_DATADIR=`gnome-config --datadir`
+  else
+    GNOME_DATADIR="$GNOME_DIR/share"
+  fi
 fi
 
 if test -n "$USE_GNOME2_MACROS" ; then

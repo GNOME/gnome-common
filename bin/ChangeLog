@@ -1,3 +1,8 @@
+2000-11-20  Martin Baulig  <baulig@suse.de>
+
+	* gnome-autogen.sh: Initialize GNOME_DATADIR from
+	GNOME_DIR if set before trying gnome-config.
+
 2000-05-29  Martin Baulig  <baulig@suse.de>
 
 	* gnome-autogen.sh: New file. Moved here from
