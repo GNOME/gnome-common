@@ -153,7 +153,17 @@ do
       fi
 
       echo "Running aclocal $aclocalinclude ..."
-      aclocal-1.4 $aclocalinclude
+      aclocal-1.4 $aclocalinclude || {
+        echo
+	echo "**Error**: \`aclocal' failed. Please fix the warnings"
+        echo "(probably missing development files) and try again"
+	DIE=1
+      }
+
+      if test "$DIE" -eq 1; then
+        exit 1
+      fi
+
       if grep "^AM_CONFIG_HEADER" $bn >/dev/null; then
 	echo "Running autoheader..."
 	autoheader
