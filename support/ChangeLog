@@ -1,3 +1,13 @@
+1998-09-02  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnomesupport.awk (canonicalize_file_name, realpath): Emit
+	declarations if required.
+
+	* canonicalize.c (canonicalize_file_name, realpath): New file.
+	Imported from GLibC 2.0.7.
+
+	* libc-symbols.h: New file. Imported from GLibC 2.0.7.
+
 1998-08-24  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnomesupport.awk: Emit declarations for `setreuid', `setregid'
