@@ -1,3 +1,13 @@
+1998-07-15  Martin Baulig  <baulig@Stud.Informatik.uni-trier.de>
+
+	* gnomesupport-h.c (memmove strtod strtol strtoul): Emit
+	declarations.
+
+	* memmove.c: New file.  Imported from GNU libiberty.
+
+	* strtod.c, strtol.c, strtoul.c: New files. Imported from
+	GNU libiberty.
+
 1998-07-14  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* mkstemp.c (<stdint.h>): Systems that don't have `mkstemp'

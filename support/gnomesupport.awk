@@ -106,6 +106,37 @@ END {
     print "                 char **/*save_ptr*/);";
   }
 
+  if (!def["HAVE_STRTOD"]) {
+    print "";
+    print "/* Convert the initial portion of the string pointed to by";
+    print "   nptr to double representation and return the converted value.";
+    print "   If endptr is not NULL, a pointer to the character after the";
+    print "   last character used in the conversion is stored in the";
+    print "   location referenced by endptr. */";
+    print "double strtod (const char */*nptr*/, char **/*endptr*/);";
+  }
+
+  if (!def["HAVE_STRTOL"]) {
+    print "";
+    print "/* Convert the initial portion of the string pointed to by";
+    print "   nptr to a long integer value according to the given base.";
+    print "   If endptr is not NULL, a pointer to the character after the";
+    print "   last character used in the conversion is stored in the";
+    print "   location referenced by endptr. */";
+    print "long int strtol (const char */*nptr*/, char **/*endptr*/, int /*base*/);";
+  }
+
+  if (!def["HAVE_STRTOUL"]) {
+    print "";
+    print "/* Convert the initial portion of the string pointed to by";
+    print "   nptr to an unsigned long integer value according to the given base.";
+    print "   If endptr is not NULL, a pointer to the character after the";
+    print "   last character used in the conversion is stored in the";
+    print "   location referenced by endptr. */";
+    print "unsigned long int strtol (const char */*nptr*/, char **/*endptr*/,";
+    print "                          int /*base*/);";
+  }
+
   if (!def["HAVE_VASPRINTF"]) {
     print "";
     print "/* Write formatted output to a string dynamically allocated with";
@@ -123,7 +154,13 @@ END {
     print "int snprintf (char */*str*/, size_t /*maxlen*/,";
     print "              char */*fmt*/, ...);";
   }
-  
+
+  if (!def["HAVE_MEMMOVE"]) {
+    print "";
+    print "/* Copies len bytes from src to dest. */";
+    print "void * memmove (void */*dest*/, const void */*src*/, size_t /*len*/);";
+  }
+
   print "";
   print "#ifdef __cplusplus";
   print "}";
