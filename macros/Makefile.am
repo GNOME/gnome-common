@@ -22,10 +22,11 @@ MACROS=						\
   gnome.m4					\
   gperf-check.m4				\
   linger.m4					\
-  need-declaration.m4
+  need-declaration.m4				\
+  balsa-offset-tool.m4
 
-EXTRA_DIST=$(MACROS) gnome-common.m4 autogen.sh
-MAINTAINERCLEANFILES=macros.dep
+EXTRA_DIST=$(MACROS) gnome-common.m4 autogen.sh offset-tool.sh.in
+MAINTAINERCLEANFILES=macros.dep offset-tool.sh offset-defs.sh
 
 @MAINT@macros.dep: Makefile.am
 @MAINT@	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=macros/%)' > $@
