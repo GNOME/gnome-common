@@ -1,3 +1,8 @@
+1998-05-12  Kjartan Maraas  <kmaraas@fib.hl.no>
+
+	* argp-help.c (argp_doc): Backed out previous "fix". :-)
+	As pointed out it was dead wrong.
+	
 1998-05-09  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* argp-help.c (argp_doc): Removed a compiler warning.
