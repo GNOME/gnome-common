@@ -1,38 +1,3 @@
-dnl
-dnl GNOME_CHECK_PKGCONFIG (script-if-enabled, [failflag])
-dnl
-AC_DEFUN([GNOME_CHECK_PKGCONFIG],[
-	AC_PATH_PROG(PKG_CONFIG, pkg-config)
-	have_pkgconfig=no
-	if test -x "$PKG_CONFIG" ; then
-	    have_pkgconfig=yes
-	else
-	    PKG_CONFIG=
-	fi
-	AC_MSG_CHECKING(for pkg-config)
-	if test $have_pkgconfig = yes ; then
-	    AC_MSG_RESULT(yes)
-	else
-	    AC_MSG_RESULT(not found)
- 	    if test x$2 = xfail; then
-		AC_MSG_ERROR([
-*** You need the latest pkg-config.
-*** Get the latest version of pkg-config from
-*** http://pkgconfig.sourceforce.net.])
-	    fi
-	fi
-	AC_SUBST(PKG_CONFIG)
-
-	AC_PROVIDE([GNOME_REQUIRE_PKGCONFIG])
-])
-
-dnl
-dnl GNOME_REQUIRE_PKGCONFIG
-dnl
-AC_DEFUN([GNOME_REQUIRE_PKGCONFIG],[
-	GNOME_CHECK_PKGCONFIG([], fail)
-])
-
 dnl GNOME_PKGCONFIG_CHECK_VERSION() extracts up to 6 decimal numbers out of given-version
 dnl and required-version, using any non-number letters as delimiters. it then
 dnl compares each of those 6 numbers in order 1..6 to each other, requirering
@@ -40,7 +5,6 @@ dnl all of the 6 given-version numbers to be greater than, or at least equal
 dnl to the corresponding number of required-version.
 dnl GNOME_PKGCONFIG_CHECK_VERSION(given-version, required-version [, match-action] [, else-action])
 AC_DEFUN([GNOME_PKGCONFIG_CHECK_VERSION],[
-AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
 [eval `echo "$1:0:0:0:0:0:0" | sed -e 's/^[^0-9]*//' -e 's/[^0-9]\+/:/g' \
  -e 's/\([^:]*\):\([^:]*\):\([^:]*\):\([^:]*\):\([^:]*\):.*/ac_v1=\1 ac_v2=\2 ac_v3=\3 ac_v4=\4 ac_v5=\5 ac_v6=\6/' \
 `]
@@ -66,6 +30,47 @@ case $ac_vm in
         [$4]
         ;;
 esac
+])
+
+dnl
+dnl GNOME_CHECK_PKGCONFIG (script-if-enabled, [failflag])
+dnl
+AC_DEFUN([GNOME_CHECK_PKGCONFIG],[
+	AC_PATH_PROG(PKG_CONFIG, pkg-config)
+	have_pkgconfig=no
+	if test -x "$PKG_CONFIG" ; then
+	    have_pkgconfig=yes
+	else
+	    PKG_CONFIG=
+	fi
+	AC_MSG_CHECKING(for pkg-config)
+	if test x$have_pkgconfig = xyes ; then
+	    pkgconfig_required_version=0.4.1
+	    pkgconfig_version=`pkg-config --version`
+	    GNOME_PKGCONFIG_CHECK_VERSION($pkgconfig_version, $pkgconfig_required_version, [have_pkgconfig=yes], [have_pkgconfig=no])
+	fi
+	if test x$have_pkgconfig = xyes ; then
+	    AC_MSG_RESULT(yes)
+	else
+	    PKG_CONFIG=
+	    AC_MSG_RESULT(not found)
+ 	    if test x$2 = xfail; then
+		AC_MSG_ERROR([
+*** You need the latest pkg-config (at least $pkgconfig_required_version).
+*** Get the latest version of pkg-config from
+*** http://pkgconfig.sourceforce.net.])
+	    fi
+	fi
+	AC_SUBST(PKG_CONFIG)
+
+	AC_PROVIDE([GNOME_REQUIRE_PKGCONFIG])
+])
+
+dnl
+dnl GNOME_REQUIRE_PKGCONFIG
+dnl
+AC_DEFUN([GNOME_REQUIRE_PKGCONFIG],[
+	GNOME_CHECK_PKGCONFIG([], fail)
 ])
 
 dnl Check if the C compiler accepts a certain C flag, and if so adds it to

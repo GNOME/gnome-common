@@ -2,7 +2,7 @@ dnl GNOME_X_CHECKS
 dnl
 dnl Basic X11 related checks for X11.  At the end, the following will be
 dnl defined/changed:
-dnl   GTK_{CFLAGS,LIBS}      From AM_PATH_GTK
+dnl   GTK_{CFLAGS,LIBS}      From GTK+
 dnl   CPPFLAGS		     Will include $X_CFLAGS
 dnl   GNOME_HAVE_SM	     `true' or `false' depending on whether session
 dnl                          management is available.  It is available if
@@ -15,7 +15,9 @@ dnl   gnome_cv_passdown_{x_libs,X_LIBS,X_CFLAGS}
 dnl
 AC_DEFUN([GNOME2_X_CHECKS],
 [
-	PKG_CHECK_MODULES(GTK, gtk+-2.0:1.3.1)
+	AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
+
+	GNOME_PKGCONFIG_CHECK_MODULES(GTK, gtk+-2.0:1.3.1)
 	AC_SUBST(GTK_CFLAGS)
 	AC_SUBST(GTK_LIBS)
 

@@ -1,3 +1,12 @@
+2000-11-26  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-x-checks.m4 (GNOME2_X_CHECKS): Use
+	GNOME_PKGCONFIG_CHECK_MODULES.
+
+	* gnome-pkgconfig.m4 (GNOME_PKGCONFIG_CHECK_VERSION): Don't
+	AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG]).
+	(GNOME_CHECK_PKGCONFIG): Check for pkg-config >= 0.4.1.
+
 2000-11-22  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-pkgconfig.m4: Added GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES
