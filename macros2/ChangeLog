@@ -1,3 +1,9 @@
+2002-08-10  Miles Lane  <miles_lane@yahoo.com>
+
+	* autogen.sh: fix the "find" test so that the presence of
+	  configure.in is reporteded.  Each expression requires its
+	  own -print flag.
+
 2002-08-10  Sebastian Rittau  <srittau@jroger.in-berlin.de>
 
 	* autogen.sh: support for configure.ac
