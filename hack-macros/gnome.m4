@@ -87,34 +87,50 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
   fi
 
   tmp_gnome_libdir=`$GNOME_CONFIG $gnome_config_args --libdir`
+  if test -n "$4"; then
+	AC_MSG_CHECKING([for additional GNOME modules])
+  fi
   for module in $4 ""; do
-	if test -f $tmp_gnome_libdir/$module'Conf'.sh; then
+	gnome_m4_notfound=no
+	if test -f $tmp_gnome_libdir/${module}Conf.sh; then
 		tmp_bsnom=`echo $module | tr a-z A-Z`
 		eval $tmp_bsnom'_CFLAGS'=\"`$GNOME_CONFIG $gnome_config_args --cflags $module`\"
 		eval $tmp_bsnom'_LIBS'=\"`$GNOME_CONFIG $gnome_config_args --libs $module`\"
-	elif test "$module" eq zvt; then
+	elif test "$module" = zvt; then
 	  ZVT_LIBS="`$GNOME_CONFIG $gnome_config_args --libs zvt`"
 	  AC_SUBST(ZVT_LIBS)
-	elif test "$module" eq gtk; then
+	elif test "$module" = gtk; then
 	  GTK_CFLAGS="`$GNOME_CONFIG $gnome_config_args --cflags gtk`"
 	  GTK_LIBS="`$GNOME_CONFIG $gnome_config_args --libs gtk`"
 	  AC_SUBST(GTK_CFLAGS)
 	  AC_SUBST(GTK_LIBS)
-	elif test "$module" eq "glib"; then
+	elif test "$module" = "glib"; then
 	  GLIB_CFLAGS="`$GNOME_CONFIG $gnome_config_args --cflags glib`"
 	  GLIB_LIBS="`$GNOME_CONFIG $gnome_config_args --libs glib`"
 	  AC_SUBST(GLIB_CFLAGS)
 	  AC_SUBST(GLIB_LIBS)
-	elif test "$module" eq "oaf"; then
+	elif test "$module" = "oaf"; then
 	  OAF_CFLAGS="`$GNOME_CONFIG $gnome_config_args --cflags oaf`"
 	  OAF_LIBS="`$GNOME_CONFIG $gnome_config_args --libs oaf`"
 	  AC_SUBST(OAF_CFLAGS)
 	  AC_SUBST(OAF_LIBS)
-	elif -n "$module"; then
-	     echo "*** $module library is not installed"
-	     ifelse([$3], , :, [$3])
+	elif test "$module" = "gnorba"; then
+	  GNORBA_CFLAGS="`$GNOME_CONFIG $gnome_config_args --cflags gnorba`"
+	  GNORBA_LIBS="`$GNOME_CONFIG $gnome_config_args --libs gnorba`"
+	  AC_SUBST(GNORBA_CFLAGS)
+	  AC_SUBST(GNORBA_LIBS)
+	elif test -n "$module"; then
+	  AC_MSG_RESULT([$module library is not installed])
+	  ifelse([$3], , :, [$3])
+	  gnome_m4_notfound=yes
+	fi
+	if test "$gnome_m4_notfound" = no; then
+	  echo $ac_n " $module" 1>&6
 	fi
   done
+  if test -n "$4"; then
+	AC_MSG_RESULT([])
+  fi
 
   rm -f conf.gnometest
 ])
