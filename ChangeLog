@@ -1,3 +1,8 @@
+2001-09-20 Glynn Foster <glynn.foster@sun.com>
+
+	* macros2/gnome-x-checks.m4: replaced  
+	GNOME_PKGCONFIG_CHECK_MODULES with  PKG_CHECK_MODULES
+
 2001-08-02  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.2.3
