@@ -69,7 +69,7 @@ fi
 #  }
 #}
 
-(automake-1.4 --version) < /dev/null > /dev/null 2>&1 || {
+(automake-1.4 --version || automake --version) < /dev/null > /dev/null 2>&1 || {
   echo
   echo "**Error**: You must have \`automake' installed to compile $PKG_NAME."
   echo "Get ftp://ftp.gnu.org/pub/gnu/automake-1.3.tar.gz"
@@ -80,7 +80,7 @@ fi
 
 
 # if no automake, don't bother testing for aclocal
-test -n "$NO_AUTOMAKE" || (aclocal-1.4 --version) < /dev/null > /dev/null 2>&1 || {
+test -n "$NO_AUTOMAKE" || (aclocal-1.4 --version || aclocal --version) < /dev/null > /dev/null 2>&1 || {
   echo
   echo "**Error**: Missing \`aclocal'.  The version of \`automake'"
   echo "installed doesn't appear recent enough."
