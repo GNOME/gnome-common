@@ -9,4 +9,4 @@ EXTRA_DIST =			\
 	omf.make		\
 	xmldocs.make		\
 	gnome-doc-common.in	\
-	ChangeLog
+	README

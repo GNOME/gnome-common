@@ -14,4 +14,4 @@ PKG_NAME="Gnome Skeleton"
     exit 1
 }
 
-. $srcdir/macros/autogen.sh
+. $srcdir/macros2/autogen.sh

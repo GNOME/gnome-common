@@ -1,3 +1,13 @@
+=== gnome-common 2.4.0 ===
+
+2003-10-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* doc-build/Makefile.am: Distribute README in place of the
+	non-existent ChangeLog. Doh!
+
+	* autogen.sh: Use the GNOME 2 autogen.sh script by default.
+	* configure.in: Version number bumped.
+
 2003-08-23  Marco Pesenti Gritti  <marco@gnome.org>
 
 	* macros2/compiler-flags.m4:
