@@ -1,3 +1,28 @@
+2003-02-18  James Henstridge  <james@daa.com.au>
+
+	* autogen.sh (topdir): check to see if gnome-deprecated-macros.m4
+	ended up in aclocal.m4, and warn if so.
+
+	* gnome-platform.m4: kill this too (with a deprecation warning).
+
+	* gnome-cxx-check.m4: move to gnome-deprecated-macros.m4
+
+	* gnome-pkgconfig.m4: remove, and add a deprecation warning in its
+	place.
+
+	* gnome-x-checks.m4: remove, and add an AU_DEFUN in its place
+	telling people not to use it.
+
+	* linger.m4: removed outright.
+
+	* gnome-common.m4: remove GNOME_GTKDOC_CHECK, deprecated in favour
+	of GTK_DOC_CHECK.
+
+	* gnome-gettext.m4: remove file (people should be using gettextize
+	or glib-gettextize).
+
+	* gnome-deprecated-macros.m4: new file to hold deprecated macros.
+
 2003-02-14  Kalpesh Shah <kalpesh.shah@sun.com>
 
 	* check-utmp.m4: initialize UTMP structure properly. 
