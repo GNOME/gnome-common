@@ -1,9 +1,26 @@
-2000-11-21  Martin Baulig  <baulig@suse.de>
+2002-01-06  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* Makefile.am: Install libgnomesupport.la, but call it
-	libgnomesupport-1.3.la.
+	* popt.c, popthelp.c: #include <libintl.h> to get rid of warnings.
+	Fixes #66557.
+	
+2001-09-13  Havoc Pennington  <hp@redhat.com>
 
-	* gnome-support-2.0.pc.in: Added pkg-config file.
+	* Makefile.am (gnomeincludedir): move popt-gnome.h to includedir/gnome-1.0
+
+2001-06-14  Miguel de Icaza  <miguel@ximian.com>
+
+	From David KAELBLING:
+
+	* gnomesupport.awk: Generate proper declarations for SGI. 
+
+	* vsnprintf.c: Add SGI IRIX 6.5 support, by defining size_t as
+	ssize_t which is what vsnprintf uses.
+
+2000-02-26  Changwoo Ryu  <cwryu@idis.co.kr>
+
+	* poptint.h: Replaced `HAVE_DGETTEXT' cpp flag with
+	`HAVE_GETTEXT'.  The standalone popt defines the flag in
+	./configure script directly, while gnome does not.
 
 1999-05-27  Raja R Harinath  <harinath@cs.umn.edu>
 
