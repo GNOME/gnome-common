@@ -18,8 +18,8 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
-#ifndef __ARGP_H__
-#define __ARGP_H__
+#ifndef _ARGP_H
+#define _ARGP_H
 
 #include <stdio.h>
 #include <ctype.h>
@@ -29,16 +29,16 @@
 #include <errno.h>
 
 #ifndef __const
-#define __const const
+# define __const const
 #endif
 
 #ifndef __error_t_defined
 typedef int error_t;
-#define __error_t_defined
+# define __error_t_defined
 #endif
 
 #ifndef __P
-# if (defined (__STDC__) && __STDC__) || defined (__cplusplus)
+# if (defined __STDC__ && __STDC__) || defined __cplusplus
 #  define __P(args)	args
 # else
 #  define __P(args)	()
@@ -160,6 +160,12 @@ typedef error_t (*argp_parser_t)(int key, char *arg, struct argp_state *state);
    actually modify the argument (perhaps into an option), and have it
    processed again.  */
 #define ARGP_KEY_ARG		0
+/* There are remaining arguments not parsed by any parser, which may be found
+   starting at (STATE->argv + STATE->next).  If success is returned, but
+   STATE->next left untouched, it's assumed that all arguments were consume,
+   otherwise, the parser should adjust STATE->next to reflect any arguments
+   consumed.  */
+#define ARGP_KEY_ARGS		0x1000006
 /* There are no more command line arguments at all.  */
 #define ARGP_KEY_END		0x1000001
 /* Because it's common to want to do some special processing if there aren't
@@ -172,11 +178,12 @@ typedef error_t (*argp_parser_t)(int key, char *arg, struct argp_state *state);
    element of the CHILD_INPUT field, if any, in the state structure is
    copied to each child's state to be the initial value of the INPUT field.  */
 #define ARGP_KEY_INIT		0x1000003
+/* Use after all other keys, including SUCCESS & END.  */
+#define ARGP_KEY_FINI		0x1000007
 /* Passed in when parsing has successfully been completed (even if there are
    still arguments remaining).  */
 #define ARGP_KEY_SUCCESS	0x1000004
-/* Passed in if an error occurs (in which case a call with ARGP_KEY_SUCCESS is
-   never made, so any cleanup must be done here).  */
+/* Passed in if an error occurs.  */
 #define ARGP_KEY_ERROR		0x1000005
 
 /* An argp structure contains a set of options declarations, a function to
@@ -396,7 +403,7 @@ extern void (*argp_program_version_hook) __P ((FILE *__stream,
    argp_help if the ARGP_HELP_BUG_ADDR flag is set (as it is by various
    standard help messages), embedded in a sentence that says something like
    `Report bugs to ADDR.'.  */
-__const extern char *argp_program_bug_address;
+extern __const char *argp_program_bug_address;
 
 /* The exit status that argp will use when exiting due to a parsing error.
    If not defined or set by the user program, this defaults to EX_USAGE from
@@ -503,16 +510,16 @@ extern void *__argp_input __P ((__const struct argp *argp,
 
 #ifdef __OPTIMIZE__
 
-#if !_LIBC
-# define __argp_usage argp_usage
-# define __argp_state_help argp_state_help
-# define __option_is_short _option_is_short
-# define __option_is_end _option_is_end
-#endif
+# if !_LIBC
+#  define __argp_usage argp_usage
+#  define __argp_state_help argp_state_help
+#  define __option_is_short _option_is_short
+#  define __option_is_end _option_is_end
+# endif
 
-#ifndef ARGP_EI
-# define ARGP_EI extern inline
-#endif
+# ifndef ARGP_EI
+#  define ARGP_EI extern inline
+# endif
 
 ARGP_EI void
 __argp_usage (__const struct argp_state *__state)
@@ -538,17 +545,16 @@ __option_is_end (__const struct argp_option *__opt)
   return !__opt->key && !__opt->name && !__opt->doc && !__opt->group;
 }
 
-#if !_LIBC
-# undef __argp_usage
-# undef __argp_state_help
-# undef __option_is_short
-# undef __option_is_end
-#endif
-
+# if !_LIBC
+#  undef __argp_usage
+#  undef __argp_state_help
+#  undef __option_is_short
+#  undef __option_is_end
+# endif
 #endif /* __OPTIMIZE__ */
 
 #ifdef  __cplusplus
 }
 #endif
 
-#endif /* __ARGP_H__ */
+#endif /* argp.h */
