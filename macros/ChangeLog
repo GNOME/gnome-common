@@ -1,46 +1,6 @@
-2001-05-24  Arturo Espinosa Aldama  <arturo@ximian.com>
+2001-12-11  Israel Escalante <israel@ximian.com>
 
-	* 0.5 RELEASE
-
-2001-05-24  jacob berkman  <jacob@ximian.com>
-
-	* gnome-pthread-check.m4 (GNOME_PTHREAD_CHECK): add hp-ux specific
-	check from glib
-
-2001-05-19  Jody Goldberg <jgoldberg@home.com>
-
-	* gnome-gettext.m4 : Add BUILD_INCLUDED_LIBINTL so that newer versions
-	  work.
-
-2001-04-16  Jaka Mocnik  <jaka@gnu.org>
-
-	* gnome-print-check.m4: change $(cmd) to `cmd` in order to make it
-	usable in non-bash bourne shells.
-
-2001-03-01  JP Rosevear  <jpr@ximian.com>
-
-	* gnome-pilot.m4: quote a test and make sure incdir is always set
-	so 'cat' works
-
-2001-02-21  Lauris Kaplinski  <lauris@ximian.com>
-
-	* gnome-print-check.m4: Replaced the awk alchemy with sed alchemy.
-	I seems to work now as long as gnome-config is working - but that is
-	the whole point of gnome-config, isn't it?
-
-2001-02-19  JP Rosevear  <jpr@ximian.com>
-
-	* gnome-pilot.m4: Revert my previous patch now that gnome-pim and
-	evolution are fixed to accomodate the change
-	
-2001-02-19  JP Rosevear  <jpr@ximian.com>
-
-	* gnome-pilot.m4: AC_SUBST the PISOCK_LIBDIR var
-
-2001-02-17  Lauris Kaplinski  <lauris@ximian.com>
-
-	* gnome-print-check.m4: Remove most of stuff here, but now
-	it at least WORKS
+	* Release 1.5.11.
 
 2001-02-07  Kenneth Christiansen  <kenneth@gnu.org>
 
