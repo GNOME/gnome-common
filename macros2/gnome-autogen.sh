@@ -383,7 +383,11 @@ for configure_ac in $configure_files; do
 
 	# Finally, run automake to create the makefiles ...
 	printbold "Running $AUTOMAKE..."
-	$AUTOMAKE --gnu --add-missing --force --copy || exit 1
+	if [ $REQUIRED_AUTOMAKE_VERSION != 1.4 ]; then
+	    $AUTOMAKE --gnu --add-missing --force --copy || exit 1
+	else
+	    $AUTOMAKE --gnu --add-missing --copy || exit 1
+	fi
 
 	cd "$topdir"
     fi

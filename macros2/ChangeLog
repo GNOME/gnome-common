@@ -1,5 +1,11 @@
 2004-11-09  Jordi Mallach  <jordi@sindominio.net>
 
+	* gnome-autogen.sh: Workaround automake-1.4 limitations by just
+	using --force if $REQUIRED_AUTOMAKE_VERSION != 1.4. This avoids
+	Louie's wrath too. :)
+
+2004-11-09  Jordi Mallach  <jordi@sindominio.net>
+
 	* gnome-autogen.sh: Call all the bootstrap programs (libtoolize,
 	intltoolize, gtkdocize, automake) using --force and --copy
 	consistently.
