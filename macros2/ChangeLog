@@ -1,5 +1,11 @@
 2004-10-28  James Henstridge  <james@jamesh.id.au>
 
+	* gnome-autogen.sh: get rid of the code that modified PATH,
+	ACLOCAL_FLAGS and LD_LIBRARY_PATH based on $GNOME2_PATH, since
+	this was broken.  It could cause configure tests to pass, when the
+	subsequent build would fail due to path problems.  For more
+	details, see bug #140210.
+
 	* gnome-autogen.sh: if the directory is read only, skip it.  This
 	helps in cases where a directory from a failed "make distcheck" is
 	lying around.  Should fix bug #136093.

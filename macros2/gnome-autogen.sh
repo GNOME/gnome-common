@@ -28,28 +28,6 @@ case `echo "testing\c"; echo 1,2,3`,`echo -n testing; echo 1,2,3` in
   *)       ECHO_N= ;;
 esac
 
-# if GNOME2_DIR or GNOME2_PATH is set, modify ACLOCAL_FLAGS ...
-# NOTE: GNOME2_DIR is deprecated (as of Jan 2004), but is left here for
-# backwards-compatibility. You should be using GNOME2_PATH, since that is also
-# understood by libraries such as libgnome.
-if [ -n "$GNOME2_DIR" ]; then
-    echo "Using GNOME2_DIR is deprecated in gnome-common."
-    echo "Please use GNOME2_PATH instead (for compatibility with other GNOME pieces)."
-    ACLOCAL_FLAGS="-I $GNOME2_DIR/share/aclocal $ACLOCAL_FLAGS"
-    LD_LIBRARY_PATH="$GNOME2_DIR/lib:$LD_LIBRARY_PATH"
-    PATH="$GNOME2_DIR/bin:$PATH"
-    export PATH
-    export LD_LIBRARY_PATH
-else
-    if [ -n "$GNOME2_PATH" ]; then
-        ACLOCAL_FLAGS="-I $GNOME2_PATH/share/aclocal $ACLOCAL_FLAGS"
-        LD_LIBRARY_PATH="$GNOME2_PATH/lib:$LD_LIBRARY_PATH"
-        PATH="$GNOME2_PATH/bin:$PATH"
-        export PATH
-        export LD_LIBRARY_PATH
-    fi
-fi
-
 # some terminal codes ...
 boldface="`tput bold 2>/dev/null`"
 normal="`tput sgr0 2>/dev/null`"
