@@ -1,3 +1,8 @@
+2004-01-31  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Use automake-1.8 if available. Patch from
+	alexander.winston@comcast.net (Alexander Winston). Bug #132966.
+
 2004-01-25  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Deprecate the use of GNOME2_DIR and allow the use
