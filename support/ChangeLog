@@ -1,3 +1,8 @@
+1998-03-28  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* vasprintf.c (int_vasprintf): Imported from GNU libit-0.4.
+	Applied a change that appears in `libiberty'.
+
 Fri Mar 13 21:30:34 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* argp.texi: Imported from glibc.

@@ -44,6 +44,7 @@ The files that have "vendor" versions are:
 	strndup.c		GNU
 	strnlen.c		GNU
 	strtok_r.c		GNU
+	vasprintf.c		GNU
 	vsnprintf.c		SNPRINTF_de_Raadt
 
 To find out the list of changes made against a "vendor" revision, you
@@ -70,3 +71,22 @@ In other words the "Branch revision" and "Vendor Tag" must agree.
 
 - Raja R Harinath <harinath@cs.umn.edu>
   1998-03-11
+
+Good places to get "support" functions:
+
+`libgnomesupport' is essentially a `glibc' emulation library, and hence
+`glibc' itself is a good source.  However, some of the functions cannot
+be easily ripped out and put here (esp. any of the stdio-derived
+functions).  Other places are:
+
+* libiberty from your friendly Cygnus source distribution, e.g.,
+  binutils, gdb.  The only caveat is that these cannot be used drop-in:
+  you have to remove references to other files in the Cygnus tree &c.
+
+* libit, which appeared briefly on ftp://alpha.gnu.org
+
+* Jim Meyering's collection from his `fileutils'/`sh-utils'/`textutils'
+  packages
+
+- Raja R Harinath
+  1998-03-28
