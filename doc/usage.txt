@@ -76,4 +76,4 @@ Comments, Questions, etc. are welcome :)
 
 
 Nov 21, 2000
-Martin Baulig <martin@suse.de>
+Martin Baulig <martin@gnome.org>
