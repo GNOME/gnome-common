@@ -19,8 +19,8 @@
 # include <config.h>
 #endif
 
-#include <fcntl.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <sys/stat.h>
 
 #if defined STDC_HEADERS || defined _LIBC

@@ -1,3 +1,8 @@
+Sun Mar 28 16:32:00 1999  ape@spacetec.no  (Asbjorn Pettersen)
+
+	* loadmsgcat.c: include <sys/types.h> before <fcntl.h>
+	OS/2 version fails if not.
+
 1997-09-06 02:10  Ulrich Drepper  <drepper@cygnus.com>
 
 	* intlh.inst.in: Reformat copyright.
