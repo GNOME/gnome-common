@@ -41,6 +41,10 @@
 #define roundup(x, y) ((((x)+((y)-1))/(y))*(y))
 #endif
 
+#ifdef __sgi
+#define size_t ssize_t
+#endif
+
 static int pgsize;
 static char *curobj;
 static int caught;
