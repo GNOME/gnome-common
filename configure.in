@@ -1,4 +1,4 @@
-AC_INIT(macros2/gnome-pkgconfig.m4)
+AC_INIT(macros2/gnome-common.m4)
 
 AM_INIT_AUTOMAKE(gnome-common, 1.2.4)
 

@@ -1,3 +1,7 @@
+2003-02-18  Jody Goldberg <jody@gnome.org>
+
+	* configure.in : Don't depend on a file that James just deleted
+
 2002-12-12  Jody Goldberg <jody@gnome.org>
 
 	* macros2/gnome-common.m4 (GNOME_DEBUG_CHECK) : now that autoconf-2.52
