@@ -1,3 +1,8 @@
+2001-07-12  Darin Adler  <darin@bentspoon.com>
+
+	* configure.in: Remove AC_ARG_PROGRAM, because AM_INIT_AUTOMAKE
+	already takes care of that.
+
 2001-05-22  Darin Adler  <darin@eazel.com>
 
 	* hack-macros/gnome.m4: Add BUILD_INCLUDED_LIBINTL for
