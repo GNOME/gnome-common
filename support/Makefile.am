@@ -23,8 +23,8 @@ include_HEADERS = popt-gnome.h
 
 popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
 
-libgnomesupport_la_SOURCES = gnomesupport.h $(popt_sources)
-#libgnomesupport_la_LIBADD  = @LTLIBOBJS@
+libgnomesupport_la_SOURCES = gnomesupport.h $(popt_sources) gnome-argp.c
+libgnomesupport_la_LIBADD  = @LTLIBOBJS@
 libgnomesupport_la_LDFLAGS = -version-info 0:0:0
 
 BUILT_SOURCES = gnomesupport.h
