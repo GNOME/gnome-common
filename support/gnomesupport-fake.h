@@ -6,6 +6,7 @@
 #endif
 
 #include <gnomesupport.h>
+#include <gnome-argp.h>
 
 /* Override some of config.h.
    Gnomesupport provides the replacements for these, so you actually
