@@ -1,3 +1,7 @@
+2004-08-16  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-autogen.sh: Add some foo to handle automake-1.9.x too.
+
 2004-05-13  James Henstridge  <james@daa.com.au>
 
 	* autogen.sh: Change the order the various tools are called in to
