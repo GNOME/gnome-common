@@ -3,8 +3,8 @@
 progname=`echo "$0" | sed 's%^.*/%%'`
 
 PROGRAM=gnome-doc-common
-PACKAGE=@PACKAGE_NAME@
-VERSION=@PACKAGE_VERSION@
+PACKAGE=@PACKAGE@
+VERSION=@VERSION@
 
 prefix=@prefix@
 datadir=@datadir@
