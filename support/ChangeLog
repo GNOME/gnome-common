@@ -1,3 +1,7 @@
+Tue Jul  7 00:02:51 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* argp-help.c: Don't include <malloc.h>.
+
 1998-06-11  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (gnomesupport.h): Build with `gnomesupport.awk'.

@@ -27,9 +27,6 @@
 #include <string.h>
 #include <assert.h>
 #include <stdarg.h>
-#ifndef __FreeBSD__
-#include <malloc.h>
-#endif
 #include <ctype.h>
 
 #ifndef _
