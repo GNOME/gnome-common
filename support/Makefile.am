@@ -17,7 +17,8 @@ supportinclude_DATA = gnomesupport.h
 # should not be installed
 noinst_HEADERS = argp-fmtstream.h argp-namefrob.h gnomesupport-fake.h
 
-libgnomesupport_la_SOURCES = long-options.c gnome-argp.c
+# gnomesupport.h is listed here to ensure that it is built
+libgnomesupport_la_SOURCES = gnomesupport.h long-options.c gnome-argp.c
 libgnomesupport_la_LIBADD  = @LTLIBOBJS@
 libgnomesupport_la_LDFLAGS = -version-info 0:0:0
 
