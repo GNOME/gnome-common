@@ -34,6 +34,11 @@
 #include <string.h>
 #include <unistd.h>
 
+/* For Gnome only: don't assume gcc.  */
+#ifndef __GNUC__
+#define __attribute__(X)
+#endif
+
 #if    (_LIBC - 0 && !defined (USE_IN_LIBIO)) \
     || (defined (__GNU_LIBRARY__) && defined (HAVE_LINEWRAP_H))
 /* line_wrap_stream is available, so use that.  */

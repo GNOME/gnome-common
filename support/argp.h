@@ -44,6 +44,11 @@ typedef int error_t;
 #  define __P(args)	()
 # endif
 #endif
+
+/* For Gnome only: don't assume gcc.  */
+#ifndef __GNUC__
+#define __attribute__(X)
+#endif
 
 #ifdef  __cplusplus
 extern "C" {

@@ -1,5 +1,8 @@
 Fri Mar  6 20:10:55 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* argp-fmtstream.h (__attribute__): Define unless using gcc.
+	* argp.h (__attribute__): Define unless using gcc.
+
 	* argp-help.c, argp-parse.c, argp.h: Imported new versions from
 	glibc, while preserving local changes.
 
