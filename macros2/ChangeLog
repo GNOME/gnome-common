@@ -1,3 +1,8 @@
+2000-08-06  Martin Baulig  <baulig@suse.de>
+
+	* gnome-x-checks.m4 (GNOME_X_CHECKS): Renamed
+	to GNOME2_X_CHECKS.
+
 2000-07-24  Martin Baulig  <martin@home-of-linux.org>
 
 	* autogen.sh: Removed some old crap in it.

@@ -13,7 +13,7 @@ dnl
 dnl The following configure cache variables are defined (but not used):
 dnl   gnome_cv_passdown_{x_libs,X_LIBS,X_CFLAGS}
 dnl
-AC_DEFUN([GNOME_X_CHECKS],
+AC_DEFUN([GNOME2_X_CHECKS],
 [
 	AM_PATH_GTK_2_0(1.3.1,,AC_MSG_ERROR(GTK not installed, or gtk-config not in path))
 	dnl Hope that GTK_CFLAGS have only -I and -D.  Otherwise, we could
