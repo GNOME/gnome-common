@@ -1,3 +1,8 @@
+2001-05-22  Darin Adler  <darin@eazel.com>
+
+	* hack-macros/gnome.m4: Add BUILD_INCLUDED_LIBINTL for
+	compatibility with the new gettext.
+	
 2001-04-16  Darin Adler  <darin@eazel.com>
 
 	* gnome-common.spec.in: A cut at updating the spec file now that
