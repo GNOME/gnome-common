@@ -28,7 +28,7 @@
 #include <stdint.h>
 #define gettimeofday __gettimeofday
 #define set_errno(e) __set_errno(e)
-typedef uint64_t big_type;
+typedef guint64 big_type;
 #else
 #define set_errno(e) errno = (e)
 /* FIXME: maybe check for long long.  */
