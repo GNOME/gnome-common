@@ -372,7 +372,7 @@ for configure_ac in $configure_files; do
     fi
 done
 
-conf_flags="--enable-maintainer-mode --enable-compile-warnings"
+conf_flags="--enable-maintainer-mode"
 
 if test x$NOCONFIGURE = x; then
     printbold Running $srcdir/configure $conf_flags "$@" ...
