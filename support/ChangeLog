@@ -1,5 +1,8 @@
 Wed Mar  4 00:58:27 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* Makefile.am (libsupport_a_SOURCES): Added gnome-argp.c.
+	* gnome-argp.c: New file.
+
 	* argp-parse.c: Include gnome-argp.h.
 	* argp-help.c: Include gnome-argp.h.
 
