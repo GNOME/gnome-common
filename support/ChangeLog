@@ -1,3 +1,8 @@
+1999-02-17  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* poptint.h: Removed the suspicious `#ifdef HAVE_DGETTEXT...'
+	switch.  Now `progname --help' messages should be translated.
+
 1998-12-24  Jeff Garzik  <jgarzik@pobox.com>
 
 	* poptparse.[ch]:  poptParseArgvString cleanups...
