@@ -1,3 +1,18 @@
+2001-04-14  Martin Baulig  <baulig@suse.de>
+
+	* gnome-common.pc.in, gnome-common-2.0.pc.in: Removed.
+
+	* configure.in: Set version number to 1.2.2.
+	(--enable-platform-gnome-2): Removed this command line argument;
+	this package is now the same for GNOME 1.x and GNOME 2.0.
+
+	* acinclude.m4: Removed.
+	* acconfig.h: Removed.
+
+	* support/: We don't build this directory anymore; the GNOME 1.x
+	version of it is in gnome-libs/support and the GNOME 2.0 one is in
+	libgnomebase/libgnomesupport.
+
 2001-03-26  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* Makefile.am: added gnome-common.spec.in to EXTRA_DISTS
