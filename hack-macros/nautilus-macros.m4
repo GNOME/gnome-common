@@ -97,11 +97,11 @@ AC_ARG_ENABLE(freetype2test, [  --disable-freetype2test       Do not try to comp
     FREETYPE2_LIBS=`$FREETYPE2_CONFIG $freetype2conf_args --libs`
 
     freetype2_major_version=`$FREETYPE2_CONFIG $freetype2_args --version | \
-	sed 's/\([[0-9]]*\):\([[0-9]]*\):\([[0-9]]*\)/\1/'`
+	sed 's/\([[0-9]]*\)[[:.]]\([[0-9]]*\)[[:.]]\([[0-9]]*\)/\1/'`
     freetype2_minor_version=`$FREETYPE2_CONFIG $freetype2_args --version | \
-	sed 's/\([[0-9]]*\):\([[0-9]]*\):\([[0-9]]*\)/\2/'`
-    freetype2_micro_version=`$FREETYPE2_CONFIG $freetype2_config_args --version | \
-	sed 's/\([[0-9]]*\):\([[0-9]]*\):\([[0-9]]*\)/\3/'`
+	sed 's/\([[0-9]]*\)[[:.]]\([[0-9]]*\)[[:.]]\([[0-9]]*\)/\2/'`
+    freetype2_micro_version=`$FREETYPE2_CONFIG $freetype2_args --version | \
+	sed 's/\([[0-9]]*\)[[:.]]\([[0-9]]*\)[[:.]]\([[0-9]]*\)/\3/'`
 
     if test "x$enable_freetype2test" = "xyes" ; then
       ac_save_CFLAGS="$CFLAGS"
