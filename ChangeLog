@@ -1,3 +1,7 @@
+2003-05-24  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* MAINTAINERS: Put myself in as maintainer.
+
 2003-02-26  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* macros2/autogen.sh: set WANT_AUTOCONF_2_5 variable to tell 
