@@ -3,6 +3,7 @@
 supportincludedir = $(pkglibdir)/include
 
 if BUILD_GNOME_SUPPORT
+INCLUDES = -D_GNU_SOURCE
 
 lib_LTLIBRARIES = libgnomesupport.la
 

@@ -1,3 +1,7 @@
+1998-05-20  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (INCLUDES): Define _GNU_SOURCE.
+
 1998-05-19  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnomesupport-h.c (strerror): Emit declaration.
