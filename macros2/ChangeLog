@@ -1,0 +1,9 @@
+2000-05-29  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am: New file. Install this stuff into
+	`$(datadir)/aclocal/gnome2-macros'.
+
+	* gnome.m4: New file. Copied from `hack-macros' dir.
+
+	* autogen.sh: New file. Copied from `macros' dir.
+
