@@ -34,30 +34,24 @@ case "${top_srcdir}" in
     test -f ../config.status && top_builddir=".."
     test -f config.status && top_builddir="."
     ;;
-..)
-    top_builddir=".."
-    real_top_srcdir=".."
-    ;;
-.)
-    top_builddir="."
-    real_top_srcdir"."
-    ;;
+#..)
+#    top_builddir=".."
+#    real_top_srcdir=".."
+#    ;;
+#.)
+#    top_builddir="."
+#    real_top_srcdir"."
+#    ;;
 *)
-    test -d ../../${real_top_srcdir} && top_builddir="../.."
-    test -d ../${real_top_srcdir} && top_builddir=".."
-    test -d ./${real_top_srcdir} && top_builddir="."
+    test -f ../../${real_top_srcdir}/configure && top_builddir="../.."
+    test -f ../${real_top_srcdir}/configure && top_builddir=".."
+    test -f ./${real_top_srcdir}/configure && top_builddir="."
     ;;
 esac
 
 case "${real_top_srcdir}" in
 /*)
     header_dots="${real_top_srcdir}"
-    ;;
-..)
-    header_dots=".."
-    ;;
-.)
-    header_dots="."
     ;;
 *)
     header_dots="${top_dots}${real_top_srcdir}"
@@ -68,6 +62,8 @@ esac
 
 tmp="${top_srcdir}"
 top_srcdir="${header_dots}"
+
+echo top builddir: ${top_builddir}
 
 if test -r "${top_builddir}/${tool_defs}" ; then
     . "${top_builddir}/${tool_defs}"
