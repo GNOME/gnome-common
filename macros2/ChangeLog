@@ -1,3 +1,9 @@
+2004-11-09  Jordi Mallach  <jordi@sindominio.net>
+
+	* gnome-autogen.sh: Call all the bootstrap programs (libtoolize,
+	intltoolize, gtkdocize, automake) using --force and --copy
+	consistently.
+
 2004-10-28  James Henstridge  <james@jamesh.id.au>
 
 	* gnome-autogen.sh: get rid of the code that modified PATH,

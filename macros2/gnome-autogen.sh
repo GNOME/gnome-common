@@ -324,7 +324,7 @@ for configure_ac in $configure_files; do
 	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null || \
 	   grep "^LT_INIT" $basename >/dev/null; then
 	    printbold "Running $LIBTOOLIZE..."
-	    $LIBTOOLIZE --force || exit 1
+	    $LIBTOOLIZE --force --copy || exit 1
 	fi
 
 	if grep "^AM_GLIB_GNU_GETTEXT" $basename >/dev/null; then
@@ -342,11 +342,11 @@ for configure_ac in $configure_files; do
 
 	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
 	    printbold "Running $INTLTOOLIZE..."
-	    $INTLTOOLIZE --force --automake || exit 1
+	    $INTLTOOLIZE --force --copy --automake || exit 1
 	fi
 	if grep "^GTK_DOC_CHECK" $basename >/dev/null; then
 	    printbold "Running $GTKDOCIZE..."
-	    $GTKDOCIZE || exit 1
+	    $GTKDOCIZE --copy || exit 1
 	fi
 
 	if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
@@ -383,7 +383,7 @@ for configure_ac in $configure_files; do
 
 	# Finally, run automake to create the makefiles ...
 	printbold "Running $AUTOMAKE..."
-	$AUTOMAKE --gnu --add-missing || exit 1
+	$AUTOMAKE --gnu --add-missing --force --copy || exit 1
 
 	cd "$topdir"
     fi
