@@ -157,10 +157,4 @@ AC_DEFUN(GNOME_PKGCONFIG_CHECK_MODULES,
 	    eval $name'_DEPENDS'=\"$pkg_list\"
 	fi
     fi
-    pkg_varlist=`$PKG_CONFIG --extra-flags $pkg_list`
-    if test -n "$pkg_varlist"; then
-	for pkgvar in $pkg_varlist; do
-	    eval ${name}'_'${pkgvar}=\"`$PKG_CONFIG --get-flag $pkgvar $pkg_list`\"
-	done
-    fi
 ])

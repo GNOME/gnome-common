@@ -1,5 +1,13 @@
 2000-11-22  Martin Baulig  <martin@home-of-linux.org>
 
+	* gnome-platform.m4: New file. This defines
+	GNOME_PLATFORM_GNOME_2.
+
+	* gnome-pkgconfig.m4: Disable the --extra-flags argument to
+	pkg-config, this doesn't exist anymore.
+
+2000-11-22  Martin Baulig  <martin@home-of-linux.org>
+
 	* gnome-pkgconfig.m4: New file. This defines
 	GNOME_CHECK_PKGCONFIG, GNOME_REQUIRE_PKGCONFIG and
 	GNOME_PKGCONFIG_* macros from pkg-config.
