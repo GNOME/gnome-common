@@ -19,15 +19,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/time.h>
 
-#ifndef _LIBC
-#define __gettimeofday gettimeofday
-#define __set_errno(e) errno = (e)
+#ifdef _LIBC
+#include <stdint.h>
+#define gettimeofday __gettimeofday
+#define set_errno(e) __set_errno(e)
+typedef uint64_t big_type;
+#else
+#define set_errno(e) errno = (e)
+/* FIXME: maybe check for long long.  */
+typedef long big_type;
 #endif
 
 /* Generate a unique temporary file name from TEMPLATE.
@@ -40,7 +45,7 @@ mkstemp (template)
 {
   static const char letters[]
     = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  static uint64_t value;
+  static big_type value;
   struct timeval tv;
   char *XXXXXX;
   size_t len;
@@ -49,7 +54,7 @@ mkstemp (template)
   len = strlen (template);
   if (len < 6 || strcmp (&template[len - 6], "XXXXXX"))
     {
-      __set_errno (EINVAL);
+      set_errno (EINVAL);
       return -1;
     }
 
@@ -57,12 +62,12 @@ mkstemp (template)
   XXXXXX = &template[len - 6];
 
   /* Get some more or less random data.  */
-  __gettimeofday (&tv, NULL);
-  value += ((uint64_t) tv.tv_usec << 16) ^ tv.tv_sec ^ getpid ();
+  gettimeofday (&tv, NULL);
+  value += ((big_type) tv.tv_usec << 16) ^ tv.tv_sec ^ getpid ();
 
   for (count = 0; count < TMP_MAX; ++count)
     {
-      uint64_t v = value;
+      big_type v = value;
       int fd;
 
       /* Fill in the random bits.  */
