@@ -1,3 +1,8 @@
+2004-06-04  Richard Kinder  <r_kinder@yahoo.com>
+	* doc-build/gnome-doc-common.in - change @VERSION@, @PACKAGE@
+	to @PACKAGE_VERSION@ and @PACKAGE_NAME@ so things depending on
+	a particular version of gnome-doc-common work.
+
 2004-05-26  James Henstridge  <james@daa.com.au>
 
 	* macros2/gnome-compiler-warnings.m4: some small cleanups.
