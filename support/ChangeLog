@@ -1,3 +1,8 @@
+2003-10-20  Bastien Nocera  <hadess@hadess.net>
+
+	* Makefile.am: make libgtop compile, other apps using libgnomesupport
+	should be dead by now
+
 2000-11-21  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am: Install libgnomesupport.la, but call it
