@@ -46,6 +46,7 @@ AC_OUTPUT([
 gnome-common.pc
 gnome-common-2.0.pc
 Makefile
+gnome-common.spec
 macros/Makefile
 macros2/Makefile
 bin/Makefile

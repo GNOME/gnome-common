@@ -8,7 +8,7 @@ endif
 
 SUBDIRS = bin macros macros2 doc $(support)
 
-EXTRA_DIST = gnome-common.spec gnome-common-2.0.pc.in gnome-common.pc.in
+EXTRA_DIST = gnome-common.spec gnome-common-2.0.pc.in gnome-common.pc.in 
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = $(pkgconfig_file) gnome-common.pc

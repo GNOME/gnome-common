@@ -1,3 +1,11 @@
+2001-03-26  Robin * Slomkowski  <rslomkow@eazel.com>
+
+	* Makefile.am: added gnome-common.spec.in to EXTRA_DISTS
+	* configure.in: added gnome-common.spec.in
+	* gnome-common.spec: removed from repository as it appeared
+                             generic
+	* gnome-common.spec.in: new spec file using Martin's suggestions
+
 2000-12-01  Martin Baulig  <baulig@suse.de>
 
 	Released gnome-common 1.2.1.
