@@ -1,3 +1,9 @@
+1998-03-12  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (noinst_HEADERS): Don't install argp-fmtstream.h and
+	argp-namefrob.h.  They are used only to compile `argp' and not for
+	general usage.
+
 1998-03-11  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* getopt.h: Don't mention getopt() for C++.  (Local fix).
