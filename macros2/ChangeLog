@@ -1,3 +1,10 @@
+2004-10-27  James Henstridge  <james@jamesh.id.au>
+
+	* gnome-autogen.sh (ACLOCAL): if AC_CONFIG_MACRO_DIR() is used in
+	configure.ac, pass that directory to aclocal.
+	Run libtoolize if the configure.ac file calls LT_INIT (the new
+	name for AC_PROG_LIBTOOL in libtool-2.0).
+
 2004-08-16  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-autogen.sh: Add some foo to handle automake-1.9.x too.

@@ -230,7 +230,8 @@ want_gtk_doc=false
 
 configure_files="`find $srcdir -name '{arch}' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
-    if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null; then
+    if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null || \
+       grep "^LT_INIT" $configure_ac >/dev/null; then
 	want_libtool=true
     fi
     if grep "^AM_GNU_GETTEXT" $configure_ac >/dev/null; then
@@ -340,7 +341,8 @@ for configure_ac in $configure_files; do
         # details.
 
         # programs that might install new macros get run before aclocal
-	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null; then
+	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null || \
+	   grep "^LT_INIT" $basename >/dev/null; then
 	    printbold "Running $LIBTOOLIZE..."
 	    $LIBTOOLIZE --force || exit 1
 	fi
@@ -373,9 +375,15 @@ for configure_ac in $configure_files; do
 	fi
 
         # Now run aclocal to pull in any additional macros needed
-	aclocalinclude="$ACLOCAL_FLAGS"
+
+	# if the AC_CONFIG_MACRO_DIR() macro is used, pass that
+	# directory to aclocal.
+	m4dir=`cat "$configure_ac" | grep '^AC_CONFIG_MACRO_DIR' | sed -n -e 's/AC_CONFIG_MACRO_DIR(\([^()]*\))/\1/p' | sed -e 's/^\[\(.*\)\]$/\1/' | sed -e 1q`
+	if [ -n "$m4dir" ]; then
+	    m4dir="-I $m4dir"
+	fi
 	printbold "Running $ACLOCAL..."
-	$ACLOCAL $aclocalinclude || exit 1
+	$ACLOCAL $m4dir $ACLOCAL_FLAGS || exit 1
 
 	if grep "GNOME_AUTOGEN_OBSOLETE" aclocal.m4 >/dev/null; then
 	    printerr "*** obsolete gnome macros were used in $configure_ac"
