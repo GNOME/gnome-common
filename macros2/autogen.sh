@@ -109,7 +109,7 @@ do
         fi
       fi
       if grep "^AM_PROG_XML_I18N_TOOLS" configure.in >/dev/null; then
-        echo "Running xml-i18n-toolize... Ignore non-fatal messages."
+        echo "Running xml-i18n-toolize..."
 	xml-i18n-toolize --copy --force --automake
       fi
       if grep "^AM_PROG_LIBTOOL" configure.in >/dev/null; then

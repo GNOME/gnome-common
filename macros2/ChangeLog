@@ -1,3 +1,7 @@
+2001-08-18  Darin Adler  <darin@bentspoon.com>
+
+	* autogen.sh: Don't ask people to ignore xml-i18n-tools messages.
+
 2001-08-04  Darin Adler  <darin@bentspoon.com>
 
 	* autogen.sh: Update gettext logic to allow anything that
