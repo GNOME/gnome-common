@@ -150,7 +150,7 @@ uninstall:
 
 info dvi:
 
-$(OBJECTS): ../config.h libgettext.h
+$(OBJECTS): $(top_builddir)/config.h libgettext.h
 bindtextdom.$lo finddomain.$lo loadmsgcat.$lo: gettextP.h gettext.h loadinfo.h
 dcgettext.$lo: gettextP.h gettext.h hash-string.h loadinfo.h
 
@@ -195,15 +195,15 @@ dist distdir: Makefile $(DISTFILES)
 dist-libc:
 	tar zcvf intl-glibc.tar.gz $(COMSRCS) $(COMHDRS) libintl.h.glibc
 
-Makefile: Makefile.in ../config.status
-	cd .. \
+Makefile: Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) \
 	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 # The dependency for intlh.inst is different in gettext and all other
 # packages.  Because we cannot you GNU make features we have to solve
 # the problem while rewriting Makefile.in.
-@GT_YES@intlh.inst: intlh.inst.in ../config.status
-@GT_YES@	cd .. \
+@GT_YES@intlh.inst: intlh.inst.in $(top_builddir)/config.status
+@GT_YES@	cd $(top_builddir) \
 @GT_YES@	&& CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
 @GT_YES@	  $(SHELL) ./config.status
 @GT_NO@.PHONY: intlh.inst
