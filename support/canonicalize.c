@@ -26,7 +26,6 @@
 #include <sys/stat.h>
 #include <errno.h>
 
-#include <libc-symbols.h>
 #include <argp-namefrob.h>
 
 /* Return the canonical absolute name of file NAME.  A canonical name
@@ -175,11 +174,23 @@ error:
     free (rpath);
   return NULL;
 }
-weak_alias (canonicalize, realpath)
 
+char *
+realpath (const char *name, char *resolved)
+{
+  if (resolved == NULL)
+    {
+      __set_errno (EINVAL);
+      return NULL;
+    }
+	
+  return canonicalize (name, resolved);
+}
 
+#if 0
 char *
 canonicalize_file_name (const char *name)
 {
   return canonicalize (name, NULL);
 }
+#endif

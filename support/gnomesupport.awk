@@ -185,25 +185,19 @@ END {
     print "              char */*fmt*/, ...);";
   }
 
-  if (!def["HAVE_CANONICALIZE_FILE_NAME"] || !def["HAVE_REALPATH"]) {
+  if (!def["HAVE_REALPATH"]) {
     print "";
     print "/* Return the canonical absolute name of file NAME.  A canonical name";
     print "   does not contain any `.', `..' components nor any repeated path";
-    print "   separators ('/') or symlinks.  All path components must exist.  If";
-    print "   RESOLVED is null, the result is malloc'd; otherwise, if the";
-    print "   canonical name is PATH_MAX chars or more, returns null with `errno'";
-    print "   set to ENAMETOOLONG; if the name fits in fewer than PATH_MAX chars,";
-    print "   returns the name in RESOLVED.  If the name cannot be resolved and";
-    print "   RESOLVED is non-NULL, it contains the path of the first component";
+    print "   separators ('/') or symlinks.  All path components must exist.";
+    print "   If the canonical name is PATH_MAX chars or more, returns null with";
+    print "   `errno' set to ENAMETOOLONG; if the name fits in fewer than PATH_MAX";
+    print "   chars, returns the name in RESOLVED.  If the name cannot be resolved";
+    print "   and RESOLVED is non-NULL, it contains the path of the first component";
     print "   that cannot be resolved.  If the path can be resolved, RESOLVED";
     print "   holds the same value as the value returned.  */";
     print "";
-    if (!def["HAVE_CANONICALIZE_FILE_NAME"]) {
-      print "char *canonicalize_file_name (const char */*name*/);";
-    }
-    if (!def["HAVE_REALPATH"]) {
-      print "char *realpath (char */*path*/, char /*resolved_path*/[]);";
-    }
+    print "char *realpath (char */*path*/, char /*resolved_path*/[]);";
   }
 
   print "";
