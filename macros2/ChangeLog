@@ -1,3 +1,7 @@
+2000-07-24  Martin Baulig  <baulig@suse.de>
+
+	Synced with gnome-libs/gnome-data.
+
 2000-06-09  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-common.m4: We need this here as well.
