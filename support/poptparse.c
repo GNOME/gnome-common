@@ -1,5 +1,5 @@
 /* (C) 1998 Red Hat Software, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.redhat.com/pub/code/popt */
 
 #include "system.h"
@@ -20,7 +20,7 @@ int poptDupArgv(int argc, const char **argv,
 	    return POPT_ERROR_NOARG;
 	nb += strlen(argv[i]) + 1;
     }
-	
+
     dst = malloc(nb);
     argv2 = (void *) dst;
     dst += (argc + 1) * sizeof(*argv);

@@ -1,5 +1,5 @@
 /* (C) 1998 Red Hat Software, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.redhat.com/pub/code/popt */
 
 #include "system.h"
@@ -12,7 +12,7 @@ static void configLine(poptContext con, char * line) {
     char * entryType;
     char * longName = NULL;
     char shortName = '\0';
-    
+
     if (strncmp(line, con->appName, nameLength)) return;
     line += nameLength;
     if (!*line || !isspace(*line)) return;
@@ -49,7 +49,7 @@ static void configLine(poptContext con, char * line) {
 
 	con->execs[con->numExecs].shortName = shortName;
 	con->execs[con->numExecs].script = xstrdup(line);
-	
+
 	con->numExecs++;
     }
 }
@@ -64,7 +64,7 @@ int poptReadConfigFile(poptContext con, const char * fn) {
     if (fd < 0) {
 	if (errno == ENOENT)
 	    return 0;
-	else 
+	else
 	    return POPT_ERROR_ERRNO;
     }
 
@@ -98,8 +98,8 @@ int poptReadConfigFile(poptContext con, const char * fn) {
 	  case '\\':
 	    *dst++ = *chptr++;
 	    if (chptr < end) {
-		if (*chptr == '\n') 
-		    dst--, chptr++;	
+		if (*chptr == '\n')
+		    dst--, chptr++;
 		    /* \ at the end of a line does not insert a \n */
 		else
 		    *dst++ = *chptr++;

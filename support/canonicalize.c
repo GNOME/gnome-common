@@ -189,7 +189,7 @@ realpath (const char *name, char *resolved)
       set_errno (EINVAL);
       return NULL;
     }
-	
+
   return canonicalize (name, resolved);
 }
 
