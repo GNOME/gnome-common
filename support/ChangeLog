@@ -1,0 +1,6 @@
+1998-02-18  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* strcasecmp.c: New file, copied from `glibc'.  Used to provide
+	replacement `strcasecmp' file.
+	
+
