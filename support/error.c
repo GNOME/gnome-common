@@ -25,6 +25,8 @@
 # include <config.h>
 #endif
 
+#include <gnomesupport-fake.h>
+
 #include <stdio.h>
 
 #if HAVE_VPRINTF || HAVE_DOPRNT || _LIBC
@@ -65,7 +67,7 @@ void (*error_print_progname) (
 /* This variable is incremented each time `error' is called.  */
 unsigned int error_message_count;
 
-#ifdef _LIBC
+#if defined _LIBC || HAVE_PROGRAM_INVOCATION_NAME
 /* In the GNU C library, there is a predefined variable for this.  */
 
 # define program_name program_invocation_name

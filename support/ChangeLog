@@ -1,3 +1,11 @@
+1998-07-29  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnomesupport-fake.h: New file.  Fake in HAVE_* for functions
+	that are provided by `gnomesupport' rather than `libc'.
+	* error.c: Include gnomesupport-fake.h.
+	(program_name): Define to `program_invocation_name' if 
+	HAVE_PROGRAM_INVOCATION_NAME.
+
 1998-07-29  Martin Baulig  <martin@home-of-linux.org>
 
 	* error.c, error.h: New files.  Imported from glibc.
