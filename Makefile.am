@@ -1,11 +1,9 @@
-## if <internationalization support>
-#SUBDIRS = po intl macros support # <your subdirs here>
-## else
-SUBDIRS = macros support # <your subdirs here>
-## endif
+SUBDIRS = macros
 
-## to automatically rebuild aclocal.m4 if any of the macros in
-## `macros/' change
-@MAINT@include macros/macros.dep
-@MAINT@macros/macros.dep: macros/Makefile.am
-@MAINT@	cd macros && $(MAKE) macros.dep
+EXTRA_DIST = gnome-common.spec
+
+dist-hook:
+	for subdir in intl support ; do \
+	  mkdir $(distdir)/$$subdir ; \
+	  cp -pr $(srcdir)/$$subdir $(distdir) ; \
+	done

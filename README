@@ -1,2 +1,35 @@
 This directory contains sample files that should be in pretty much every
 GNOME application.
+
+-----------------------------------------------------------------------------
+
+To make this work both for GNOME Applications inside and outside the
+GNOME CVS Tree I did the following:
+
+* There is an `INSIDE_GNOME_COMMON' automake conditional which is defined
+  in two places:
+
+  - macros/aclocal-includes.m4 defines this to always be false.
+
+  - gnome-common/configure.in does not include anything from macros and
+    defines this to be true.
+
+* We use this automake conditional in the macros/Makefile.am to install
+  $(MACROS), autogen.sh, gnome-common.m4 and a newly created gnome-macros.dep
+  in `$(datadir)/aclocal/gnome'.
+
+  Since aclocal doesn't look in subdirectories we can safely install them
+  there even when compiling from CVS.
+
+  Also, there is no need to make any change to any existing application
+  in the GNOME CVS Tree - really fine ...
+
+* When we're outside the GNOME CVS Tree we simply need to tell aclocal that
+  it should also look in `$(datadir)/aclocal/gnome' and it will find all
+  the macros.
+
+  The is a `gnome-skel' module in CVS that can be used as a starting point
+  when writing a new GNOME Application that should be used outside CVS.
+
+February  4, 1999,
+Martin Baulig <martin@home-of-linux.org>

@@ -1,13 +1,11 @@
 AC_INIT(intl)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gnome-common, 0.13)
+AM_INIT_AUTOMAKE(gnome-common, 0.99.5)
 
 AM_MAINTAINER_MODE
 
-AM_ACLOCAL_INCLUDE(macros)
-
-GNOME_INIT
+AM_CONDITIONAL(INSIDE_GNOME_COMMON, true)
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -16,21 +14,6 @@ AC_STDC_HEADERS
 AC_ARG_PROGRAM
 AM_PROG_LIBTOOL
 
-GNOME_SUPPORT_CHECKS
-
-dnl ## internationalization support
-dnl ALL_LINGUAS=""
-dnl AM_GNU_GETTEXT
-dnl AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
-
-AC_OUTPUT(
+AC_OUTPUT([
 Makefile
-dnl ## internationalization support
-dnl po/Makefile.in
-dnl intl/Makefile
-macros/Makefile
-support/Makefile
-stamp.h)
-
-dnl ## internationalization support
-dnl stamp.h],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+macros/Makefile])
