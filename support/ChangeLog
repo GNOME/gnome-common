@@ -1,3 +1,10 @@
+1998-06-11  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (gnomesupport.h): Build with `gnomesupport.awk'.
+	(CROSS_COMPILING): Remove.
+	* gnomesupport.awk: New file, to replace `gnomesupport-h.c'.
+	* gnomesupport-h.c: Removed.  Doesn't work well in cross-compiles.
+
 1998-06-08  Martin Baulig  <martin@home-of-linux.org>
 
 	* Makefile.am (gnomesupport-h): When cross-compiling, this

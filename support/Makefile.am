@@ -5,10 +5,6 @@ supportincludedir = $(pkglibdir)/include
 if BUILD_GNOME_SUPPORT
 INCLUDES = -D_GNU_SOURCE
 
-if CROSS_COMPILING
-CC = $(build_CC)
-endif
-
 lib_LTLIBRARIES = libgnomesupport.la
 
 supportinclude_HEADERS = gnome-argp.h getopt.h long-options.h argp.h
@@ -25,13 +21,11 @@ libgnomesupport_la_SOURCES = long-options.c gnome-argp.c
 libgnomesupport_la_LIBADD  = @LTLIBOBJS@
 libgnomesupport_la_LDFLAGS = -version-info 0:0:0
 
-noinst_PROGRAMS = gnomesupport-h
-
 BUILT_SOURCES = gnomesupport.h
 
-gnomesupport.h: gnomesupport-h
-	./gnomesupport-h > gnomesupport.h-new && \
-	mv gnomesupport.h-new gnomesupport.h
+gnomesupport.h: gnomesupport.awk $(top_builddir)/config.h
+	$(AWK) -f $(srcdir)/gnomesupport.awk < $(top_builddir)/config.h > gsh-t
+	mv gsh-t gnomesupport.h
 
 endif
 
