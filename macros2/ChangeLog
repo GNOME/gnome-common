@@ -1,3 +1,9 @@
+2003-11-19  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Replace use of -or in a find command with -o.
+	Makes things work for people with less functional versions of
+	find. Fixes bug #127354 reported by Rolf Sponsel.
+
 2003-11-03    <clahey@ximian.com>
 
 	* gnome-common.m4: Removed ENABLE_WERROR and changed name to
