@@ -225,6 +225,9 @@ done
 
 DIE=0
 
+#tell Mandrake autoconf wrapper we want autoconf 2.5x, not 2.13
+WANT_AUTOCONF_2_5=1
+export WANT_AUTOCONF_2_5
 version_check autoconf AUTOCONF 'autoconf2.50 autoconf autoconf-2.53' $REQUIRED_AUTOCONF_VERSION \
     "http://ftp.gnu.org/pub/gnu/autoconf/autoconf-$REQUIRED_AUTOCONF_VERSION.tar.gz" || DIE=1
 AUTOHEADER=`echo $AUTOCONF | sed s/autoconf/autoheader/`

@@ -1,3 +1,8 @@
+2003-02-26  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
+	* macros2/autogen.sh: set WANT_AUTOCONF_2_5 variable to tell 
+	Mandrake autoconf wrapper we want to check if autoconf 2.5x is here..
+
 2003-02-18  Jody Goldberg <jody@gnome.org>
 
 	* configure.in : Don't depend on a file that James just deleted
