@@ -97,7 +97,7 @@ END {
   if (!def["HAVE_VASPRINTF"]) {
     print "";
     print "/* Write formatted output to a string dynamically allocated with";
-    print "`malloc'.  Store the address of the string in *PTR.  */";
+    print "   `malloc'.  Store the address of the string in *PTR.  */";
     print "int vasprintf (char **/*ptr*/, const char */*format*/,";
     print "               va_list /*args*/);";
     print "int asprintf (char **/*ptr*/, const char */*format*/, ...);";
