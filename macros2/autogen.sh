@@ -38,7 +38,7 @@ grep "^AM_GNU_GETTEXT" $srcdir/configure.in >/dev/null && {
   }
 }
 
-grep "^AM_GNOME_GETTEXT" $srcdir/configure.in >/dev/null && {
+grep "^AM_GNOME2?_GETTEXT" $srcdir/configure.in >/dev/null && {
   grep "sed.*POTFILES" $srcdir/configure.in >/dev/null || \
   (gettext --version) < /dev/null > /dev/null 2>&1 || {
     echo
@@ -130,7 +130,7 @@ do
 	  test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
         fi
       fi
-      if grep "^AM_GNOME_GETTEXT" configure.in >/dev/null; then
+      if grep "^AM_GNOME2?_GETTEXT" configure.in >/dev/null; then
 	echo "Creating $dr/aclocal.m4 ..."
 	test -r $dr/aclocal.m4 || touch $dr/aclocal.m4
 	echo "Running gettextize...  Ignore non-fatal messages."
