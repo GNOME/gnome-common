@@ -1,3 +1,7 @@
+Sat Mar  7 00:03:26 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* strnlen.c: New file from glibc; needed by strndup.c.
+
 Fri Mar  6 20:10:55 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* argp-fmtstream.h (__attribute__): Define unless using gcc.
