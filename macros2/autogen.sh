@@ -39,7 +39,7 @@ fi
   }
 }
 
-grep "^AM_[A-Z0-9_]\+_GETTEXT" $srcdir/configure.in >/dev/null && {
+grep "^AM_[A-Z0-9_]\{1,\}_GETTEXT" $srcdir/configure.in >/dev/null && {
   grep "sed.*POTFILES" $srcdir/configure.in >/dev/null || \
   (gettext --version) < /dev/null > /dev/null 2>&1 || {
     echo

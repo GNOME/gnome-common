@@ -1,3 +1,7 @@
+2001-09-04  Frank Belew  <frb@ximian.com>
+
+	* autogen.sh: change gettext regexp to work with non-gnu grep
+
 2001-08-18  Darin Adler  <darin@bentspoon.com>
 
 	* autogen.sh: Don't ask people to ignore xml-i18n-tools messages.
