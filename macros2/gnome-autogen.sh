@@ -212,7 +212,7 @@ check_m4macros() {
 	printerr "***Error***: some autoconf macros required to build $PKG_NAME"
 	printerr "  were not found in your aclocal path, or some forbidden"
 	printerr "  macros were found.  Perhaps you need to adjust your"
-	printerr "  ACLOCAL_PATH?"
+	printerr "  ACLOCAL_FLAGS?"
 	printerr
     fi
     return $cm_status
@@ -270,11 +270,6 @@ esac
 version_check automake AUTOMAKE "$automake_progs" $REQUIRED_AUTOMAKE_VERSION \
     "http://ftp.gnu.org/pub/gnu/automake/automake-$REQUIRED_AUTOMAKE_VERSION.tar.gz" || DIE=1
 ACLOCAL=`echo $AUTOMAKE | sed s/automake/aclocal/`
-
-# We need to do this for the craaaaaaazy mkinstalldirs usage of glib-gettext
-AUTOMAKE_VERSION=`echo $AUTOMAKE | sed s/automake-//`
-ACLOCAL_DIR=`$ACLOCAL --print-ac-dir`
-AUTOMAKE_DIR=`echo $ACLOCAL_DIR | sed s/aclocal/automake-$AUTOMAKE_VERSION/`
 
 if $want_libtool; then
     version_check libtool LIBTOOLIZE libtoolize $REQUIRED_LIBTOOL_VERSION \
@@ -353,11 +348,6 @@ for configure_ac in $configure_files; do
 	if grep "^AM_GLIB_GNU_GETTEXT" $basename >/dev/null; then
 	    printbold "Running $GLIB_GETTEXTIZE... Ignore non-fatal messages."
 	    echo "no" | $GLIB_GETTEXTIZE --force --copy || exit 1
-	    # This is to copy in mkinstalldirs for glib-gettext
-	    if [ -x $AUTOMAKE_DIR/mkinstalldirs ]; then
-		echo "  copying mkinstalldirs... "
-		cp -f $AUTOMAKE_DIR/mkinstalldirs $dirname
-	    fi
 	elif grep "^AM_GNU_GETTEXT" $basename >/dev/null; then
 	   if grep "^AM_GNU_GETTEXT_VERSION" $basename > /dev/null; then
 	   	printbold "Running autopoint..."

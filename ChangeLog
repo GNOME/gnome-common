@@ -1,3 +1,11 @@
+2004-08-30  James Henstridge  <james@jamesh.id.au>
+
+	* macros2/gnome-autogen.sh: fix up error message when a required
+	M4 file isn't found.  Fixes bug #147417.
+
+	* macros2/gnome-autogen.sh: Revert Rodney's changes, since
+	glib-gettextize has been fixed on the HEAD and 2.4 branches.
+
 2004-06-10  Rodney Dawes  <dobey@ximian.com>
 
 	* macros2/gnome-autogen.sh: Add code to check for mkinstalldirs in
