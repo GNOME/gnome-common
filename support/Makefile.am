@@ -5,6 +5,10 @@ supportincludedir = $(pkglibdir)/include
 if BUILD_GNOME_SUPPORT
 INCLUDES = -D_GNU_SOURCE
 
+if CROSS_COMPILING
+CC = $(build_CC)
+endif
+
 lib_LTLIBRARIES = libgnomesupport.la
 
 supportinclude_HEADERS = gnome-argp.h getopt.h long-options.h argp.h
