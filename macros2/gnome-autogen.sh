@@ -378,7 +378,7 @@ for configure_ac in $configure_files; do
 
 	# if the AC_CONFIG_MACRO_DIR() macro is used, pass that
 	# directory to aclocal.
-	m4dir=`cat "$configure_ac" | grep '^AC_CONFIG_MACRO_DIR' | sed -n -e 's/AC_CONFIG_MACRO_DIR(\([^()]*\))/\1/p' | sed -e 's/^\[\(.*\)\]$/\1/' | sed -e 1q`
+	m4dir=`cat "$basename" | grep '^AC_CONFIG_MACRO_DIR' | sed -n -e 's/AC_CONFIG_MACRO_DIR(\([^()]*\))/\1/p' | sed -e 's/^\[\(.*\)\]$/\1/' | sed -e 1q`
 	if [ -n "$m4dir" ]; then
 	    m4dir="-I $m4dir"
 	fi

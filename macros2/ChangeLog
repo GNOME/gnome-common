@@ -1,3 +1,8 @@
+2004-10-28  James Henstridge  <james@jamesh.id.au>
+
+	* gnome-autogen.sh (m4dir): fix up the AC_CONFIG_MACRO_DIR check
+	to work with sub-package configure.in's.
+
 2004-10-27  James Henstridge  <james@jamesh.id.au>
 
 	* gnome-autogen.sh (ACLOCAL): if AC_CONFIG_MACRO_DIR() is used in
