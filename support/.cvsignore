@@ -1,9 +1,0 @@
-Makefile.in
-Makefile
-.deps
-*.la
-*.lo
-.libs
-gnomesupport-h
-gnomesupport.h
-gnome-support-2.0.pc
