@@ -1,7 +1,10 @@
-2003-05-03  Malcolm Tredinnick <malcolm@commsecure.com.au>
+2003-05-04  Malcolm Tredinnick <malcolm@commsecure.com.au>
 	
-	* autogen.sh: Make this portable to Bourne-like shells. Fixes
-	the problems pointed out by Morten Welinder in bug #110177.
+	* autogen.sh:
+	- Make this portable to Bourne-like shells. Fixes the problems
+	  pointed out by Morten Welinder in bug #110177.
+	- Extend the check_m4macros() function to handle Cygwin
+	  environments. Fixes bug #110947.
 
 2003-04-10  Ross Burton  <ross@burtonini.com>
 

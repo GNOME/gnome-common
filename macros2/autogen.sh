@@ -159,6 +159,16 @@ check_m4macros() {
 		    cm_macrofound=true
 		    break
 		fi
+		# The macro dir in Cygwin environments may contain a file
+		# called dirlist containing other directories to look in.
+		if [ -f "$cm_dir/dirlist" ]; then
+		    for cm_otherdir in `cat $cm_dir/dirlist`; do
+			if [ -f "$cm_otherdir/$cm_macro" ]; then
+			    cm_macrofound=true
+		            break
+			fi
+		    done
+		fi
 	    done
 	    if $cm_macrofound; then
 		:
