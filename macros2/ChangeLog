@@ -1,3 +1,8 @@
+2003-11-01  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Make version checking work, as pointed out by
+	Michael H Schimek in bug #125818.
+
 2003-10-31    <clahey@ximian.com>
 
 	* gnome-common.m4: Changed name of new macro to

@@ -59,7 +59,7 @@ compare_versions() {
     ch_status=0
     IFS="${IFS=         }"; ch_save_IFS="$IFS"; IFS="."
     set $ch_actual_version
-    for min in $ch_min_version; do
+    for ch_min in $ch_min_version; do
         ch_cur=`echo $1 | sed 's/[^0-9].*$//'`; shift # remove letter suffixes
         if [ -z "$ch_min" ]; then break; fi
         if [ -z "$ch_cur" ]; then ch_status=1; break; fi
