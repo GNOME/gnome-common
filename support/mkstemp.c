@@ -25,6 +25,11 @@
 #include <unistd.h>
 #include <sys/time.h>
 
+#ifndef _LIBC
+#define __gettimeofday gettimeofday
+#define __set_errno(e) errno = (e)
+#endif
+
 /* Generate a unique temporary file name from TEMPLATE.
    The last six characters of TEMPLATE must be "XXXXXX";
    they are replaced with a string that makes the filename unique.

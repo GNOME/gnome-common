@@ -23,7 +23,7 @@ END {
     print "";
     print "#include <stdarg.h>";
   }
-  
+
   if (!def["HAVE_SCANDIR"]) {
     print "";
     print "#include <sys/types.h>";
@@ -42,7 +42,19 @@ END {
       if (def["HAVE_NDIR_H"])
 	print "#include <ndir.h>";
     }
+  }
 
+  if (!def["HAVE_MKSTEMP"]) {
+    print "";
+    print "/* Generate a unique temporary file name from TEMPLATE.";
+    print "   The last six characters of TEMPLATE must be "XXXXXX";";
+    print "   they are replaced with a string that makes the filename";
+    print "   unique.  Returns a file descriptor open on the file for";
+    print "   reading and writing.  */";
+    print "int mkstemp (char */*template*/);";
+  }
+  
+  if (!def["HAVE_SCANDIR"]) {
     print "";
     print "/* Scan the directory DIR, calling SELECTOR on each directory";
     print "   entry.  Entries for which SELECTOR returns nonzero are";
@@ -112,7 +124,7 @@ END {
     print "              char */*fmt*/, ...);";
   }
   
-  print ""
+  print "";
   print "#ifdef __cplusplus";
   print "}";
   print "#endif /* __cplusplus */";

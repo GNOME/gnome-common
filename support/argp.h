@@ -527,8 +527,9 @@ extern void *__argp_input __P ((__const struct argp *argp,
 #  define __option_is_end _option_is_end
 # endif
 
+/* FIXME: Assume we are using GCC.  This is inside an __OPTIMIZE__ test.  */
 # ifndef ARGP_EI
-#  define ARGP_EI extern inline
+#  define ARGP_EI extern __inline__
 # endif
 
 ARGP_EI void
