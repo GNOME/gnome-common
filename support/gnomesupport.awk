@@ -49,6 +49,24 @@ END {
     print "/* Get name of current host.  */";
     print "int gethostname(char */*name*/, int /*namelen*/);";
   }
+
+  if (def["NEED_DECLARATION_SETREUID"]) {
+    print "";
+    print "/* Set real and effective user ID. */";
+    print "int setreuid(uid_t /*ruid*/, uid_t /*euid*/);";
+  }
+
+  if (def["NEED_DECLARATION_SETREGID"]) {
+    print "";
+    print "/* Set real and effective group ID. */";
+    print "int setregid(gid_t /*rgid*/, gid_t /*egid*/);";
+  }
+  
+  if (def["NEED_DECLARATION_GETPAGESIZE"]) {
+    print "";
+    print "/* Get system page size. */";
+    print "size_t getpagesize(void);";
+  }
   
   if (!def["HAVE_MEMMOVE"]) {
     print "";
