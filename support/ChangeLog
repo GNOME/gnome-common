@@ -1,3 +1,24 @@
+1998-08-18  Martin Baulig  <martin@home-of-linux.org>
+
+	* Makefile.am: Added explicit dependency `error.c: gnomesupport.h'.
+
+	* gnomesupport-fake.h: Include `sys/types.h' to get `size_t' under
+	FreeBSD.
+
+	* gnomesupport-fake.h: Include `gnomesupport.h' only if we really
+	`NEED_GNOMESUPPORT_H'.
+
+1998-08-16  Martin Baulig  <martin@home-of-linux.org>
+
+	* Makefile.am (EXTRA_DIST): Added all source and header files that
+	are in CVS to make sure everything is included in the distribution
+	no matter which files are used on the build system.
+
+1998-08-15  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (libgnomesupport_la_SOURCES): List `gnomesupport.h'
+	here in the hope that it'll ensure that it is built.
+
 1998-08-05  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (noinst_HEADERS): Add `gnomesupport-fake.h'.
