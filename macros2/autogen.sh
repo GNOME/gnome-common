@@ -14,6 +14,7 @@ REQUIRED_GLIB_GETTEXT_VERSION=${REQUIRED_GLIB_GETTEXT_VERSION:-2.2.0}
 REQUIRED_INTLTOOL_VERSION=${REQUIRED_INTLTOOL_VERSION:-0.25}
 REQUIRED_PKG_CONFIG_VERSION=${REQUIRED_PKG_CONFIG_VERSION:-0.14.0}
 REQUIRED_GTK_DOC_VERSION=${REQUIRED_GTK_DOC_VERSION:-1.0}
+REQUIRED_DOC_COMMON_VERSION=${REQUIRED_DOC_COMMON_VERSION:-2.3.0}
 
 # a list of required m4 macros.  Package can set an initial value
 REQUIRED_M4MACROS=${REQUIRED_M4MACROS:-}
@@ -29,8 +30,8 @@ if [ -n "$GNOME2_DIR" ]; then
 fi
 
 
-# Not all echo versions allow -n, so let's be portable. This test is based on
-# the one in autoconf.
+# Not all echo versions allow -n, so we check what is possible. This test is
+# based on the one in autoconf.
 case `echo "testing\c"; echo 1,2,3`,`echo -n testing; echo 1,2,3` in
   *c*,-n*) ECHO_N= ;;
   *c*,*  ) ECHO_N=-n ;;
@@ -292,6 +293,11 @@ if $want_gtk_doc; then
     require_m4macro gtk-doc.m4
 fi
 
+if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
+    version_check gnome-common DOC_COMMON gnome-doc-common" \
+        $REQUIRED_DOC_COMMON_VERSION "" || DIE=1
+fi
+
 check_m4macros || DIE=1
 
 if [ "$DIE" -eq 1 ]; then
@@ -349,6 +355,10 @@ for configure_ac in $configure_files; do
 	if grep "^A[CM]_CONFIG_HEADER" $basename >/dev/null; then
 	    printbold "Running $AUTOHEADER..."
 	    $AUTOHEADER || exit 1
+	fi
+	if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
+	    printbold "Running gnome-doc-common..."
+	    gnome-doc-common --copy || exit 1
 	fi
 
 	printbold "Running $AUTOMAKE..."

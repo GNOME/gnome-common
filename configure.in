@@ -1,12 +1,10 @@
 AC_INIT(macros2/gnome-common.m4)
 
-AM_INIT_AUTOMAKE(gnome-common, 1.2.4)
+AM_INIT_AUTOMAKE(gnome-common, 2.3.0)
 
 AM_MAINTAINER_MODE
 
 AM_CONDITIONAL(INSIDE_GNOME_COMMON, true)
-
-AC_DEFUN([AC_FYI], [echo "FYI: " $1])
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -31,5 +29,8 @@ gnome-common.spec
 macros/Makefile
 macros2/Makefile
 bin/Makefile
-doc/Makefile])
+doc/Makefile
+doc-build/Makefile
+doc-build/gnome-doc-common
+])
 

@@ -2,6 +2,13 @@
 
 	* MAINTAINERS: Put myself in as maintainer.
 
+	* configure.in: Bump the version number to 2.3.0
+
+	* configure.in, Makefile.am, macros2/autogen.sh, doc-build/*:
+	Add in the infrastructure to allow user documentatin to be built
+	from some common files. This will not affect existing packages.
+	The changes required to use this are given in doc-build/README.
+
 2003-02-26  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* macros2/autogen.sh: set WANT_AUTOCONF_2_5 variable to tell 
