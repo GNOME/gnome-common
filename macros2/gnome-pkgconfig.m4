@@ -178,6 +178,9 @@ AC_DEFUN([GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES],
 	if test -z "$4" ; then
 	    eval 'HAVE_'$name=yes
 	fi
+	eval 'have_'$name=yes
+    else
+	eval 'have_'$name=no
     fi
 ])
 
