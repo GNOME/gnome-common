@@ -191,7 +191,7 @@ check_m4macros() {
 		fi
 	    done
 	    if $cm_macrofound; then
-		printerr "  $mcm_acro found (should be cleared from macros dir)"
+		printerr "  $cm_macro found (should be cleared from macros dir)"
 		cm_status=1
 	    fi
 	done
