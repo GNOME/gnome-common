@@ -334,18 +334,16 @@ for configure_ac in $configure_files; do
 	printbold "Processing $configure_ac"
 	cd $dirname
 
-	aclocalinclude="$ACLOCAL_FLAGS"
-	printbold "Running $ACLOCAL..."
-	$ACLOCAL $aclocalinclude || exit 1
+        # Note that the order these tools are called should match what
+        # autoconf's "autoupdate" package does.  See bug 138584 for
+        # details.
 
-	if grep "GNOME_AUTOGEN_OBSOLETE" aclocal.m4 >/dev/null; then
-	    printerr "*** obsolete gnome macros were used in $configure_ac"
-	fi
-
+        # programs that might install new macros get run before aclocal
 	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null; then
 	    printbold "Running $LIBTOOLIZE..."
 	    $LIBTOOLIZE --force || exit 1
 	fi
+
 	if grep "^AM_GLIB_GNU_GETTEXT" $basename >/dev/null; then
 	    printbold "Running $GLIB_GETTEXTIZE... Ignore non-fatal messages."
 	    echo "no" | $GLIB_GETTEXTIZE --force --copy || exit 1
@@ -358,31 +356,45 @@ for configure_ac in $configure_files; do
 	    	echo "no" | $GETTEXTIZE --force --copy || exit 1
 	   fi
 	fi
+
+	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
+	    printbold "Running $INTLTOOLIZE..."
+	    $INTLTOOLIZE --force --automake || exit 1
+	fi
 	if grep "^GTK_DOC_CHECK" $basename >/dev/null; then
 	    printbold "Running $GTKDOCIZE..."
 	    $GTKDOCIZE || exit 1
 	fi
-	if grep "^A[CM]_CONFIG_HEADER" $basename >/dev/null; then
-	    printbold "Running $AUTOHEADER..."
-	    $AUTOHEADER || exit 1
-	fi
+
 	if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
 	    printbold "Running gnome-doc-common..."
 	    gnome-doc-common --copy || exit 1
 	fi
 
-	printbold "Running $AUTOMAKE..."
-	$AUTOMAKE --gnu --add-missing || exit 1
+        # Now run aclocal to pull in any additional macros needed
+	aclocalinclude="$ACLOCAL_FLAGS"
+	printbold "Running $ACLOCAL..."
+	$ACLOCAL $aclocalinclude || exit 1
 
-	# This must run after automake, since intltoolize wants mkinstalldirs
-	# to be available and that is only linked or copied by automake.
-	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
-	    printbold "Running $INTLTOOLIZE..."
-	    $INTLTOOLIZE --force --automake || exit 1
+	if grep "GNOME_AUTOGEN_OBSOLETE" aclocal.m4 >/dev/null; then
+	    printerr "*** obsolete gnome macros were used in $configure_ac"
 	fi
 
+	# Now that all the macros are sorted, run autoconf and autoheader ...
 	printbold "Running $AUTOCONF..."
 	$AUTOCONF || exit 1
+	if grep "^A[CM]_CONFIG_HEADER" $basename >/dev/null; then
+	    printbold "Running $AUTOHEADER..."
+	    $AUTOHEADER || exit 1
+	    # this prevents automake from thinking config.h.in is out of
+	    # date, since autoheader doesn't touch the file if it doesn't
+	    # change.
+	    test -f config.h.in && touch config.h.in
+	fi
+
+	# Finally, run automake to create the makefiles ...
+	printbold "Running $AUTOMAKE..."
+	$AUTOMAKE --gnu --add-missing || exit 1
 
 	cd "$topdir"
     fi

@@ -1,3 +1,8 @@
+2004-05-13  James Henstridge  <james@daa.com.au>
+
+	* autogen.sh: Change the order the various tools are called in to
+	match that of autoconf's autoupdate tool.  See bug 138584.
+
 2004-01-31  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Use automake-1.8 if available. Patch from
