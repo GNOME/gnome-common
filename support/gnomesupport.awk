@@ -19,7 +19,8 @@ END {
     print "#include <stdarg.h>";
   }
 
-  if (!def["HAVE_SCANDIR"] || def["NEED_DECLARATION_SCANDIR"]) {
+  if (!def["HAVE_SCANDIR"] || def["NEED_DECLARATION_SCANDIR"] || 
+      !def["HAVE_VASPRINTF"] || !def["HAVE_VSNPRINTF"]) {
     print "#include <sys/types.h>";
 
     if (def["HAVE_DIRENT_H"]) {
@@ -178,10 +179,17 @@ END {
   if (!def["HAVE_VSNPRINTF"]) {
     print "";
     print "/* Maximum chars of output to write is MAXLEN.  */";
+    print "#ifdef __sgi"
+    print "int vsnprintf (char */*str*/, ssize_t /*maxlen*/,";
+    print "               char */*fmt*/, va_list /*ap*/);";
+    print "int snprintf (char */*str*/, ssize_t /*maxlen*/,";
+    print "              char */*fmt*/, ...);";
+    print "#else"
     print "int vsnprintf (char */*str*/, size_t /*maxlen*/,";
     print "               char */*fmt*/, va_list /*ap*/);";
     print "int snprintf (char */*str*/, size_t /*maxlen*/,";
     print "              char */*fmt*/, ...);";
+    print "#endif"
   }
 
   if (!def["HAVE_REALPATH"]) {
