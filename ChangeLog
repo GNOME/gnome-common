@@ -1,3 +1,31 @@
+2004-05-26  James Henstridge  <james@daa.com.au>
+
+	* macros2/gnome-compiler-warnings.m4: some small cleanups.
+
+	* macros2/gnome-common.m4 (GNOME_COMMON_INIT): since caching is
+	turned off in all recent Autoconfs, it doesn't make sense to use
+	it.  Change implementation to instead make sure ${ACLOCAL_FLAGS}
+	gets passed to aclocal when called from the makefile.
+
+	* macros2/Makefile.am: alter installation so that it puts the
+	macros directly into $(datadir)/aclocal instead of
+	$(datadir)/aclocal/gnome2-macros
+
+	* autogen.sh (REQUIRED_AUTOMAKE_VERSION): use a modern version of
+	automake.
+
+	* macros2/gnome-compiler-flags.m4: move from compiler-flags.m4 to
+	reduce chance of collisions.
+
+	* macros2/gnome-autogen.sh: move from autogen.sh
+
+	* Makefile.am (SUBDIRS): don't build bin/ and macros/ directories.
+
+	* configure.in: don't create makefiles for bin/ and macros/
+	directories.
+	Since we don't actually build the support/ directory (since 2001),
+	remove the matching parts from the configure script.
+
 2004-05-13  James Henstridge  <james@daa.com.au>
 
 	* gnome-common.spec.in: simplify and update spec file.

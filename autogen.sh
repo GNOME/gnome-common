@@ -4,7 +4,9 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="Gnome Skeleton"
+REQUIRED_AUTOMAKE_VERSION=1.7
+
+PKG_NAME="Gnome Common Macros"
 
 (test -f $srcdir/configure.in \
 ## put other tests here
@@ -14,4 +16,4 @@ PKG_NAME="Gnome Skeleton"
     exit 1
 }
 
-. $srcdir/macros2/autogen.sh
+. $srcdir/macros2/gnome-autogen.sh

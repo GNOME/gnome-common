@@ -6,14 +6,10 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl More compiler warnings
     dnl ******************************
 
-    if test -z "$1" ; then
-	default_compile_warnings=yes
-    else
-	default_compile_warnings="$1"
-    fi
-
     AC_ARG_ENABLE(compile-warnings, 
-    [  --enable-compile-warnings=[no/minimum/yes/maximum/error]	Turn on compiler warnings.],, [enable_compile_warnings="$default_compile_warnings"])
+                  AC_HELP_STRING([--enable-compile-warnings=@<:@no/minimum/yes/maximum/error@:>@],
+                                 [Turn on compiler warnings]),,
+                  [enable_compile_warnings="m4_default([$1],[yes])"])
 
     warnCFLAGS=
     if test "x$GCC" != xyes; then
@@ -65,8 +61,9 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     AC_MSG_RESULT($warning_flags)
 
     AC_ARG_ENABLE(iso-c,
-    [  --enable-iso-c          Try to warn if code is not ISO C ],,
-    enable_iso_c=no)
+                  AC_HELP_STRING([--enable-iso-c],
+                                 [Try to warn if code is not ISO C ]),,
+                  [enable_iso_c=no])
 
     AC_MSG_CHECKING(what language compliance flags to pass to the C compiler)
     complCFLAGS=
@@ -91,8 +88,10 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 dnl For C++, do basically the same thing.
 
 AC_DEFUN([GNOME_CXX_WARNINGS],[
-  AC_ARG_ENABLE(cxx-warnings, 
-    [  --enable-cxx-warnings=[no/minimum/yes]	Turn on compiler warnings.],,enable_cxx_warnings=minimum)
+  AC_ARG_ENABLE(cxx-warnings,
+                AC_HELP_STRING([--enable-cxx-warnings=@<:@no/minimum/yes@:>@]
+                               [Turn on compiler warnings.]),,
+                [enable_cxx_warnings="m4_default([$1],[minimum])"])
 
   AC_MSG_CHECKING(what warning flags to pass to the C++ compiler)
   warnCXXFLAGS=
@@ -116,8 +115,9 @@ AC_DEFUN([GNOME_CXX_WARNINGS],[
   AC_MSG_RESULT($warnCXXFLAGS)
 
    AC_ARG_ENABLE(iso-cxx,
-     [  --enable-iso-cxx          Try to warn if code is not ISO C++ ],,
-     enable_iso_cxx=no)
+                 AC_HELP_STRING([--enable-iso-cxx],
+                                [Try to warn if code is not ISO C++ ]),,
+                 [enable_iso_cxx=no])
 
    AC_MSG_CHECKING(what language compliance flags to pass to the C++ compiler)
    complCXXFLAGS=

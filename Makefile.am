@@ -1,5 +1,5 @@
-SUBDIRS = bin macros macros2 doc doc-build
+SUBDIRS = macros2 doc-build
 
-EXTRA_DIST = gnome-common.spec
+EXTRA_DIST = gnome-common.spec doc/usage.txt
 
 
