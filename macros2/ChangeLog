@@ -1,3 +1,7 @@
+2001-06-01  Peter Williams  <peterw@ximian.com>
+
+	* autogen.sh: s,Gnome,$PKG_NAME,g
+
 2001-04-13  Martin Baulig  <baulig@suse.de>
 
 	* gnome-pkgconfig.m4 (GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES):
