@@ -67,6 +67,8 @@ AC_DEFUN([PILOT_LINK_HOOK],[
 		pl_ve=`echo $1|sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
 		pl_ma=`echo $1|sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
 		pl_mi=`echo $1|sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
+		CFLAGS_save="$CFLAGS"
+		CFLAGS="$CFLAGS $PISOCK_INCLUDEDIR"
 		AC_TRY_RUN(
 			[
 			#include <$piversion_include>
@@ -89,6 +91,7 @@ AC_DEFUN([PILOT_LINK_HOOK],[
 			[AC_MSG_ERROR("pilot-link >= $1 required")],
 			[AC_MSG_WARN("No action taken for crosscompile")]
 		)
+		CFLAGS="$CFLAGS_save"
 	fi
 ])
 
@@ -99,10 +102,12 @@ AC_DEFUN([PILOT_LINK_CHECK],[
 AC_DEFUN([GNOME_PILOT_HOOK],[
 	AC_PATH_PROG(GNOME_CONFIG,gnome-config,no)
 	AC_CACHE_CHECK([for gnome-pilot environment],gnome_cv_pilot_found,[
-		if test x$GNOME_CONFIG = xno; then
+		if test "x$GNOME_CONFIG" = "xno"; then
 			gnome_cv_pilot_found=no
 		else
-			if $GNOME_CONFIG --modversion gpilot 2> /dev/null; then
+			# gnome-config doesn't return a useful error status,
+			# so we check if it outputs anything to stderr
+			if test "x`$GNOME_CONFIG gpilot 2>&1 > /dev/null`" = "x"; then
 				gnome_cv_pilot_found=yes
 			else
 				gnome_cv_pilot_found=no
