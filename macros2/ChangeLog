@@ -1,3 +1,8 @@
+2004-11-24  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-autogen.sh: Add support for IT_PROG_INTLTOOL which
+	deprecates AC_PROG_INTLTOOL
+
 2004-11-09  Jordi Mallach  <jordi@sindominio.net>
 
 	* gnome-autogen.sh: Workaround automake-1.4 limitations by just

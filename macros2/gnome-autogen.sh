@@ -218,7 +218,7 @@ for configure_ac in $configure_files; do
     if grep "^AM_GLIB_GNU_GETTEXT" $configure_ac >/dev/null; then
 	want_glib_gettext=true
     fi
-    if grep "^AC_PROG_INTLTOOL" $configure_ac >/dev/null; then
+    if grep "^(AC|IT)_PROG_INTLTOOL" $configure_ac >/dev/null; then
 	want_intltool=true
     fi
     if grep "^PKG_CHECK_MODULES" $configure_ac >/dev/null; then
