@@ -1033,7 +1033,6 @@ It won't do much except give an error messages and exit when there are any
 arguments, and print a (rather pointless) message for @samp{--help}.
 
 @smallexample
-@include argp-ex1.c.texi
 @end smallexample
 
 @node Argp Example 2, Argp Example 3, Argp Example 1, Argp Examples
@@ -1057,7 +1056,6 @@ will almost always be constant for a given program, even if it uses
 different argument parsers for various tasks).
 
 @smallexample
-@include argp-ex2.c.texi
 @end smallexample
 
 @node Argp Example 3, Argp Example 4, Argp Example 2, Argp Examples
@@ -1079,7 +1077,6 @@ also possible to use global variables instead, but using a structure
 like this is somewhat more flexible and clean.
 
 @smallexample
-@include argp-ex3.c.texi
 @end smallexample
 
 @node Argp Example 4, , Argp Example 3, Argp Examples
@@ -1108,7 +1105,6 @@ All documentation strings are also passed to the @code{gettext}
 function, for possible translation into the current locale.
 
 @smallexample
-@include argp-ex4.c.texi
 @end smallexample
 
 @node Argp User Customization, , Argp Examples, Argp
