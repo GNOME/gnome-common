@@ -29,13 +29,21 @@ if [ -n "$GNOME2_DIR" ]; then
 fi
 
 
+# Not all echo versions allow -n, so let's be portable. This test is based on
+# the one in autoconf.
+case `echo "testing\c"; echo 1,2,3`,`echo -n testing; echo 1,2,3` in
+  *c*,-n*) ECHO_N= ;;
+  *c*,*  ) ECHO_N=-n ;;
+  *)       ECHO_N= ;;
+esac
+
 # some terminal codes ...
 boldface="`tput bold 2>/dev/null`"
 normal="`tput sgr0 2>/dev/null`"
 printbold() {
-    echo -n "$boldface"
+    echo $ECHO_N "$boldface"
     echo "$@"
-    echo -n "$normal"
+    echo $ECHO_N "$normal"
 }    
 printerr() {
     echo "$@" >&2
@@ -45,68 +53,66 @@ printerr() {
 #     compare_versions MIN_VERSION ACTUAL_VERSION
 # returns true if ACTUAL_VERSION >= MIN_VERSION
 compare_versions() {
-    local min_version actual_version status save_IFS cur min
-    min_version=$1
-    actual_version=$2
-    status=0
-    IFS="${IFS=         }"; save_IFS="$IFS"; IFS="."
-    set $actual_version
-    for min in $min_version; do
-        cur=`echo $1 | sed 's/[^0-9].*$//'`; shift # remove letter suffixes
-        if [ -z "$min" ]; then break; fi
-        if [ -z "$cur" ]; then status=1; break; fi
-        if [ $cur -gt $min ]; then break; fi
-        if [ $cur -lt $min ]; then status=1; break; fi
+    ch_min_version=$1
+    ch_actual_version=$2
+    ch_status=0
+    IFS="${IFS=         }"; ch_save_IFS="$IFS"; IFS="."
+    set $ch_actual_version
+    for min in $ch_min_version; do
+        ch_cur=`echo $1 | sed 's/[^0-9].*$//'`; shift # remove letter suffixes
+        if [ -z "$ch_min" ]; then break; fi
+        if [ -z "$ch_cur" ]; then ch_status=1; break; fi
+        if [ $ch_cur -gt $ch_min ]; then break; fi
+        if [ $ch_cur -lt $ch_min ]; then ch_status=1; break; fi
     done
-    IFS="$save_IFS"
-    return $status
+    IFS="$ch_save_IFS"
+    return $ch_status
 }
 
 # Usage:
 #     version_check PACKAGE VARIABLE CHECKPROGS MIN_VERSION SOURCE
 # checks to see if the package is available
 version_check() {
-    local package variable checkprogs min_version source status checkprog actual_version
-    package=$1
-    variable=$2
-    checkprogs=$3
-    min_version=$4
-    source=$5
-    status=1
+    vc_package=$1
+    vc_variable=$2
+    vc_checkprogs=$3
+    vc_min_version=$4
+    vc_source=$5
+    vc_status=1
 
-    checkprog=`eval echo "\\$$variable"`
-    if [ -n "$checkprog" ]; then
-	printbold "using $checkprog for $package"
+    vc_checkprog=`eval echo "\\$$vc_variable"`
+    if [ -n "$vc_checkprog" ]; then
+	printbold "using $vc_checkprog for $vc_package"
 	return 0
     fi
 
-    printbold "checking for $package >= $min_version..."
-    for checkprog in $checkprogs; do
-	echo -n "  testing $checkprog... "
-	if $checkprog --version < /dev/null > /dev/null 2>&1; then
-	    actual_version=`$checkprog --version | head -1 | \
+    printbold "checking for $vc_package >= $vc_min_version..."
+    for vc_checkprog in $vc_checkprogs; do
+	echo $ECHO_N "  testing $vc_checkprog... "
+	if $vc_checkprog --version < /dev/null > /dev/null 2>&1; then
+	    vc_actual_version=`$vc_checkprog --version | head -1 | \
                                sed 's/^.*[ 	]\([0-9.]*[a-z]*\).*$/\1/'`
-	    if compare_versions $min_version $actual_version; then
+	    if compare_versions $vc_min_version $vc_actual_version; then
 		echo "found."
 		# set variable
-		eval "$variable=$checkprog"
-		status=0
+		eval "$vc_variable=$vc_checkprog"
+		vc_status=0
 		break
 	    else
-		echo "too old (found version $actual_version)"
+		echo "too old (found version $vc_actual_version)"
 	    fi
 	else
 	    echo "not found."
 	fi
     done
-    if [ "$status" != 0 ]; then
-	printerr "***Error***: You must have $package >= $min_version installed"
+    if [ "$vc_status" != 0 ]; then
+	printerr "***Error***: You must have $vc_package >= $vc_min_version installed"
 	printerr "  to build $PKG_NAME.  Download the appropriate package for"
 	printerr "  from your distribution or get the source tarball at"
-        printerr "    $source"
+        printerr "    $vc_source"
 	printerr
     fi
-    return $status
+    return $vc_status
 }
 
 # Usage:
@@ -131,64 +137,62 @@ forbid_m4macro() {
 # Checks that all the requested macro files are in the aclocal macro path
 # Uses REQUIRED_M4MACROS and ACLOCAL variables.
 check_m4macros() {
-    local macrodirs status macro dir macrofound
-
     # construct list of macro directories
-    macrodirs="`$ACLOCAL --print-ac-dir`"
+    cm_macrodirs="`$ACLOCAL --print-ac-dir`"
     set - $ACLOCAL_FLAGS
     while [ $# -gt 0 ]; do
 	if [ "$1" = "-I" ]; then
-	    macrodirs="$macrodirs $2"
+	    cm_macrodirs="$cm_macrodirs $2"
 	    shift
 	fi
 	shift
     done
 
-    status=0
+    cm_status=0
     if [ -n "$REQUIRED_M4MACROS" ]; then
 	printbold "Checking for required M4 macros..."
 	# check that each macro file is in one of the macro dirs
-	for macro in $REQUIRED_M4MACROS; do
-	    macrofound=false
-	    for dir in $macrodirs; do
-		if [ -f "$dir/$macro" ]; then
-		    macrofound=true
+	for cm_macro in $REQUIRED_M4MACROS; do
+	    cm_macrofound=false
+	    for cm_dir in $cm_macrodirs; do
+		if [ -f "$cm_dir/$cm_macro" ]; then
+		    cm_macrofound=true
 		    break
 		fi
 	    done
-	    if $macrofound; then
+	    if $cm_macrofound; then
 		:
 	    else
-		printerr "  $macro not found"
-		status=1
+		printerr "  $cm_macro not found"
+		cm_status=1
 	    fi
 	done
     fi
     if [ -n "$FORBIDDEN_M4MACROS" ]; then
 	printbold "Checking for forbidden M4 macros..."
 	# check that each macro file is in one of the macro dirs
-	for macro in $FORBIDDEN_M4MACROS; do
-	    macrofound=false
-	    for dir in $macrodirs; do
-		if [ -f "$dir/$macro" ]; then
-		    macrofound=true
+	for cm_macro in $FORBIDDEN_M4MACROS; do
+	    cm_macrofound=false
+	    for cm_dir in $cm_macrodirs; do
+		if [ -f "$cm_dir/$cm_macro" ]; then
+		    cm_macrofound=true
 		    break
 		fi
 	    done
-	    if $macrofound; then
-		printerr "  $macro found (should be cleared from macros dir)"
-		status=1
+	    if $cm_macrofound; then
+		printerr "  $mcm_acro found (should be cleared from macros dir)"
+		cm_status=1
 	    fi
 	done
     fi
-    if [ "$status" != 0 ]; then
+    if [ "$cm_status" != 0 ]; then
 	printerr "***Error***: some autoconf macros required to build $PKG_NAME"
 	printerr "  were not found in your aclocal path, or some forbidden"
 	printerr "  macros were found.  Perhaps you need to adjust your"
 	printerr "  ACLOCAL_PATH?"
 	printerr
     fi
-    return $status
+    return $cm_status
 }
 
 # try to catch the case where the macros2/ directory hasn't been cleared out.
