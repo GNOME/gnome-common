@@ -1,3 +1,7 @@
+2004-09-14  James Henstridge  <james@jamesh.id.au>
+
+	* configure.in: bump version number to 2.8.0
+
 2004-08-30  James Henstridge  <james@jamesh.id.au>
 
 	* macros2/gnome-autogen.sh: fix up error message when a required
