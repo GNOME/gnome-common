@@ -122,6 +122,9 @@ extern char *bindtextdomain__ PARAMS ((const char *__domainname,
 				    const char *__dirname));
 
 #if ENABLE_NLS
+#ifdef VFS_STANDALONE
+#error This can never work
+#endif
 
 /* Solaris 2.3 has the gettext function but dcgettext is missing.
    So we omit this optimization for Solaris 2.3.  BTW, Solaris 2.4
