@@ -1,5 +1,10 @@
 2001-07-26  Darin Adler  <darin@bentspoon.com>
 
+	* configure.in: Point to the new home of pkgconfig at
+	www.freedesktop.org instead of "sourceforce.net" [sic].
+
+2001-07-26  Darin Adler  <darin@bentspoon.com>
+
 	* doc/usage.txt: Point to the new home of pkgconfig at
 	www.freedesktop.org.
 
