@@ -1,3 +1,13 @@
+2000-09-30  Martin Baulig  <baulig@suse.de>
+
+	* gnome-x-checks.m4: Switch to pkg-config to check for GTK+ 2.0;
+	Removed all `gnome_cv_passdown_x_*' variables and `USE_DEVGTK'.
+
+	* gnome-common.m4 (GNOME_COMMON_INIT): Added the always-false
+	INSIDE_GNOME_COMMON automake conditional.
+	(GNOME_GTKDOC_CHECK): New macro.
+	(GNOME_DEBUG_CHECK): New macro.
+
 Thu Aug 24 02:28:57 2000  George Lebl <jirka@5z.com>
 
 	* gnome-x-checks.m4: use the correct name in AC_PROVIDE
