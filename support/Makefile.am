@@ -35,4 +35,4 @@ gnomesupport.h: gnomesupport.awk $(top_builddir)/config.h
 	$(AWK) -f $(srcdir)/gnomesupport.awk < $(top_builddir)/config.h > gsh-t
 	mv gsh-t gnomesupport.h
 
-EXTRA_DIST = gnomesupport.awk README-gnome 
+EXTRA_DIST = gnomesupport.awk README-gnome easy-vsnprintf.c
