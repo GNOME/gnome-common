@@ -18,7 +18,7 @@
 PACKAGE = @PACKAGE@
 VERSION = @VERSION@
 
-SHELL = @SHELL@
+SHELL = /bin/sh
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -150,7 +150,7 @@ uninstall:
 
 info dvi:
 
-$(OBJECTS): $(top_builddir)/config.h libgettext.h
+$(OBJECTS): ../config.h libgettext.h
 bindtextdom.$lo finddomain.$lo loadmsgcat.$lo: gettextP.h gettext.h loadinfo.h
 dcgettext.$lo: gettextP.h gettext.h hash-string.h loadinfo.h
 
@@ -171,7 +171,7 @@ mostlyclean:
 clean: mostlyclean
 
 distclean: clean
-	rm -f Makefile ID TAGS po2msg.sed po2tbl.sed libintl.h
+	rm -f Makefile ID TAGS po2msg.sed po2tbl.sed
 
 maintainer-clean: distclean
 	@echo "This command is intended for maintainers to use;"
@@ -180,7 +180,7 @@ maintainer-clean: distclean
 
 # GNU gettext needs not contain the file `VERSION' but contains some
 # other files which should not be distributed in other packages.
-distdir = $(top_srcdir)/$(PACKAGE)-$(VERSION)/$(subdir)
+distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
 dist distdir: Makefile $(DISTFILES)
 	if test "$(PACKAGE)" = gettext; then \
 	  additional="$(DISTFILES.gettext)"; \
@@ -192,25 +192,18 @@ dist distdir: Makefile $(DISTFILES)
 	    || cp -p $(srcdir)/$$file $(distdir); \
 	done
 
-distcopy: Makefile $(DISTFILES)
-	  additional="$(DISTFILES.normal)";
-	for file in $(DISTFILES.common) $$additional; do \
-	  ln $(srcdir)/$$file $(distdir) 2> /dev/null \
-	    || cp -p $(srcdir)/$$file $(distdir); \
-	done
-
 dist-libc:
 	tar zcvf intl-glibc.tar.gz $(COMSRCS) $(COMHDRS) libintl.h.glibc
 
-Makefile: Makefile.in $(top_builddir)/config.status
-	cd $(top_builddir) \
+Makefile: Makefile.in ../config.status
+	cd .. \
 	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 # The dependency for intlh.inst is different in gettext and all other
 # packages.  Because we cannot you GNU make features we have to solve
 # the problem while rewriting Makefile.in.
-@GT_YES@intlh.inst: intlh.inst.in $(top_builddir)/config.status
-@GT_YES@	cd $(top_builddir) \
+@GT_YES@intlh.inst: intlh.inst.in ../config.status
+@GT_YES@	cd .. \
 @GT_YES@	&& CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
 @GT_YES@	  $(SHELL) ./config.status
 @GT_NO@.PHONY: intlh.inst
