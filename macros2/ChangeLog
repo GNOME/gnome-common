@@ -1,5 +1,12 @@
 2000-11-22  Martin Baulig  <martin@home-of-linux.org>
 
+	* gnome-pkgconfig.m4: Added GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES
+	to check for a list of optional modules.
+
+	* gnome-platform.m4: Require GNOME_REQUIRE_PKGCONFIG.
+
+2000-11-22  Martin Baulig  <martin@home-of-linux.org>
+
 	* gnome-platform.m4: New file. This defines
 	GNOME_PLATFORM_GNOME_2.
 

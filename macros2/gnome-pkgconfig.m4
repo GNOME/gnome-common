@@ -22,6 +22,8 @@ AC_DEFUN([GNOME_CHECK_PKGCONFIG],[
 	    fi
 	fi
 	AC_SUBST(PKG_CONFIG)
+
+	AC_PROVIDE([GNOME_REQUIRE_PKGCONFIG])
 ])
 
 dnl
@@ -37,7 +39,7 @@ dnl compares each of those 6 numbers in order 1..6 to each other, requirering
 dnl all of the 6 given-version numbers to be greater than, or at least equal
 dnl to the corresponding number of required-version.
 dnl GNOME_PKGCONFIG_CHECK_VERSION(given-version, required-version [, match-action] [, else-action])
-AC_DEFUN(GNOME_PKGCONFIG_CHECK_VERSION,[
+AC_DEFUN([GNOME_PKGCONFIG_CHECK_VERSION],[
 AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
 [eval `echo "$1:0:0:0:0:0:0" | sed -e 's/^[^0-9]*//' -e 's/[^0-9]\+/:/g' \
  -e 's/\([^:]*\):\([^:]*\):\([^:]*\):\([^:]*\):\([^:]*\):.*/ac_v1=\1 ac_v2=\2 ac_v3=\3 ac_v4=\4 ac_v5=\5 ac_v6=\6/' \
@@ -68,7 +70,7 @@ esac
 
 dnl Check if the C compiler accepts a certain C flag, and if so adds it to
 dnl CFLAGS
-AC_DEFUN(GNOME_PKGCONFIG_CHECK_CFLAG, [
+AC_DEFUN([GNOME_PKGCONFIG_CHECK_CFLAG], [
   AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
 
   AC_MSG_CHECKING(if C compiler accepts $1)
@@ -91,7 +93,7 @@ AC_DEFUN(GNOME_PKGCONFIG_CHECK_CFLAG, [
 
 dnl add $ACLOCAL_FLAGS (and optionally more dirs) to the aclocal
 dnl commandline, so make can work even if it needs to rerun aclocal
-AC_DEFUN(GNOME_PKGCONFIG_ACLOCALFLAGS,
+AC_DEFUN([GNOME_PKGCONFIG_ACLOCALFLAGS],
 [
   AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
 
@@ -102,7 +104,7 @@ AC_DEFUN(GNOME_PKGCONFIG_ACLOCALFLAGS,
   done
 ])
 
-AC_DEFUN(GNOME_PKGCONFIG_CHECK_MODULES,
+AC_DEFUN([GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES],
 [
     AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
 
@@ -128,12 +130,20 @@ AC_DEFUN(GNOME_PKGCONFIG_CHECK_MODULES,
 			pkg_list="$pkg_list $pkg_module_name"
 		    ,
 			AC_MSG_RESULT([($pkg_module_name)])
-			AC_MSG_ERROR([An old version of $pkg_module_name (version $pkg_version) was found. You need at least version $test_version])
+			if test x$4 = xfail ; then
+				AC_MSG_ERROR([An old version of $pkg_module_name (version $pkg_version) was found. You need at least version $test_version])
+			else
+				AC_MSG_WARN([An old version of $pkg_module_name (version $pkg_version) was found. You need at least version $test_version])
+			fi
 		    )
 		else
 		    dnl doesn't exist
 		    AC_MSG_RESULT([($pkg_module_name)])
-		    AC_MSG_ERROR([$msg])
+		    if test x$4 = xfail ; then
+			AC_MSG_ERROR([$msg])
+		    else
+			AC_MSG_WARN([$msg])
+		    fi
 		fi
 	    else
 		msg=`$PKG_CONFIG $module 2>&1`
@@ -142,7 +152,11 @@ AC_DEFUN(GNOME_PKGCONFIG_CHECK_MODULES,
 		    pkg_list="$pkg_list $module"
 		else
 		    AC_MSG_RESULT([($module)])
-		    AC_MSG_ERROR([$msg])
+		    if test x$4 = xfail ; then
+			AC_MSG_ERROR([$msg])
+		    else
+			AC_MSG_WARN([$msg])
+		    fi
 		fi
 	    fi
 	fi
@@ -156,5 +170,13 @@ AC_DEFUN(GNOME_PKGCONFIG_CHECK_MODULES,
 	else
 	    eval $name'_DEPENDS'=\"$pkg_list\"
 	fi
+	if test -z "$4" ; then
+	    eval 'HAVE_'$name=yes
+	fi
     fi
+])
+
+AC_DEFUN([GNOME_PKGCONFIG_CHECK_MODULES],
+[
+	GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES($1,$2,$3,fail)
 ])

@@ -9,6 +9,8 @@ dnl   the default value without command line argument.
 dnl
 
 AC_DEFUN([GNOME_PLATFORM_GNOME_2],[
+	AC_REQUIRE([GNOME_REQUIRE_PKGCONFIG])
+
 	if test x$1 = xyes ; then
 	    platform_gnome_2_default=yes
 	else
