@@ -45,9 +45,7 @@ static void invokeCallbacks(poptContext con, const struct poptOption * table,
 
 poptContext poptGetContext(const char * name, int argc, const char ** argv,
 			   const struct poptOption * options, int flags) {
-    poptContext con = malloc(sizeof(*con));
-
-    memset(con, 0, sizeof(*con));
+    poptContext con = calloc(1, sizeof *con);
 
     con->os = con->optionStack;
     con->os->argc = argc;
