@@ -1,10 +1,10 @@
 ## Process this file with automake to produce Makefile.in.
 
-supportexecincludedir = $(includedir)/gnome/$(GNOME_INTERFACE_VERSION)
+supportexecincludedir = $(pkglibdir)/include
 
 INCLUDES = -D_GNU_SOURCE
 
-noinst_LTLIBRARIES = libgnomesupport.la
+lib_LTLIBRARIES = libgnomesupport.la
 
 # it is in _DATA since we don't want `gnomesupport.h' to be part of
 # the distributed `.tar.gz' file
@@ -13,7 +13,7 @@ supportexecinclude_DATA = gnomesupport.h
 # These are internal headers: they are used only when compiling and
 # should not be installed
 noinst_HEADERS = gnomesupport-fake.h \
-		 findme.h poptint.h system.h
+		 findme.h poptint.h
 
 # Hmm... should we move `error.h' here.
 include_HEADERS = popt-gnome.h
