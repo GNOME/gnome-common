@@ -319,6 +319,7 @@ for configure_ac in $configure_files; do
 	echo skipping $dirname -- flagged as no auto-gen
     else
 	printbold "Processing $configure_ac"
+	cd $dirname
 
 	aclocalinclude="$ACLOCAL_FLAGS"
 	printbold "Running $ACLOCAL..."

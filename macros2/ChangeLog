@@ -1,3 +1,12 @@
+2003-06-19  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* autogen.sh: Inserted missing "cd $dirname" to effectively
+	process subdirectories, since all it was doing was to process the
+	toplevel dir multiple times.
+
+	[Editor's note: also reported with patch by Elijah Newren in bug
+	#115481.]
+
 2003-05-21  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Ignore {arch} subdirectories. Fixes bug #113327.
