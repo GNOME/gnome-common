@@ -133,7 +133,7 @@ END {
     print "   If endptr is not NULL, a pointer to the character after the";
     print "   last character used in the conversion is stored in the";
     print "   location referenced by endptr. */";
-    print "unsigned long int strtol (const char */*nptr*/, char **/*endptr*/,";
+    print "unsigned long int strtoul (const char */*nptr*/, char **/*endptr*/,";
     print "                          int /*base*/);";
   }
 
