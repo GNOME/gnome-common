@@ -1,3 +1,7 @@
+2005-03-21  Sven Herzberg  <herzi@gnome-de.org>
+
+	* macros2/gnome-autogen.sh: added support for the gnome-doc-utils
+
 2005-03-15  Stepan Kasal  <kasal@ucw.cz>
 
 	* macros2/ChangeLog: Removed; the contents merged into the main one.

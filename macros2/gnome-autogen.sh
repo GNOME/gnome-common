@@ -15,6 +15,7 @@ REQUIRED_INTLTOOL_VERSION=${REQUIRED_INTLTOOL_VERSION:-0.25}
 REQUIRED_PKG_CONFIG_VERSION=${REQUIRED_PKG_CONFIG_VERSION:-0.14.0}
 REQUIRED_GTK_DOC_VERSION=${REQUIRED_GTK_DOC_VERSION:-1.0}
 REQUIRED_DOC_COMMON_VERSION=${REQUIRED_DOC_COMMON_VERSION:-2.3.0}
+REQUIRED_GNOME_DOC_UTILS_VERSION=${REQUIRED_GNOME_DOC_UTILS_VERSION:-0.1.3}
 
 # a list of required m4 macros.  Package can set an initial value
 REQUIRED_M4MACROS=${REQUIRED_M4MACROS:-}
@@ -210,6 +211,7 @@ want_glib_gettext=false
 want_intltool=false
 want_pkg_config=false
 want_gtk_doc=false
+want_gnome_doc_utils=false
 
 configure_files="`find $srcdir -name '{arch}' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
@@ -231,6 +233,9 @@ for configure_ac in $configure_files; do
     fi
     if grep "^GTK_DOC_CHECK" $configure_ac >/dev/null; then
 	want_gtk_doc=true
+    fi
+    if grep "^GNOME_DOC_INIT" $configure_ac >/dev/null; then
+        want_gnome_doc_utils=true
     fi
 done
 
@@ -289,6 +294,11 @@ if $want_gtk_doc; then
     version_check gtk-doc GTKDOCIZE gtkdocize $REQUIRED_GTK_DOC_VERSION \
         "http://ftp.gnome.org/pub/GNOME/sources/gtk-doc/" || DIE=1
     require_m4macro gtk-doc.m4
+fi
+
+if $want_gnome_doc_utils; then
+    version_check gnome-doc-utils GNOME_DOC_PREPARE gnome-doc-prepare $REQUIRED_GNOME_DOC_UTILS_VERSION \
+        "http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils/" || DIE=1
 fi
 
 if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
