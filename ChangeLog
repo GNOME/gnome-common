@@ -1,3 +1,8 @@
+2001-04-16  Darin Adler  <darin@eazel.com>
+
+	* gnome-common.spec.in: A cut at updating the spec file now that
+	the pkgconfig stuff and support stuff has gone away.
+
 2001-04-14  Martin Baulig  <baulig@suse.de>
 
 	* gnome-common.pc.in, gnome-common-2.0.pc.in: Removed.

@@ -22,25 +22,6 @@ Docdir: 	%{prefix}/doc
 %description
 gnome-common is for developing various GNOME modules that have to do similar things
 
-%package devel
-Summary:	Libraries and include files for developing gnome-common based tools
-Group:		Development/Libraries
-Requires:	%name = %{PACKAGE_VERSION}
-Obsoletes:	%{name}-devel
-
-%package support
-Summary:	gnome-common support applications
-Group:		Development/Tools
-Requires:	%name = %{PACKAGE_VERSION}
-Obsoletes:	%{name}-devel
-
-%description devel
-This package provides the necessary development libraries and include
-files to allow you to develop components that make use of gnome-common source
-
-%description support
-These are supporting applications for using gnome-common
-
 %changelog
 * Mon Mar 26 2000 Robin * Slomkowski <rslomkow@rslomkow.org>
 - created this thing, and replaced the generic specfile
@@ -97,20 +78,5 @@ fi
 %{prefix}/bin/*
 
 %defattr (0444, bin, bin)
-%{prefix}/lib/pkgconfig/*common*.pc
 %{prefix}/share/aclocal/gnome-macros/*
 %{prefix}/share/aclocal/gnome2-macros/*
-
-%files devel
-
-%defattr(0555, bin, bin)
-%{prefix}/lib/*support*a
-
-%files support
-
-%defattr(0444, bin, bin)
-%{prefix}/include/gnome/*/*support*.h
-%{prefix}/lib/pkgconfig/*support*.pc
-
-%defattr(0555, bin, bin)
-%{prefix}/lib/*support*.so*
