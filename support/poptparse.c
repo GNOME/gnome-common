@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "popt.h"
+#include "popt-gnome.h"
 
 int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
     char * buf = strcpy(alloca(strlen(s) + 1), s);

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "popt.h"
+#include "popt-gnome.h"
 #include "poptint.h"
 
 static void displayArgs(poptContext con, enum poptCallbackReason foo, 

@@ -18,7 +18,7 @@ noinst_HEADERS = argp-fmtstream.h argp-namefrob.h gnomesupport-fake.h \
 		 findme.h poptint.h
 
 # Hmm... should we move `error.h' here.
-include_HEADERS = popt.h
+include_HEADERS = popt-gnome.h
 
 popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
 other_sources = long-options.c gnome-argp.c

@@ -17,7 +17,7 @@
 # include <alloca.h>
 #endif
 
-#include "popt.h"
+#include "popt-gnome.h"
 #include "poptint.h"
 
 static void configLine(poptContext con, char * line) {

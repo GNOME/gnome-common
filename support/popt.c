@@ -20,7 +20,7 @@
 #endif
 
 #include "findme.h"
-#include "popt.h"
+#include "popt-gnome.h"
 #include "poptint.h"
 
 #ifndef HAVE_STRERROR
