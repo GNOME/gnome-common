@@ -1,3 +1,8 @@
+2004-01-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Run intltoolize after automake, since intltoolize
+	wants mkinstalldirs now. Should fix bugs #130309 and #130366.
+
 2003-12-13  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Change the use of head to be 'head -n -1', since

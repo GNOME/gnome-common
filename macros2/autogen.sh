@@ -345,10 +345,6 @@ for configure_ac in $configure_files; do
 	    	echo "no" | $GETTEXTIZE --force --copy || exit 1
 	   fi
 	fi
-	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
-	    printbold "Running $INTLTOOLIZE..."
-	    $INTLTOOLIZE --force --automake || exit 1
-	fi
 	if grep "^GTK_DOC_CHECK" $basename >/dev/null; then
 	    printbold "Running $GTKDOCIZE..."
 	    $GTKDOCIZE || exit 1
@@ -364,6 +360,13 @@ for configure_ac in $configure_files; do
 
 	printbold "Running $AUTOMAKE..."
 	$AUTOMAKE --gnu --add-missing || exit 1
+
+	# This must run after automake, since intltoolize wants mkinstalldirs
+	# to be available and that is only linked or copied by automake.
+	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
+	    printbold "Running $INTLTOOLIZE..."
+	    $INTLTOOLIZE --force --automake || exit 1
+	fi
 
 	printbold "Running $AUTOCONF..."
 	$AUTOCONF || exit 1
