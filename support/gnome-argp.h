@@ -17,4 +17,6 @@ extern char *program_invocation_short_name;
 extern char *program_invocation_name;
 #endif
 
+#define __mempcpy(To,From,Len) (memcpy ((To), (From), (Len)) + (Len))
+
 #endif /* __GNOME_ARGP_H__ */
