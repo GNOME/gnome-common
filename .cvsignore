@@ -14,3 +14,5 @@ libtool
 config.status
 stamp-h
 stamp.h
+gnome-common.pc
+gnome-common-2.0.pc
