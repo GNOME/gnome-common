@@ -1,3 +1,8 @@
+2001-10-15  Bastien Nocera  <hadess@hadess.net>
+
+	* Makefile.am, curses.m4: added curses.m4 (copied from the gnome1
+	macros. this file is needed to gdialog
+
 2001-10-02  Darin Adler  <darin@bentspoon.com>
 
 	* autogen.sh: Complete intltool support.

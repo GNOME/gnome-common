@@ -1,7 +1,7 @@
 ## Please update this variable if any new macros are created
 
 GNOME2_MACROS=					\
-	compiler-flags.m4 gnome-common.m4 gnome-cxx-check.m4 \
+	compiler-flags.m4 curses.m4 gnome-common.m4 gnome-cxx-check.m4 \
 	gnome-gettext.m4 gnome-pthread-check.m4 gnome-x-checks.m4 \
 	linger.m4 check-utmp.m4 gnome-pkgconfig.m4 gnome-platform.m4
 
