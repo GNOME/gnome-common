@@ -1,3 +1,13 @@
+2001-08-03  Martin Baulig  <baulig@suse.de>
+
+	* gnome-pkgconfig.m4 (GNOME_PKGCONFIG_CHECK_VERSION): Removed.
+	(GNOME_PKGCONFIG_CHECK_CFLAG): Removed.
+	(GNOME_PKGCONFIG_ACLOCALFLAGS): Removed.
+	(GNOME_PKGCONFIG_CHECK_OPTIONAL_MODULES): Removed.
+	(GNOME_PKGCONFIG_CHECK_MODULES): Removed.
+	(GNOME_CHECK_PKGCONFIG): Use $PKG_CONFIG --atleast-pkgconfig-version
+	to check for the pkg-config version.
+
 2001-07-20  Martin Baulig  <baulig@suse.de>
 
 	* gnome-pkgconfig.m4: Require pkg-config 0.8.0.
