@@ -1,0 +1,7 @@
+1998-02-19  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* autogen.sh: New sample file.
+	* configure.in: Likewise.
+	* Makefile.am: Likewise.
+	* README: Likewise.
+
