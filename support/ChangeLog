@@ -1,3 +1,8 @@
+1998-12-02  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (EXTRA_DIST): Add back `gnomesupport.awk' and
+	`README-gnome'. 
+
 1998-11-06  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* popt.c (gnomesupport-fake.h): Include.
@@ -11,7 +16,7 @@
 	(popt_sources): List `popt' sources.
 	(libgnomesupport_la_SOURCES): Include $popt_sources.
 	(include_HEADERS): Install `popt.h'.
-	(noinst_HEADERSS): Don't install poptint.h and findme.h.
+	(noinst_HEADERS): Don't install poptint.h and findme.h.
 	* popt.c: New file.  From the POPT package.  Replacement for
 	argp/getopt.
 	* poptparse.c: Likewise.
