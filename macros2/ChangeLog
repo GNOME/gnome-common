@@ -1,3 +1,7 @@
+2001-03-24  Martin Baulig  <baulig@suse.de>
+
+	* autogen.sh: Add the xml-i18n-tools stuff here.
+
 2000-12-01  Martin Baulig  <baulig@suse.de>
 
 	* compile-warnings.m4: Improved compile warnings check; the
