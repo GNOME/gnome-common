@@ -120,7 +120,8 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
 	  AC_SUBST(GNORBA_CFLAGS)
 	  AC_SUBST(GNORBA_LIBS)
 	elif test -n "$module"; then
-	  AC_MSG_RESULT([$module library is not installed])
+	  echo
+	  AC_MSG_RESULT([*** $module library is not installed])
 	  ifelse([$3], , :, [$3])
 	  gnome_m4_notfound=yes
 	fi
