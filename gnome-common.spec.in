@@ -98,8 +98,8 @@ fi
 
 %defattr (0444, bin, bin)
 %{prefix}/lib/pkgconfig/*common*.pc
-%{prefix}/share/aclocal/gnome-macros/*.m4
-%{prefix}/share/aclocal/gnome2-macros/*.m4
+%{prefix}/share/aclocal/gnome-macros/*
+%{prefix}/share/aclocal/gnome2-macros/*
 
 %files devel
 
