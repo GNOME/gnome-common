@@ -1,3 +1,11 @@
+1998-12-24  Jeff Garzik  <jgarzik@pobox.com>
+
+	* poptparse.[ch]:  poptParseArgvString cleanups...
+	Added array grow increment constant.
+	Remove unnecessary 'dst' init.
+	Remove unnecessary strcpy().
+	Make arg 's' and var 'src' const-correct.
+
 1998-12-21  Matt Wilson  <msw@redhat.com>
 
 	* poptparse.c: fix pointer assignment
