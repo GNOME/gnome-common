@@ -16,7 +16,7 @@
 #include "popt-gnome.h"
 
 int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
-    char * buf;
+    char * buf = strcpy(alloca(strlen(s) + 1), s);
     char * bufStart = buf;
     char * src, * dst;
     char quote = '\0';
@@ -26,7 +26,6 @@ int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
     int argc = 0;
     int i;
 
-    buf = strcpy(alloca(strlen(s) + 1), s);
     src = s;
     dst = buf;
     argv[argc] = buf;
