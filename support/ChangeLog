@@ -1,5 +1,10 @@
 1998-08-18  Martin Baulig  <martin@home-of-linux.org>
 
+	* Makefile.am: Added explicit dependency `error.c: gnomesupport.h'.
+
+	* gnomesupport-fake.h: Include `sys/types.h' to get `size_t' under
+	FreeBSD.
+
 	* gnomesupport-fake.h: Include `gnomesupport.h' only if we really
 	`NEED_GNOMESUPPORT_H'.
 

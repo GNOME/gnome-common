@@ -24,6 +24,8 @@ libgnomesupport_la_LDFLAGS = -version-info 0:0:0
 
 BUILT_SOURCES = gnomesupport.h
 
+error.c: gnomesupport.h
+
 gnomesupport.h: gnomesupport.awk $(top_builddir)/config.h
 	$(AWK) -f $(srcdir)/gnomesupport.awk < $(top_builddir)/config.h > gsh-t
 	mv gsh-t gnomesupport.h
