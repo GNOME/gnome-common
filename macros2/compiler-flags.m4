@@ -135,9 +135,7 @@ AC_DEFUN([GNOME_CXX_WARNINGS],[
      fi
    fi
   AC_MSG_RESULT($complCXXFLAGS)
-  if test "x$cxxflags_set" != "xyes"; then
-    CXXFLAGS="$CXXFLAGS $warnCXXFLAGS $complCXXFLAGS"
-    cxxflags_set=yes
-    AC_SUBST(cxxflags_set)
-  fi
+
+  WARN_CXXFLAGS="$CXXFLAGS $warnCXXFLAGS $complCXXFLAGS"
+  AC_SUBST(WARN_CXXFLAGS)
 ])

@@ -1,3 +1,10 @@
+2003-08-23  Marco Pesenti Gritti  <marco@gnome.org>
+
+	* macros2/compiler-flags.m4:
+
+	Define WARN_CXXFLAGS instead of overwriting
+	CXXFLAGS (like WARN_FLAGS).
+
 2003-07-04  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* macros2/compiler-flags.m4: don't use -Wsign-promo, it is 
