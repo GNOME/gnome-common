@@ -17,7 +17,7 @@ AM_PROG_LIBTOOL
 AC_PROG_AWK
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config)
-if ! test -x "$PKG_CONFIG" ; then
+if test "!" -x "$PKG_CONFIG" ; then
    AC_MSG_ERROR([
 *** You need the latest pkg-config.
 *** Get the latest version of pkg-config from
