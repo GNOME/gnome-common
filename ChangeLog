@@ -209,10 +209,8 @@
 
 2003-08-23  Marco Pesenti Gritti  <marco@gnome.org>
 
-	* macros2/compiler-flags.m4:
-
-	Define WARN_CXXFLAGS instead of overwriting
-	CXXFLAGS (like WARN_FLAGS).
+	* macros2/compiler-flags.m4: Define WARN_CXXFLAGS instead of
+	overwriting CXXFLAGS (like WARN_FLAGS).
 
 2003-08-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
@@ -222,14 +220,14 @@
 
 2003-08-05  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
-	* macros2/compile-flags.m4: Continuing to try and get the flags
+	* macros2/compiler-flags.m4: Continuing to try and get the flags
 	passed to g++ in GNOME_CXX_WARNINGS correct. Based on our best
 	attempts, the current set should work for the widest range of
 	g++ versions (see bug #118987 for the discussion).
 
 2003-08-03  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
-	* macros2/compile-flags.m4: Simplify GNOME_CXX_WARNINGS.
+	* macros2/compiler-flags.m4: Simplify GNOME_CXX_WARNINGS.
 	Fixes bug #118987.
 
 2003-07-28  Malcolm Tredinnick <malcolm@commsecure.com.au>
