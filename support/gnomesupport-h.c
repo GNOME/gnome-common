@@ -101,15 +101,13 @@ int alphasort PARAMS((const void */*a*/, const void */*b*/));
 ");
 #endif
 
-#ifndef HAVE_STRTOK_R
+#ifndef HAVE_STRERROR
   puts("\
-/* Divide S into tokens separated by characters in DELIM.  Information
-   passed between calls are stored in SAVE_PTR.  */
-char * strtok_r PARAMS((char */*s*/, const char */*delim*/,
-			char **/*save_ptr*/));
+/* Return a string describing the meaning of the `errno' code in ERRNUM.  */
+extern char *strerror PARAMS((int /*errnum*/));
 ");
 #endif
-
+  
 #ifndef HAVE_STRCASECMP
   puts("\
 /* Compare S1 and S2, ignoring case.  */
@@ -134,6 +132,15 @@ size_t strnlen PARAMS((const char */*string*/, size_t /*maxlen*/));
 ");
 #endif
 
+#ifndef HAVE_STRTOK_R
+  puts("\
+/* Divide S into tokens separated by characters in DELIM.  Information
+   passed between calls are stored in SAVE_PTR.  */
+char * strtok_r PARAMS((char */*s*/, const char */*delim*/,
+			char **/*save_ptr*/));
+");
+#endif
+  
 #ifndef HAVE_VASPRINTF
   puts("\
 /* Write formatted output to a string dynamically allocated with `malloc'.
