@@ -388,11 +388,16 @@ for configure_ac in $configure_files; do
 
 	# Finally, run automake to create the makefiles ...
 	printbold "Running $AUTOMAKE..."
+        cp -pf COPYING COPYING.autogen_bak
+        cp -pf INSTALL INSTALL.autogen_bak
 	if [ $REQUIRED_AUTOMAKE_VERSION != 1.4 ]; then
 	    $AUTOMAKE --gnu --add-missing --force --copy || exit 1
 	else
 	    $AUTOMAKE --gnu --add-missing --copy || exit 1
 	fi
+        cmp COPYING COPYING.autogen_bak || cp -pf COPYING.autogen_bak COPYING
+        cmp INSTALL INSTALL.autogen_bak || cp -pf INSTALL.autogen_bak INSTALL
+        rm -f COPYING.autogen_bak INSTALL.autogen_bak
 
 	cd "$topdir"
     fi

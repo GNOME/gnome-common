@@ -1,3 +1,8 @@
+2005-02-11  James Henstridge  <james@jamesh.id.au>
+
+	* gnome-autogen.sh: preserve COPYING and INSTALL files over the
+	"automake --force" call.  Fixes bug #161916.
+
 2005-01-22  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-autogen.sh: Fix the (AC|IT)_PROG_INTLTOOL support for
