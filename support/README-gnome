@@ -1,5 +1,12 @@
 Note to Gnome hackers:
 
+If you change anything related to popt, please forward these changes to
+ewt@redhat.com, the popt package maintainer.
+
+- jgarzik@pobox.com 12/24/1998
+
+
+
 Some files in this directory are taken verbatim from glibc.
 Do not modify them.  If you find a bug, report it as you would any
 glibc bug.
@@ -13,6 +20,8 @@ sorted out with the glibc maintainer before long.
 
 - Tom Tromey <tromey@cygnus.com>
   Wed, Mar 4 1998
+
+
 
 Notes on CVS import:
 
@@ -71,6 +80,8 @@ In other words the "Branch revision" and "Vendor Tag" must agree.
 
 - Raja R Harinath <harinath@cs.umn.edu>
   1998-03-11
+
+
 
 Good places to get "support" functions:
 
