@@ -1,3 +1,8 @@
+1998-04-14  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnomesupport-h.c (main): Make gnomesupport.h include stddef.h
+	unconditionally. 
+
 1998-04-13  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* scandir.c (<sys/types.h>): Include.

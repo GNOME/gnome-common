@@ -29,6 +29,8 @@ int main(void)
 #ifdef __cplusplus
 extern \"C\" {
 #endif /* __cplusplus */
+
+#include <stddef.h>		/* for size_t */
 ");
   
 #if !defined HAVE_VASPRINTF || !defined HAVE_VSNPRINTF
