@@ -77,7 +77,12 @@ version_check() {
 	return 0
     fi
 
-    printbold "checking for $vc_package >= $vc_min_version..."
+    if test "x$vc_package" = "xautomake" -a "x$vc_min_version" = "x1.4"; then
+	vc_comparator="="
+    else
+	vc_comparator=">="
+    fi
+    printbold "checking for $vc_package $vc_comparator $vc_min_version..."
     for vc_checkprog in $vc_checkprogs; do
 	echo $ECHO_N "  testing $vc_checkprog... "
 	if $vc_checkprog --version < /dev/null > /dev/null 2>&1; then
@@ -97,7 +102,7 @@ version_check() {
 	fi
     done
     if [ "$vc_status" != 0 ]; then
-	printerr "***Error***: You must have $vc_package >= $vc_min_version installed"
+	printerr "***Error***: You must have $vc_package $vc_comparator $vc_min_version installed"
 	printerr "  to build $PKG_NAME.  Download the appropriate package for"
 	printerr "  from your distribution or get the source tarball at"
         printerr "    $vc_source"
@@ -340,7 +345,7 @@ for configure_ac in $configure_files; do
 	   fi
 	fi
 
-	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
+	if grep "^\(AC\|IT\)_PROG_INTLTOOL" $basename >/dev/null; then
 	    printbold "Running $INTLTOOLIZE..."
 	    $INTLTOOLIZE --force --copy --automake || exit 1
 	fi
