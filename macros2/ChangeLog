@@ -1,3 +1,9 @@
+2000-12-01  Martin Baulig  <baulig@suse.de>
+
+	* compile-warnings.m4: Improved compile warnings check; the
+	--enable-compile-warnings parameter now takes 5 different
+	values (no/minimum/yes/maximum/error). AC_SUBST(WARN_CFLAGS).
+
 2000-11-29  Martin Baulig  <baulig@suse.de>
 
 	* gnome.m4, gnome-gnorba-check.m4, gnome-fileutils.m4: Removed.
