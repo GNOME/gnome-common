@@ -1,3 +1,7 @@
+2000-12-01  Martin Baulig  <baulig@suse.de>
+
+	Released gnome-common 1.2.1.
+
 2000-11-21  Martin Baulig  <martin@home-of-linux.org>
 
 	* configure.in: Set version number to 1.2.1.
