@@ -1,11 +1,18 @@
 ## Process this file with automake to produce Makefile.in.
 
-noinst_LIBRARIES=libsupport.a
+supportincludedir = $(includedir)/libgnomesupport
 
-noinst_HEADERS=getopt.h long-options.h argp-fmtstream.h	\
-		argp-namefrob.h argp.h
+if BUILD_GNOME_SUPPORT
+
+lib_LTLIBRARIES = libgnomesupport.la
+
+supportinclude_HEADERS = getopt.h long-options.h argp-fmtstream.h \
+argp-namefrob.h argp.h
+
+libgnomesupport_la_SOURCES = long-options.c gnome-argp.c
+libgnomesupport_la_LIBADD  = @LTLIBOBJS@
+libgnomesupport_la_LDFLAGS = -version-info 0:0:0
+
+endif
 
 EXTRA_DIST = argp-test.c
-
-libsupport_a_SOURCES=long-options.c gnome-argp.c
-libsupport_a_LIBADD=@LIBOBJS@
