@@ -2,10 +2,15 @@
    Written by Fred Fish.  fnf@cygnus.com
    This file is in the public domain.  --Per Bothner.  */
 
-#include "ansidecl.h"
-#include "libiberty.h"
-
 #include "config.h"
+
+#ifndef PARAMS
+#if defined (__GNUC__) || __STDC__ || defined __cplusplus
+# define PARAMS(args) args
+#else
+# define PARAMS(args) ()
+#endif
+
 
 #ifdef HAVE_SYS_ERRLIST
 /* Note that errno.h (not sure what OS) or stdio.h (BSD 4.4, at least)
