@@ -61,9 +61,6 @@ esac
 tmp="${top_srcdir}"
 top_srcdir="${header_dots}"
 
-echo "#    . ${top_builddir}/${tool_defs}"
-echo ""
-
 if test -r "${top_builddir}/${tool_defs}" ; then
     . "${top_builddir}/${tool_defs}"
 fi
