@@ -1,4 +1,4 @@
-SUBDIRS = macros
+SUBDIRS = macros macros2
 
 EXTRA_DIST = gnome-common.spec
 
