@@ -46,6 +46,7 @@ AC_DEFUN([GNOME_DEBUG_CHECK],
 	AC_ARG_ENABLE(debug, [  --enable-debug turn on debugging [default=no]], enable_debug="$enableval", enable_debug=no)
 
 	if test x$enable_debug = xyes ; then
-	  AC_DEFINE(GNOME_ENABLE_DEBUG)
+	    AC_DEFINE(GNOME_ENABLE_DEBUG,1,
+		[Enable additional debugging at the expense of performance and size])
 	fi
 ])

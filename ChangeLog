@@ -1,3 +1,10 @@
+2002-12-12  Jody Goldberg <jody@gnome.org>
+
+	* macros2/gnome-common.m4 (GNOME_DEBUG_CHECK) : now that autoconf-2.52
+	  is a prereq for things the build broke on the use of
+	      AC_DEFINE(GNOME_ENABLE_DEBUG) 
+	  without the additional arguments.
+
 2001-12-11  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Up to 1.2.4.
