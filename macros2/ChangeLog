@@ -1,3 +1,9 @@
+2003-02-14  Kalpesh Shah <kalpesh.shah@sun.com>
+
+	* check-utmp.m4: initialize UTMP structure properly. 
+	Fixes Bug#93774.
+	Patch reviewed by Andersca <andersca@gnu.org>
+
 2002-09-23  Bastien Nocera  <hadess@hadess.net>
 
 	* autogen.sh: exit if aclocal, autoheader, automake or autoconf

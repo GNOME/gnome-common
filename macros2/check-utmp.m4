@@ -212,7 +212,7 @@ AC_TRY_COMPILE([#ifdef TIME_WITH_SYS_TIME
 #endif
 #ifdef HAVE_UTMPX_H
 #include <utmpx.h>
-#endif],[UTMP ut; ut.ut_tv={0, 0};],result=yes,result=no)
+#endif],[UTMP ut; ut.ut_tv.tv_sec=0; ut.ut_tv.tv_usec=0;],result=yes,result=no)
 if test "$result" = "yes"; then
   AC_DEFINE(HAVE_UT_UT_TV)
 fi
