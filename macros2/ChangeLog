@@ -1,3 +1,8 @@
+2002-04-01  jacob berkman  <jacob@ximian.com>
+
+	* gnome-x-checks.m4 (GNOME2_X_CHECKS): kill bogus clearing of
+	LDFLAGS
+
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
 	* autogen.sh: add check for glib-gettextize
