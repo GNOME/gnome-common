@@ -1,3 +1,7 @@
+2001-08-02  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.2.3
+
 2001-07-26  Darin Adler  <darin@bentspoon.com>
 
 	* configure.in: Point to the new home of pkgconfig at
