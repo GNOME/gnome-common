@@ -1,7 +1,12 @@
 2003-10-31    <clahey@ximian.com>
 
-	* gnome-common.m4: New macro to disable deprecated functions when
-	maintainer mode is on.
+	* gnome-common.m4: Changed name of new macro to
+	AM_MAINTAINER_MODE_DEFINES and added definition for ENABLE_WERROR.
+
+2003-10-31    <clahey@ximian.com>
+
+	* gnome-common.m4: New macro to disable deprecated functions and
+	widgets when maintainer mode is on.
 
 2003-08-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
