@@ -7,3 +7,10 @@ config.sub
 configure
 ltconfig
 ltmain.sh
+config.log
+config.h
+config.cache
+libtool
+config.status
+stamp-h
+stamp.h
