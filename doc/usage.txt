@@ -30,8 +30,10 @@ Then put the following in your configure.ac or configure.in file:
 
 This macro is equivalent to the following two lines (which you can use
 instead if you don't want to depend on gnome-common macros):
-  ACLOCAL_AMFLAGS="\${ACLOCAL_FLAGS}"
-  AC_SUBST([ACLOCAL_AMFLAGS])
+  AC_SUBST([ACLOCAL_AMFLAGS], ["\${ACLOCAL_FLAGS}"])
+
+Or if you are using the AC_CONFIG_MACRO_DIR macro:
+  AC_SUBST([ACLOCAL_AMFLAGS], ["-I $ac_macro_dir \${ACLOCAL_FLAGS}"])
 
 This will make sure that autoconf macros will be found when you
 rebuild the package without rerunning autogen.sh.
