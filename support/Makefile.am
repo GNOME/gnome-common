@@ -6,7 +6,7 @@ if BUILD_GNOME_SUPPORT
 
 lib_LTLIBRARIES = libgnomesupport.la
 
-supportinclude_HEADERS = getopt.h long-options.h argp-fmtstream.h \
+supportinclude_HEADERS = gnome-argp.h getopt.h long-options.h argp-fmtstream.h \
 argp-namefrob.h argp.h
 
 libgnomesupport_la_SOURCES = long-options.c gnome-argp.c
