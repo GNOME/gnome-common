@@ -1,22 +1,32 @@
-This module is intended especially for people who want to
-develop GNOME Applications outside of the GNOME CVS tree
-(of cause, it also works if you develop inside of GNOME CVS).
+This module is intended for people who want to develop
+GNOME Applications outside of the GNOME CVS tree or for
+people who're developing inside GNOME CVS, but don't want
+to carry the macros/ directory in their module.
 
-The idea is to install everything from the `macros/' and
-to provide a gnome-autogen.sh script which is similar to
-the one from the macros dir.
+There are two modes of operation:
 
-Basically all we need to do is to make sure that the macros
-in the `macros/' dir work with all versions of their package
-(I mean, foo.m4 needs to work with all versions of foo).
+1.) The GNOME 1.x platform is what you get when you
+    configure this module without any special parameters.
 
-We only need to re-release gnome-common when any of the
-macros have changed which doesn't happen too often.
+    This installs everything from the `macros' directory
+    in `$(datadir)/aclocal/gnome-macros' and provides a
+    `gnome-autogen.sh' in `$(bindir)'.
 
-So, here's what you have to do to use it:
+2.) To enable support for the GNOME 2.x platform, gnome-common's
+    configure has a `--enable-platform-gnome-2' command line
+    argument which you need to use.
 
-1.) You need to compile and install gnome-common like any
-    normal package.
+    The difference is that the GNOME 2.x version will require
+    a recent version of pkg-config (from pkgconfig.sourceforge.net)
+    and also compile the `support' directory.
+
+    This is considered "hacker stuff" and has the same disclaimer
+    than gnome-libs HEAD.
+
+
+To use this module in your package, you need to:
+    
+1.) Compile and install gnome-common like any normal package.
 
 2.) You don't need to have a `macros/' dir in your package,
     this stuff is going to replace it.
@@ -24,7 +34,7 @@ So, here's what you have to do to use it:
 3.) In your autogen.sh use this:
 
     ---
-    . `gnome-config --bindir`/gnome-autogen.sh
+    . gnome-autogen.sh
     ---
 
     instead of
@@ -50,18 +60,20 @@ from gnome-common.
 
 [This is only intended for "hackers":
 
- If you want to use GNOME 2.0, you can use
+ If you want to use GNOME 2.0, just use
 
  ---
- USE_GNOME_2_MACROS=1 . `gnome-config --bindir`/gnome-autogen.sh
+ USE_GNOME_2_MACROS=1 . gnome-autogen.sh
  ---
 
- in your autogen.sh to get rid of the `hack-macros/' dir.
+ in your autogen.sh.
+
+ There's an example for this in LibGTop HEAD.
 ]
 
 Comments, Questions, etc. are welcome :)
 
 
-May 29, 2000
+Nov 21, 2000
 Martin Baulig <martin@suse.de>
 
