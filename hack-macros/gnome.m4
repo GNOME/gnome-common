@@ -87,7 +87,7 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
   fi
 
   tmp_gnome_libdir=`$GNOME_CONFIG $gnome_config_args --libdir`
-  for module in $4; do
+  for module in $4 ""; do
 	if test -f $tmp_gnome_libdir/$module'Conf'.sh; then
 		tmp_bsnom=`echo $module | tr a-z A-Z`
 		eval $tmp_bsnom'_CFLAGS'=\"`$GNOME_CONFIG $gnome_config_args --cflags $module`\"
@@ -110,7 +110,7 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
 	  OAF_LIBS="`$GNOME_CONFIG $gnome_config_args --libs oaf`"
 	  AC_SUBST(OAF_CFLAGS)
 	  AC_SUBST(OAF_LIBS)
-	else
+	elif -n "$module"; then
 	     echo "*** $module library is not installed"
 	     ifelse([$3], , :, [$3])
 	fi
