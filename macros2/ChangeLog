@@ -1,3 +1,9 @@
+2003-05-19  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* curses.m4: Reverse the sense of a test so that the
+	--with-ncurses=<dir> option in a configure.in script works.
+	Fixes bug #100730.
+
 2003-02-14  Kalpesh Shah <kalpesh.shah@sun.com>
 
 	* check-utmp.m4: initialize UTMP structure properly. 
