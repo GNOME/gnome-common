@@ -1,3 +1,7 @@
+2001-10-29  jacob berkman  <jacob@ximian.com>
+
+	* autogen.sh: add check for glib-gettextize
+
 2001-10-15  Bastien Nocera  <hadess@hadess.net>
 
 	* Makefile.am, curses.m4: added curses.m4 (copied from the gnome1

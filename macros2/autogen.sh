@@ -49,16 +49,28 @@ fi
   }
 }
 
-grep "^AM_[A-Z0-9_]\{1,\}_GETTEXT" $srcdir/configure.in >/dev/null && {
-  grep "sed.*POTFILES" $srcdir/configure.in >/dev/null || \
-  (gettext --version) < /dev/null > /dev/null 2>&1 || {
-    echo
-    echo "**Error**: You must have \`gettext' installed to compile $PKG_NAME."
-    echo "Get ftp://alpha.gnu.org/gnu/gettext-0.10.35.tar.gz"
-    echo "(or a newer version if it is available)"
-    DIE=1
-  }
-}
+
+if grep "^AM_[A-Z0-9_]\{1,\}_GETTEXT" $srcdir/configure.in >/dev/null; then
+  if grep "sed.*POTFILES" $srcdir/configure.in >/dev/null; then
+    GETTEXTIZE=""
+  else
+    if grep "^AM_GLIB_GNU_GETTEXT" configure.in >/dev/null; then
+      GETTEXTIZE="glib-gettextize"
+      GETTEXTIZE_URL="ftp://ftp.gtk.org/pub/gtk/v1.3/glib-1.3.11.tar.gz"
+    else
+      GETTEXTIZE="gettextize"
+      GETTEXTIZE_URL="ftp://alpha.gnu.org/gnu/gettext-0.10.35.tar.gz"
+    fi
+
+    if ! $GETTEXTIZE --version < /dev/null > /dev/null 2>&1; then
+      echo
+      echo "**Error**: You must have \`$GETTEXTIZE' installed to compile $PKG_NAME."
+      echo "Get $GETTEXTIZE_URL"
+      echo "(or a newer version if it is available)"
+      DIE=1
+    fi
+  fi
+fi
 
 (automake --version) < /dev/null > /dev/null 2>&1 || {
   echo
@@ -106,17 +118,14 @@ do
     ( cd $dr
 
       aclocalinclude="$ACLOCAL_FLAGS"
-      if grep "^AM_[A-Z0-9_]\+_GETTEXT" configure.in >/dev/null; then
-	if grep "sed.*POTFILES" configure.in >/dev/null; then
-	  : do nothing -- we still have an old unmodified configure.in
-	else
-	  echo "Creating $dr/aclocal.m4 ..."
-	  test -r $dr/aclocal.m4 || touch $dr/aclocal.m4
-	  echo "Running gettextize...  Ignore non-fatal messages."
-	  echo "no" | gettextize --force --copy
-	  echo "Making $dr/aclocal.m4 writable ..."
-	  test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
-        fi
+
+      if test "$GETTEXTIZE"; then
+	echo "Creating $dr/aclocal.m4 ..."
+	test -r $dr/aclocal.m4 || touch $dr/aclocal.m4
+	echo "Running $GETTEXTIZE...  Ignore non-fatal messages."
+	echo "no" | $GETTEXTIZE --force --copy
+	echo "Making $dr/aclocal.m4 writable ..."
+	test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
       fi
       if grep "^AC_PROG_INTLTOOL" configure.in >/dev/null; then
         echo "Running intltoolize..."
