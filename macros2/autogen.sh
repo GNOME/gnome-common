@@ -81,7 +81,7 @@ if grep "^AM_[A-Z0-9_]\{1,\}_GETTEXT" "$CONFIGURE" >/dev/null; then
   fi
 fi
 
-(automake --version) < /dev/null > /dev/null 2>&1 || {
+(automake-1.4 --version) < /dev/null > /dev/null 2>&1 || {
   echo
   echo "**Error**: You must have \`automake' installed to compile $PKG_NAME."
   echo "Get ftp://ftp.gnu.org/pub/gnu/automake-1.3.tar.gz"
@@ -92,7 +92,7 @@ fi
 
 
 # if no automake, don't bother testing for aclocal
-test -n "$NO_AUTOMAKE" || (aclocal --version) < /dev/null > /dev/null 2>&1 || {
+test -n "$NO_AUTOMAKE" || (aclocal-1.4 --version) < /dev/null > /dev/null 2>&1 || {
   echo
   echo "**Error**: Missing \`aclocal'.  The version of \`automake'"
   echo "installed doesn't appear recent enough."
@@ -151,14 +151,15 @@ do
 	  libtoolize --force --copy
 	fi
       fi
+
       echo "Running aclocal $aclocalinclude ..."
-      aclocal $aclocalinclude
+      aclocal-1.4 $aclocalinclude
       if grep "^AM_CONFIG_HEADER" $bn >/dev/null; then
 	echo "Running autoheader..."
 	autoheader
       fi
       echo "Running automake --gnu $am_opt ..."
-      automake --add-missing --gnu $am_opt
+      automake-1.4 --add-missing --gnu $am_opt
       echo "Running autoconf ..."
       autoconf
     )
