@@ -1,3 +1,8 @@
+2004-02-17  Mark McLoughlin  <mark@skynet.ie>
+
+	* doc-build/xmldocs.make: fix one last occurrence of
+	not using $(DESTDIR).
+
 === gnome-common 2.4.0 ===
 
 2003-10-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
