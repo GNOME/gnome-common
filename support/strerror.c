@@ -10,6 +10,7 @@
 #else
 # define PARAMS(args) ()
 #endif
+#endif
 
 
 #ifdef HAVE_SYS_ERRLIST
