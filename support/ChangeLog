@@ -1,5 +1,9 @@
 1998-07-30  Martin Baulig  <martin@home-of-linux.org>
 
+	* error.c: Making weak alias `__error' and `__error_at_line'
+	only if `_LIBC' is defined and not if we only
+	HAVE_PROGRAM_INVOCATION_NAME.
+
 	* gnomesupport-fake.h: Include gnome-argp.h to get
 	`program_invocation_name'.
 
