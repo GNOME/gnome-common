@@ -47,14 +47,6 @@ fi
   }
 }
 
-# Make sure we are using the correct gettext version
-REQ_GETTEXT_VERSION=10
-GETTEXT_VERSION=`gettext --version | head -1 | awk -F\. '{print $(NF-1)}'`
-if [ "$GETTEXT_VERSION" != "$REQ_GETTEXT_VERSION" ]; then
-  echo "You need to install GNU Gettext 0.$REQ_GETTEXT_VERSION.x (You currently have 0.$GETTEXT_VERSION.x)"
-  DIE=1
-fi
-
 #grep "^AM_GNU_GETTEXT" $srcdir/configure.in >/dev/null && {
 #  grep "sed.*POTFILES" $srcdir/configure.in >/dev/null || \
 #  (gettext --version) < /dev/null > /dev/null 2>&1 || {
@@ -153,7 +145,7 @@ do
 	  echo "Creating $dr/aclocal.m4 ..."
 	  test -r $dr/aclocal.m4 || touch $dr/aclocal.m4
 	  echo "Running gettextize...  Ignore non-fatal messages."
-	  echo "no" | gettextize --force --copy
+	  ./setup-gettext
 	  echo "Making $dr/aclocal.m4 writable ..."
 	  test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
         fi
@@ -162,7 +154,7 @@ do
 	echo "Creating $dr/aclocal.m4 ..."
 	test -r $dr/aclocal.m4 || touch $dr/aclocal.m4
 	echo "Running gettextize...  Ignore non-fatal messages."
-	echo "no" | gettextize --force --copy
+	./setup-gettext
 	echo "Making $dr/aclocal.m4 writable ..."
 	test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
       fi
