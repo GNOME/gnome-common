@@ -1,3 +1,7 @@
+2001-10-02  Darin Adler  <darin@bentspoon.com>
+
+	* autogen.sh: Add intltool support.
+
 2001-09-04  Frank Belew  <frb@ximian.com>
 
 	* autogen.sh: change gettext regexp to work with non-gnu grep
