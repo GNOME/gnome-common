@@ -58,14 +58,22 @@ AC_DEFUN([BALSA_OFFSET_TOOL],[
 
 	ifelse($3,[],[
 		define([cat_command],[])
+		define([cat_vars],[])
 	],[
 		define([cat_command],[
-			#Don't collide with the EOF inside the AC_OUTPUT_COMMANDS that we're in
-			cat <<BOTEOF >${BALSA_OFFSET_TOOL_DEFSFILE} 
-$3
+		echo creating ${BALSA_OFFSET_TOOL_DEFSFILE}
+		#Don't collide with the EOF inside the AC_OUTPUT_COMMANDS that we're in
+		cat <<BOTEOF >${BALSA_OFFSET_TOOL_DEFSFILE}
+${BALSA_OFFSET_TOOL_EXDEFS}
 BOTEOF
 ])
+		define([cat_vars],[
+			BALSA_OFFSET_TOOL_EXDEFS='$3'
+		])
+
 	])
+
+	dnl cat_command
 
 	changequote(<<,>>)dnl Clobbers my regexes!
 
@@ -106,10 +114,9 @@ BOTEOF
 
 	])
 
-	AC_OUTPUT_COMMANDS(cat_command)
+	AC_OUTPUT_COMMANDS(cat_command,cat_vars)
 
 	AC_OUTPUT_COMMANDS([
-
 			echo creating $1
 			(cd ${BALSA_OFFSET_FRAG_DIR} && ${SHELL} ${BALSA_OFFSET_TOOL_DOTS}${BALSA_OFFSET_TOOL_HOME}/${BALSA_OFFSET_TOOL_NAME} \
 				--makerules --fragname ${BALSA_OFFSET_FRAG_BASE} ${BALSA_OFFSET_SRCFILES} >${BALSA_OFFSET_FRAG_BASE})
@@ -128,6 +135,7 @@ BOTEOF
 	])
 
 	undefine([cat_command])
+	undefine([cat_vars])
 
 	BALSA_OFFSET_SRCPATH="${srcdir}"
 	BALSA_OFFSET_TOOL_DOTS="${frag_dots}"

@@ -6,6 +6,13 @@
 # data for use with Balsa's configuration, because
 # it's really constant data although GCC, at least,
 # doesn't think so.
+#
+# To achieve that effect, I have writen this here
+# absurdly overcomplicated tool, autoconf macro,
+# configure.in code, and Makefile.am :-) There
+# might be a simpler way to do this, and I guess
+# I'll trade in this cool code for better code,
+# but I can't think of a simpler way right now :-)
 
 srcdir="@srcdir@"
 top_srcdir="@top_srcdir@"
@@ -19,6 +26,7 @@ CC="@CC@"
 DEFS="@DEFS@"
 CFLAGS="@CFLAGS@"
 mid_file=offset-tool.c
+no_clean=no
 
 case "${top_srcdir}" in
 /*)
@@ -71,7 +79,7 @@ top_srcdir="${tmp}"
 
 usage()
 {
-    echo "Usage: offset-tool.sh (--help|--create|--makerules|--headername) [--fragname=<fragment name>] <filenames...>"
+    echo "Usage: offset-tool.sh (--help|--create|--makerules|--headername) [--fragname=<fragment name>] [--noclean] <filenames...>"
     echo "Look at $(top_srcdir)/${offset_tool_home}/offset-tool.sh.in for more information"
     exit 1
 }
@@ -108,6 +116,8 @@ while test $# -gt 0 ; do
 	    fragname=`echo ${1} |sed -e 's,.*=\(.*\),\1,'`; shift ;;
 	--fragname)
 	    shift; fragname="${1}" ; shift ;;
+	--noclean)
+	    no_clean=yes ; shift ;;
 	--)
 	    shift; break ;;
 	-*)
@@ -206,8 +216,12 @@ EOF
 	exit 3
     }
 
-    echo "Cleaning up..."
-    rm -f ${mid_file} ${mid_exe}
+    if test x"$no_clean" = xyes ; then
+	:
+    else
+	echo "Cleaning up..."
+	rm -f ${mid_file} ${mid_exe}
+    fi
 
     res=$?
     echo "Done creating ${header}"
