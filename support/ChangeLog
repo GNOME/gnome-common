@@ -1,3 +1,12 @@
+1998-05-19  Martin Baulig  <martin@home-of-linux.org>
+
+	* vsnprintf.c (vsnprintf): Added prototype for systems
+	defining __STDC__.
+
+	* vsnprintf.c (snprintf): Moved toward the end of the
+	file, that the compiler gets correct prototype for
+	vsnprintf().
+
 1998-05-12  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* argp-help.c (argp_doc): Backed out previous "fix". :-)

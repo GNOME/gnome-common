@@ -97,32 +97,14 @@ mcleanup(str, n, p)
 
 int
 #if __STDC__
-snprintf(char *str, size_t n, char const *fmt, ...)
+vsnprintf(char *str, size_t n, char const *fmt, va_list ap)
 #else
-snprintf(str, n, fmt, va_alist)
-	char *str;
-	size_t n;
-	char *fmt;
-	va_dcl
-#endif
-{
-	va_list ap;
-#if __STDC__
-	va_start(ap, fmt);
-#else
-	va_start(ap);
-#endif
-
-	return (vsnprintf(str, n, fmt, ap));
-	va_end(ap);
-}
-
-int
 vsnprintf(str, n, fmt, ap)
 	char *str;
 	size_t n;
 	char *fmt;
 	char *ap;
+#endif
 {
 	struct sigaction osa, nsa;
 	char *p;
@@ -148,4 +130,28 @@ vsnprintf(str, n, fmt, ap)
 	(void) sigaction(SIGSEGV, &osa, NULL);
 	return (ret);
 }
+
+int
+#if __STDC__
+snprintf(char *str, size_t n, char const *fmt, ...)
+#else
+snprintf(str, n, fmt, va_alist)
+	char *str;
+	size_t n;
+	char *fmt;
+	va_dcl
+#endif
+{
+	va_list ap;
+#if __STDC__
+	va_start(ap, fmt);
+#else
+	va_start(ap);
+#endif
+
+	return (vsnprintf(str, n, fmt, ap));
+	va_end(ap);
+}
+
+
 
