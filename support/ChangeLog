@@ -1,3 +1,9 @@
+1998-07-29  Martin Baulig  <martin@home-of-linux.org>
+
+	* error.c, error.h: New files.  Imported from glibc.
+
+	* Makefile.am (supportinclude_HEADERS): Added `error.h'.
+
 1998-07-17  Martin Baulig  <martin@home-of-linux.org>
 
 	* strtol.c, strtoul.c (<ansidecl.h>): Removed. Using

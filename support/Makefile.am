@@ -7,7 +7,7 @@ INCLUDES = -D_GNU_SOURCE
 
 lib_LTLIBRARIES = libgnomesupport.la
 
-supportinclude_HEADERS = gnome-argp.h getopt.h long-options.h argp.h
+supportinclude_HEADERS = gnome-argp.h getopt.h long-options.h argp.h error.h
 
 # it is in _DATA since we don't want `gnomesupport.h' to be part of
 # the distributed `.tar.gz' file
