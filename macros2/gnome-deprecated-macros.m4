@@ -14,7 +14,7 @@ AU_DEFUN([GNOME_PLATFORM_GNOME_2], [])
 AU_DEFUN([GNOME_CHECK_CXX],
 [
   # see if a C++ compiler exists and works
-  AC_REQUIRE([AC_PROG_CXX])dnl
+  AC_PROG_CXX
   if test "x$ac_cv_prog_cxx_works" = xno; then
     AC_MSG_WARN(ifelse([$1], , "No C++ compiler", [$1]))
   fi

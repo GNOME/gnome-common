@@ -1,3 +1,8 @@
+2003-02-19  James Henstridge  <james@daa.com.au>
+
+	* gnome-deprecated-macros.m4(GNOME_CHECK_CXX): AC_REQUIRE does not
+	work within AU_DEFUN, so change to a simple call to AC_PROG_CXX.
+
 2003-02-18  James Henstridge  <james@daa.com.au>
 
 	* autogen.sh (topdir): check to see if gnome-deprecated-macros.m4
