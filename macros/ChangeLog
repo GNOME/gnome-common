@@ -1,3 +1,10 @@
+2000-02-26  James Henstridge  <james@daa.com.au>
+
+        * gnome-gettext.m4: fix up check of LINGUAS variable so that we don't
+        get problems when LINGUAS contains `en' and ALL_LINGUAS contains 
+        `en_GB' for instance.  This patch is the same as the one applied to
+	HEAD.
+
 1999-09-26  Jody Goldberg <jgoldberg@home.com>
 
 	* compiler-flags.m4 : Remove -Wpointer-arith.  It generates large
