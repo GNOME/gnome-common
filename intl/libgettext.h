@@ -1,19 +1,19 @@
-/* libgettext.h -- Message catalogs for internationalization.
-   Copyright (C) 1995 Free Software Foundation, Inc.
+/* Message catalogs for internationalization.
+   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software Foundation,
+   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 /* Because on some systems (e.g. Solaris) we sometimes have to include
    the systems libintl.h as well as this file we have more complex
@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
    define _LIBINTL_H and therefore we have to protect the definition here.  */
 
 #if !defined (_LIBINTL_H) || !defined (_LIBGETTEXT_H)
-#if !_LIBINTL_H
+#if !defined (_LIBINTL_H)
 # define _LIBINTL_H	1
 #endif
 #define _LIBGETTEXT_H	1
@@ -43,11 +43,11 @@ extern "C" {
 
 /* @@ end of prolog @@ */
 
-#ifndef __P
+#ifndef PARAMS
 # if __STDC__
-#  define __P(args) args
+#  define PARAMS(args) args
 # else
-#  define __P(args) ()
+#  define PARAMS(args) ()
 # endif
 #endif
 
@@ -91,33 +91,34 @@ extern int _msg_tbl_length;
 /* Look up MSGID in the current default message catalog for the current
    LC_MESSAGES locale.  If not found, returns MSGID itself (the default
    text).  */
-extern char *gettext __P ((const char *__msgid));
-extern char *gettext__ __P ((const char *__msgid));
+extern char *gettext PARAMS ((const char *__msgid));
+extern char *gettext__ PARAMS ((const char *__msgid));
 
 /* Look up MSGID in the DOMAINNAME message catalog for the current
    LC_MESSAGES locale.  */
-extern char *dgettext __P ((const char *__domainname, const char *__msgid));
-extern char *dgettext__ __P ((const char *__domainname, const char *__msgid));
+extern char *dgettext PARAMS ((const char *__domainname, const char *__msgid));
+extern char *dgettext__ PARAMS ((const char *__domainname,
+				 const char *__msgid));
 
 /* Look up MSGID in the DOMAINNAME message catalog for the current CATEGORY
    locale.  */
-extern char *dcgettext __P ((const char *__domainname, const char *__msgid,
-			     int __category));
-extern char *dcgettext__ __P ((const char *__domainname, const char *__msgid,
-			       int __category));
+extern char *dcgettext PARAMS ((const char *__domainname, const char *__msgid,
+				int __category));
+extern char *dcgettext__ PARAMS ((const char *__domainname,
+				  const char *__msgid, int __category));
 
 
 /* Set the current default message catalog to DOMAINNAME.
    If DOMAINNAME is null, return the current default.
    If DOMAINNAME is "", reset to the default of "messages".  */
-extern char *textdomain __P ((const char *__domainname));
-extern char *textdomain__ __P ((const char *__domainname));
+extern char *textdomain PARAMS ((const char *__domainname));
+extern char *textdomain__ PARAMS ((const char *__domainname));
 
 /* Specify that the DOMAINNAME message catalog will be found
    in DIRNAME rather than in the system locale data base.  */
-extern char *bindtextdomain __P ((const char *__domainname,
+extern char *bindtextdomain PARAMS ((const char *__domainname,
 				  const char *__dirname));
-extern char *bindtextdomain__ __P ((const char *__domainname,
+extern char *bindtextdomain__ PARAMS ((const char *__domainname,
 				    const char *__dirname));
 
 #if ENABLE_NLS
@@ -127,33 +128,37 @@ extern char *bindtextdomain__ __P ((const char *__domainname,
    has dcgettext.  */
 # if !HAVE_CATGETS && (!HAVE_GETTEXT || HAVE_DCGETTEXT)
 
-#  define gettext(Msgid) \
+#  define gettext(Msgid)						      \
      dgettext (NULL, Msgid)
 
-#  define dgettext(Domainname, Msgid) \
+#  define dgettext(Domainname, Msgid)					      \
      dcgettext (Domainname, Msgid, LC_MESSAGES)
 
 #  if defined __GNUC__ && __GNUC__ == 2 && __GNUC_MINOR__ >= 7
-#   define dcgettext(Domainname, Msgid, Category) \
+/* This global variable is defined in loadmsgcat.c.  We need a sign,
+   whether a new catalog was loaded, which can be associated with all
+   translations.  */
+extern int _nl_msg_cat_cntr;
+
+#   define dcgettext(Domainname, Msgid, Category)			      \
   (__extension__							      \
    ({									      \
-     char *result;							      \
+     char *__result;							      \
      if (__builtin_constant_p (Msgid))					      \
        {								      \
-	 extern int _nl_msg_cat_cntr;					      \
 	 static char *__translation__;					      \
 	 static int __catalog_counter__;				      \
 	 if (! __translation__ || __catalog_counter__ != _nl_msg_cat_cntr)    \
 	   {								      \
 	     __translation__ =						      \
-	       dcgettext__ ((Domainname), (Msgid), (Category));		      \
+	       dcgettext__ (Domainname, Msgid, Category);		      \
 	     __catalog_counter__ = _nl_msg_cat_cntr;			      \
 	   }								      \
-	 result = __translation__;					      \
+	 __result = __translation__;					      \
        }								      \
      else								      \
-       result = dcgettext__ ((Domainname), (Msgid), (Category));	      \
-     result;								      \
+       __result = dcgettext__ (Domainname, Msgid, Category);		      \
+     __result;								      \
     }))
 #  endif
 # endif

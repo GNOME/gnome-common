@@ -1,19 +1,20 @@
-/* localealias.c -- handle aliases for locale names
-   Copyright (C) 1995 Free Software Foundation, Inc.
+/* Handle aliases for locale names
+   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
+   Written by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software Foundation,
+   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -25,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #ifdef __GNUC__
 # define alloca __builtin_alloca
+# define HAVE_ALLOCA 1
 #else
 # if defined HAVE_ALLOCA_H || defined _LIBC
 #  include <alloca.h>
@@ -51,9 +53,15 @@ void free ();
 #endif
 
 #if defined HAVE_STRING_H || defined _LIBC
+# ifndef _GNU_SOURCE
+#  define _GNU_SOURCE	1
+# endif
 # include <string.h>
 #else
 # include <strings.h>
+# ifndef memcpy
+#  define memcpy(Dst, Src, Num) bcopy (Src, Dst, Num)
+# endif
 #endif
 #if !HAVE_STRCHR && !defined _LIBC
 # ifndef strchr
@@ -73,6 +81,43 @@ void free ();
 # define strcasecmp __strcasecmp
 #endif
 
+
+/* For those loosing systems which don't have `alloca' we have to add
+   some additional code emulating it.  */
+#ifdef HAVE_ALLOCA
+/* Nothing has to be done.  */
+# define ADD_BLOCK(list, address) /* nothing */
+# define FREE_BLOCKS(list) /* nothing */
+#else
+struct block_list
+{
+  void *address;
+  struct block_list *next;
+};
+# define ADD_BLOCK(list, addr)						      \
+  do {									      \
+    struct block_list *newp = (struct block_list *) malloc (sizeof (*newp));  \
+    /* If we cannot get a free block we cannot add the new element to	      \
+       the list.  */							      \
+    if (newp != NULL) {							      \
+      newp->address = (addr);						      \
+      newp->next = (list);						      \
+      (list) = newp;							      \
+    }									      \
+  } while (0)
+# define FREE_BLOCKS(list)						      \
+  do {									      \
+    while (list != NULL) {						      \
+      struct block_list *old = list;					      \
+      list = list->next;						      \
+      free (old);							      \
+    }									      \
+  } while (0)
+# undef alloca
+# define alloca(size) (malloc (size))
+#endif	/* have alloca */
+
+
 struct alias_map
 {
   const char *alias;
@@ -86,10 +131,10 @@ static size_t maxmap = 0;
 
 
 /* Prototypes for local functions.  */
-static size_t read_alias_file __P ((const char *fname, int fname_len));
-static void extend_alias_table __P ((void));
-static int alias_compare __P ((const struct alias_map *map1,
-			       const struct alias_map *map2));
+static size_t read_alias_file PARAMS ((const char *fname, int fname_len));
+static void extend_alias_table PARAMS ((void));
+static int alias_compare PARAMS ((const struct alias_map *map1,
+				  const struct alias_map *map2));
 
 
 const char *
@@ -109,9 +154,9 @@ _nl_expand_alias (name)
       if (nmap > 0)
 	retval = (struct alias_map *) bsearch (&item, map, nmap,
 					       sizeof (struct alias_map),
-					       (int (*) __P ((const void *,
-							      const void *)))
-					         alias_compare);
+					       (int (*) PARAMS ((const void *,
+								 const void *))
+						) alias_compare);
       else
 	retval = NULL;
 
@@ -147,18 +192,25 @@ read_alias_file (fname, fname_len)
      const char *fname;
      int fname_len;
 {
+#ifndef HAVE_ALLOCA
+  struct block_list *block_list = NULL;
+#endif
   FILE *fp;
   char *full_fname;
   size_t added;
   static const char aliasfile[] = "/locale.alias";
 
   full_fname = (char *) alloca (fname_len + sizeof aliasfile);
+  ADD_BLOCK (block_list, full_fname);
   memcpy (full_fname, fname, fname_len);
   memcpy (&full_fname[fname_len], aliasfile, sizeof aliasfile);
 
   fp = fopen (full_fname, "r");
   if (fp == NULL)
-    return 0;
+    {
+      FREE_BLOCKS (block_list);
+      return 0;
+    }
 
   added = 0;
   while (!feof (fp))
@@ -223,14 +275,20 @@ read_alias_file (fname, fname_len)
 	      len = strlen (alias) + 1;
 	      tp = (char *) malloc (len);
 	      if (tp == NULL)
-		return added;
+		{
+		  FREE_BLOCKS (block_list);
+		  return added;
+		}
 	      memcpy (tp, alias, len);
 	      map[nmap].alias = tp;
 
 	      len = strlen (value) + 1;
 	      tp = (char *) malloc (len);
 	      if (tp == NULL)
-		return added;
+		{
+		  FREE_BLOCKS (block_list);
+		  return added;
+		}
 	      memcpy (tp, value, len);
 	      map[nmap].value = tp;
 
@@ -239,7 +297,7 @@ read_alias_file (fname, fname_len)
 	    }
 	}
 
-      /* Possibily not the whole line fitted into the buffer.  Ignore
+      /* Possibly not the whole line fits into the buffer.  Ignore
 	 the rest of the line.  */
       while (strchr (cp, '\n') == NULL)
 	{
@@ -257,8 +315,9 @@ read_alias_file (fname, fname_len)
 
   if (added > 0)
     qsort (map, nmap, sizeof (struct alias_map),
-	   (int (*) __P ((const void *, const void *))) alias_compare);
+	   (int (*) PARAMS ((const void *, const void *))) alias_compare);
 
+  FREE_BLOCKS (block_list);
   return added;
 }
 
@@ -309,6 +368,8 @@ alias_compare (map1, map2)
       c2 = isupper (*p2) ? tolower (*p2) : *p2;
       if (c1 == '\0')
 	break;
+      ++p1;
+      ++p2;
     }
   while (c1 == c2);
 

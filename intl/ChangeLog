@@ -1,3 +1,334 @@
+1997-09-06 02:10  Ulrich Drepper  <drepper@cygnus.com>
+
+	* intlh.inst.in: Reformat copyright.
+
+1997-08-19 15:22  Ulrich Drepper  <drepper@cygnus.com>
+
+	* dcgettext.c (DCGETTEXT): Remove wrong comment.
+
+1997-08-16 00:13  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (install-data): Don't change directory to install.
+
+1997-08-01 14:30  Ulrich Drepper  <drepper@cygnus.com>
+
+	* cat-compat.c: Fix copyright.
+
+	* localealias.c: Don't define strchr unless !HAVE_STRCHR.
+
+	* loadmsgcat.c: Update copyright.  Fix typos.
+
+	* l10nflist.c: Don't define strchr unless !HAVE_STRCHR.
+	(_nl_make_l10nflist): Handle sponsor and revision correctly.
+
+	* gettext.c: Update copyright.
+	* gettext.h: Likewise.
+	* hash-string.h: Likewise.
+
+	* finddomain.c: Remoave dead code.  Define strchr only if
+	!HAVE_STRCHR.
+
+	* explodename.c: Include <sys/types.h>.
+
+	* explodename.c: Reformat copyright text.
+	(_nl_explode_name): Fix typo.
+
+	* dcgettext.c: Define and use __set_errno.
+	(guess_category_value): Don't use setlocale if HAVE_LC_MESSAGES is
+	not defined.
+
+	* bindtextdom.c: Pretty printing.
+
+1997-05-01 02:25  Ulrich Drepper  <drepper@cygnus.com>
+
+	* dcgettext.c (guess_category_value): Don't depend on
+	HAVE_LC_MESSAGES.  We don't need the macro here.
+	Patch by Bruno Haible <haible@ilog.fr>.
+
+	* cat-compat.c (textdomain): DoN't refer to HAVE_SETLOCALE_NULL
+	macro.  Instead use HAVE_LOCALE_NULL and define it when using
+	glibc, as in dcgettext.c.
+	Patch by Bruno Haible <haible@ilog.fr>.
+
+	* Makefile.in (CPPFLAGS): New variable.  Reported by Franc,ois
+	Pinard.
+
+Mon Mar 10 06:51:17 1997  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in: Implement handling of libtool.
+
+	* gettextP.h: Change data structures for use of generic lowlevel
+	i18n file handling.
+
+Wed Dec  4 20:21:18 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* textdomain.c: Put parentheses around arguments of memcpy macro
+	definition.
+	* localealias.c: Likewise.
+	* l10nflist.c: Likewise.
+	* finddomain.c: Likewise.
+	* bindtextdom.c: Likewise.
+	Reported by Thomas Esken.
+
+Mon Nov 25 22:57:51 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* textdomain.c: Move definition of `memcpy` macro to right
+	position.
+
+Fri Nov 22 04:01:58 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* finddomain.c [!HAVE_STRING_H && !_LIBC]: Define memcpy using
+ 	bcopy if not already defined.  Reported by Thomas Esken.
+	* bindtextdom.c: Likewise.
+	* l10nflist.c: Likewise.
+	* localealias.c: Likewise.
+	* textdomain.c: Likewise.
+
+Tue Oct 29 11:10:27 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (libdir): Change to use exec_prefix instead of
+ 	prefix.  Reported by Knut-HåvardAksnes <etokna@eto.ericsson.se>.
+
+Sat Aug 31 03:07:09 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* l10nflist.c (_nl_normalize_codeset): We convert to lower case,
+	so don't prepend uppercase `ISO' for only numeric arg.
+
+Fri Jul 19 00:15:46 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* l10nflist.c: Move inclusion of argz.h, ctype.h, stdlib.h after
+	definition of _GNU_SOURCE.  Patch by Roland McGrath.
+
+	* Makefile.in (uninstall): Fix another bug with `for' loop and
+	empty arguments.  Patch by Jim Meyering.  Correct name os
+	uninstalled files: no intl- prefix anymore.
+
+	* Makefile.in (install-data): Again work around shells which
+	cannot handle mpty for list.  Reported by Jim Meyering.
+
+Sat Jul 13 18:11:35 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (install): Split goal.  Now depend on install-exec
+        and install-data.
+	(install-exec, install-data): New goals.  Created from former
+	install goal.
+	Reported by Karl Berry.
+
+Sat Jun 22 04:58:14 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (MKINSTALLDIRS): New variable.  Path to
+        mkinstalldirs script.
+	(install): use MKINSTALLDIRS variable or if the script is not present
+	try to find it in the $top_scrdir).
+
+Wed Jun 19 02:56:56 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* l10nflist.c: Linux libc *partly* includes the argz_* functions.
+	Grr.  Work around by renaming the static version and use macros
+	for renaming.
+
+Tue Jun 18 20:11:17 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* l10nflist.c: Correct presence test macros of __argz_* functions.
+
+	* l10nflist.c: Include <argz.h> based on test of it instead when
+	__argz_* functions are available.
+	Reported by Andreas Schwab.
+
+Thu Jun 13 15:17:44 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* explodename.c, l10nflist.c: Define NULL for dumb systems.
+
+Tue Jun 11 17:05:13 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* intlh.inst.in, libgettext.h (dcgettext): Rename local variable
+	result to __result to prevent name clash.
+
+	* l10nflist.c, localealias.c, dcgettext.c: Define _GNU_SOURCE to
+        get prototype for stpcpy and strcasecmp.
+
+	* intlh.inst.in, libgettext.h: Move declaration of
+	`_nl_msg_cat_cntr' outside __extension__ block to prevent warning
+	from gcc's -Wnested-extern option.
+
+Fri Jun  7 01:58:00 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (install): Remove comment.
+
+Thu Jun  6 17:28:17 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (install): Work around for another Buglix stupidity.
+	Always use an `else' close for `if's.  Reported by Nelson Beebe.
+
+	* Makefile.in (intlh.inst): Correct typo in phony rule.
+	Reported by Nelson Beebe.
+
+Thu Jun  6 01:49:52 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* dcgettext.c (read_alias_file): Rename variable alloca_list to
+	block_list as the macro calls assume.
+	Patch by Eric Backus.
+
+	* localealias.c [!HAVE_ALLOCA]: Define alloca as macro using
+        malloc.
+	(read_alias_file): Rename varriabe alloca_list to block_list as the
+	macro calls assume.
+	Patch by Eric Backus.
+
+	* l10nflist.c: Correct conditional for <argz.h> inclusion.
+	Reported by Roland McGrath.
+
+	* Makefile.in (all): Depend on all-@USE_INCLUDED_LIBINTL@, not
+        all-@USE_NLS@.
+
+	* Makefile.in (install): intlh.inst comes from local dir, not
+        $(srcdir).
+
+	* Makefile.in (intlh.inst): Special handling of this goal.  If
+	used in gettext, this is really a rul to construct this file.  If
+	used in any other package it is defined as a .PHONY rule with
+	empty body.
+
+	* finddomain.c: Extract locale file information handling into
+	l10nfile.c.  Rename local stpcpy__ function to stpcpy.
+
+	* dcgettext.c (stpcpy): Add local definition.
+
+	* l10nflist.c: Solve some portability problems.  Patches partly by
+	Thomas Esken.  Add local definition of stpcpy.
+
+Tue Jun  4 02:47:49 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* intlh.inst.in: Don't depend including <locale.h> on
+	HAVE_LOCALE_H.  Instead configure must rewrite this fiile
+	depending on the result of the configure run.
+
+	* Makefile.in (install): libintl.inst is now called intlh.inst.
+	Add rules for updating intlh.inst from intlh.inst.in.
+
+	* libintl.inst: Renamed to intlh.inst.in.
+
+	* localealias.c, dcgettext.c [__GNUC__]: Define HAVE_ALLOCA to 1
+        because gcc has __buitlin_alloca.
+	Reported by Roland McGrath.
+
+Mon Jun  3 00:32:16 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile.in (installcheck): New goal to fulfill needs of
+        automake's distcheck.
+
+	* Makefile.in (install): Reorder commands so that VERSION is
+        found.
+
+	* Makefile.in (gettextsrcdir): Now use subdirectory intl/ in
+        @datadir@/gettext.
+	(COMSRCS): Add l10nfile.c.
+	(OBJECTS): Add l10nfile.o.
+	(DISTFILES): Rename to DISTFILE.normal.  Remove $(DISTFILES.common).
+	(DISTFILE.gettext): Remove $(DISTFILES.common).
+	(all-gettext): Remove goal.
+	(install): If $(PACKAGE) = gettext install, otherwose do nothing.  No
+	package but gettext itself should install libintl.h + headers.
+	(dist): Extend goal to work for gettext, too.
+	(dist-gettext): Remove goal.
+
+	* dcgettext.c [!HAVE_ALLOCA]: Define macro alloca by using malloc.
+
+Sun Jun  2 17:33:06 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* loadmsgcat.c (_nl_load_domain): Parameter is now comes from
+        find_l10nfile.
+
+Sat Jun  1 02:23:03 1996  Ulrich Drepper  <drepper@cygnus.com>
+
+	* l10nflist.c (__argz_next): Add definition.
+
+	* dcgettext.c [!HAVE_ALLOCA]: Add code for handling missing alloca
+	code.  Use new l10nfile handling.
+
+	* localealias.c [!HAVE_ALLOCA]: Add code for handling missing
+        alloca code.
+
+	* l10nflist.c: Initial revision.
+
+Tue Apr  2 18:51:18 1996  Ulrich Drepper  <drepper@myware>
+
+	* Makefile.in (all-gettext): New goal.  Same as all-yes.
+
+Thu Mar 28 23:01:22 1996  Karl Eichwalder  <ke@ke.central.de>
+
+	* Makefile.in (gettextsrcdir): Define using @datadir@.
+
+Tue Mar 26 12:39:14 1996  Ulrich Drepper  <drepper@myware>
+
+	* finddomain.c: Include <ctype.h>.  Reported by Roland McGrath.
+
+Sat Mar 23 02:00:35 1996  Ulrich Drepper  <drepper@myware>
+
+	* finddomain.c (stpcpy): Rename to stpcpy__ to prevent clashing
+        with external declaration.
+
+Sat Mar  2 00:47:09 1996  Ulrich Drepper  <drepper@myware>
+
+	* Makefile.in (all-no): Rename from all_no.
+
+Sat Feb 17 00:25:59 1996  Ulrich Drepper  <drepper@myware>
+
+	* gettextP.h [loaded_domain]: Array `successor' must now contain up
+        to 63 elements (because of codeset name normalization).
+
+	* finddomain.c: Implement codeset name normalization.
+
+Thu Feb 15 04:39:09 1996  Ulrich Drepper  <drepper@myware>
+
+	* Makefile.in (all): Define to `all-@USE_NLS@'.
+	(all-yes, all_no): New goals.  `all-no' is noop, `all-yes'
+	is former all.
+
+Mon Jan 15 21:46:01 1996  Howard Gayle  <howard@hal.com>
+
+	* localealias.c (alias_compare): Increment string pointers in loop
+        of strcasecmp replacement.
+
+Fri Dec 29 21:16:34 1995  Ulrich Drepper  <drepper@myware>
+
+	* Makefile.in (install-src): Who commented this goal out ? :-)
+
+Fri Dec 29 15:08:16 1995  Ulrich Drepper  <drepper@myware>
+
+	* dcgettext.c (DCGETTEXT): Save `errno'.  Failing system calls
+	should not effect it because a missing catalog is no error.
+	Reported by Harald K<o:>nig <koenig@tat.physik.uni-tuebingen.de>.
+
+Tue Dec 19 22:09:13 1995  Ulrich Drepper  <drepper@myware>
+
+	* Makefile.in (Makefile): Explicitly use $(SHELL) for running
+        shell scripts.
+
+Fri Dec 15 17:34:59 1995  Andreas Schwab  <schwab@issan.informatik.uni-dortmund.de>
+
+	* Makefile.in (install-src): Only install library and header when
+	we use the own implementation.  Don't do it when using the
+	system's gettext or catgets functions.
+
+	* dcgettext.c (find_msg): Must not swap domain->hash_size here.
+
+Sat Dec  9 16:24:37 1995  Ulrich Drepper  <drepper@myware>
+
+	* localealias.c, libintl.inst, libgettext.h, hash-string.h,
+	gettextP.h, finddomain.c, dcgettext.c, cat-compat.c:
+	Use PARAMS instead of __P.  Suggested by Roland McGrath.
+
+Tue Dec  5 11:39:14 1995  Larry Schwimmer  <rosebud@cyclone.stanford.edu>
+
+	* libgettext.h: Use `#if !defined (_LIBINTL_H)' instead of `#if
+	!_LIBINTL_H' because Solaris defines _LIBINTL_H as empty.
+
+Mon Dec  4 15:42:07 1995  Ulrich Drepper  <drepper@myware>
+
+	* Makefile.in (install-src):
+	Install libintl.inst instead of libintl.h.install.
+
 Sat Dec  2 22:51:38 1995  Marcus Daniels  <marcus@sysc.pdx.edu>
 
 	* cat-compat.c (textdomain):
@@ -689,5 +1020,3 @@ Sun Jul  2 02:06:50 1995  Ulrich Drepper  <drepper@myware>
 	which allow to use the X/Open catgets function with an interface
 	like the Uniforum gettext function.  For system which does not
 	have neither of those a complete implementation is provided.
-
-

@@ -1,19 +1,19 @@
-/* dcgettext.c -- implemenatation of the dcgettext(3) function
-   Copyright (C) 1995 Free Software Foundation, Inc.
+/* Implementation of the dcgettext(3) function
+   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software Foundation,
+   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #ifdef __GNUC__
 # define alloca __builtin_alloca
+# define HAVE_ALLOCA 1
 #else
 # if defined HAVE_ALLOCA_H || defined _LIBC
 #  include <alloca.h>
@@ -41,6 +42,9 @@ char *alloca ();
 #ifndef errno
 extern int errno;
 #endif
+#ifndef __set_errno
+# define __set_errno(val) errno = (val)
+#endif
 
 #if defined STDC_HEADERS || defined _LIBC
 # include <stdlib.h>
@@ -54,6 +58,9 @@ void free ();
 #endif
 
 #if defined HAVE_STRING_H || defined _LIBC
+# ifndef _GNU_SOURCE
+#  define _GNU_SOURCE	1
+# endif
 # include <string.h>
 #else
 # include <strings.h>
@@ -85,13 +92,16 @@ void free ();
    file and the name space must not be polluted.  */
 # define getcwd __getcwd
 # define stpcpy __stpcpy
-#endif
-
-#if !defined HAVE_GETCWD && !defined _LIBC
-char *getwd ();
-# define getcwd(buf, max) getwd (buf)
 #else
+# if !defined HAVE_GETCWD
+char *getwd ();
+#  define getcwd(buf, max) getwd (buf)
+# else
 char *getcwd ();
+# endif
+# ifndef HAVE_STPCPY
+static char *stpcpy PARAMS ((char *dest, const char *src));
+# endif
 #endif
 
 /* Amount to increase buffer size by in each try.  */
@@ -151,10 +161,47 @@ const char _nl_default_dirname[] = GNULOCALEDIR;
 struct binding *_nl_domain_bindings;
 
 /* Prototypes for local functions.  */
-static char *find_msg __P ((struct loaded_domain *domain, const char *msgid));
-static const char *category_to_name __P((int category));
-static const char *guess_category_value __P((int category,
-					     const char *categoryname));
+static char *find_msg PARAMS ((struct loaded_l10nfile *domain_file,
+			       const char *msgid));
+static const char *category_to_name PARAMS ((int category));
+static const char *guess_category_value PARAMS ((int category,
+						 const char *categoryname));
+
+
+/* For those loosing systems which don't have `alloca' we have to add
+   some additional code emulating it.  */
+#ifdef HAVE_ALLOCA
+/* Nothing has to be done.  */
+# define ADD_BLOCK(list, address) /* nothing */
+# define FREE_BLOCKS(list) /* nothing */
+#else
+struct block_list
+{
+  void *address;
+  struct block_list *next;
+};
+# define ADD_BLOCK(list, addr)						      \
+  do {									      \
+    struct block_list *newp = (struct block_list *) malloc (sizeof (*newp));  \
+    /* If we cannot get a free block we cannot add the new element to	      \
+       the list.  */							      \
+    if (newp != NULL) {							      \
+      newp->address = (addr);						      \
+      newp->next = (list);						      \
+      (list) = newp;							      \
+    }									      \
+  } while (0)
+# define FREE_BLOCKS(list)						      \
+  do {									      \
+    while (list != NULL) {						      \
+      struct block_list *old = list;					      \
+      list = list->next;						      \
+      free (old);							      \
+    }									      \
+  } while (0)
+# undef alloca
+# define alloca(size) (malloc (size))
+#endif	/* have alloca */
 
 
 /* Names for the libintl functions are a problem.  They must not clash
@@ -175,13 +222,17 @@ DCGETTEXT (domainname, msgid, category)
      const char *msgid;
      int category;
 {
-  struct loaded_domain *domain;
+#ifndef HAVE_ALLOCA
+  struct block_list *block_list = NULL;
+#endif
+  struct loaded_l10nfile *domain;
   struct binding *binding;
   const char *categoryname;
   const char *categoryvalue;
   char *dirname, *xdomainname;
   char *single_locale;
   char *retval;
+  int saved_errno = errno;
 
   /* If no real MSGID is given return NULL.  */
   if (msgid == NULL)
@@ -223,30 +274,27 @@ DCGETTEXT (domainname, msgid, category)
       path_max += 2;		/* The getcwd docs say to do this.  */
 
       dirname = (char *) alloca (path_max + dirname_len);
+      ADD_BLOCK (block_list, dirname);
 
-      errno = 0;
+      __set_errno (0);
       while ((ret = getcwd (dirname, path_max)) == NULL && errno == ERANGE)
 	{
 	  path_max += PATH_INCR;
 	  dirname = (char *) alloca (path_max + dirname_len);
-	  errno = 0;
+	  ADD_BLOCK (block_list, dirname);
+	  __set_errno (0);
 	}
 
       if (ret == NULL)
-	/* We cannot get the current working directory.  Don't signal an
-	   error but simply return the default string.  */
-	return (char *) msgid;
+	{
+	  /* We cannot get the current working directory.  Don't signal an
+	     error but simply return the default string.  */
+	  FREE_BLOCKS (block_list);
+	  __set_errno (saved_errno);
+	  return (char *) msgid;
+	}
 
-      /* We don't want libintl.a to depend on any other library.  So
-	 we avoid the non-standard function stpcpy.  In GNU C Library
-	 this function is available, though.  Also allow the symbol
-	 HAVE_STPCPY to be defined.  */
-#if defined _LIBC || defined HAVE_STPCPY
       stpcpy (stpcpy (strchr (dirname, '\0'), "/"), binding->dirname);
-#else
-      strcat (dirname, "/");
-      strcat (dirname, binding->dirname);
-#endif
     }
 
   /* Now determine the symbolic name of CATEGORY and its value.  */
@@ -255,23 +303,15 @@ DCGETTEXT (domainname, msgid, category)
 
   xdomainname = (char *) alloca (strlen (categoryname)
 				 + strlen (domainname) + 5);
-  /* We don't want libintl.a to depend on any other library.  So we
-     avoid the non-standard function stpcpy.  In GNU C Library this
-     function is available, though.  Also allow the symbol HAVE_STPCPY
-     to be defined.  */
-#if defined _LIBC || defined HAVE_STPCPY
+  ADD_BLOCK (block_list, xdomainname);
+
   stpcpy (stpcpy (stpcpy (stpcpy (xdomainname, categoryname), "/"),
 		  domainname),
 	  ".mo");
-#else
-  strcpy (xdomainname, categoryname);
-  strcat (xdomainname, "/");
-  strcat (xdomainname, domainname);
-  strcat (xdomainname, ".mo");
-#endif
 
   /* Creating working area.  */
   single_locale = (char *) alloca (strlen (categoryvalue) + 1);
+  ADD_BLOCK (block_list, single_locale);
 
 
   /* Search for the given string.  This is a loop because we perhaps
@@ -285,7 +325,7 @@ DCGETTEXT (domainname, msgid, category)
 	{
 	  /* The whole contents of CATEGORYVALUE has been searched but
 	     no valid entry has been found.  We solve this situation
-	     by implicitely appending a "C" entry, i.e. no translation
+	     by implicitly appending a "C" entry, i.e. no translation
 	     will take place.  */
 	  single_locale[0] = 'C';
 	  single_locale[1] = '\0';
@@ -302,7 +342,11 @@ DCGETTEXT (domainname, msgid, category)
 	 domain.  Return the MSGID.  */
       if (strcmp (single_locale, "C") == 0
 	  || strcmp (single_locale, "POSIX") == 0)
-	return (char *) msgid;
+	{
+	  FREE_BLOCKS (block_list);
+	  __set_errno (saved_errno);
+	  return (char *) msgid;
+	}
 
 
       /* Find structure describing the message catalog matching the
@@ -327,7 +371,11 @@ DCGETTEXT (domainname, msgid, category)
 	    }
 
 	  if (retval != NULL)
-	    return retval;
+	    {
+	      FREE_BLOCKS (block_list);
+	      __set_errno (saved_errno);
+	      return retval;
+	    }
 	}
     }
   /* NOTREACHED */
@@ -340,17 +388,20 @@ weak_alias (__dcgettext, dcgettext);
 
 
 static char *
-find_msg (domain, msgid)
-     struct loaded_domain *domain;
+find_msg (domain_file, msgid)
+     struct loaded_l10nfile *domain_file;
      const char *msgid;
 {
   size_t top, act, bottom;
+  struct loaded_domain *domain;
 
-  if (domain->decided == 0)
-    _nl_load_domain (domain);
+  if (domain_file->decided == 0)
+    _nl_load_domain (domain_file);
 
-  if (domain->data == NULL)
+  if (domain_file->data == NULL)
     return NULL;
+
+  domain = (struct loaded_domain *) domain_file->data;
 
   /* Locate the MSGID and its translation.  */
   if (domain->hash_size > 2 && domain->hash_tab != NULL)
@@ -375,8 +426,8 @@ find_msg (domain, msgid)
 
       while (1)
 	{
-	  if (idx >= W (domain->must_swap, domain->hash_size) - incr)
-	    idx -= W (domain->must_swap, domain->hash_size) - incr;
+	  if (idx >= domain->hash_size - incr)
+	    idx -= domain->hash_size - incr;
 	  else
 	    idx += incr;
 
@@ -424,7 +475,8 @@ find_msg (domain, msgid)
 
 
 /* Return string representation of locale CATEGORY.  */
-static const char *category_to_name (category)
+static const char *
+category_to_name (category)
      int category;
 {
   const char *retval;
@@ -482,7 +534,8 @@ static const char *category_to_name (category)
 }
 
 /* Guess value of current locale from value of the environment variables.  */
-static const char *guess_category_value (category, categoryname)
+static const char *
+guess_category_value (category, categoryname)
      int category;
      const char *categoryname;
 {
@@ -520,3 +573,21 @@ static const char *guess_category_value (category, categoryname)
   return "C";
 #endif
 }
+
+/* @@ begin of epilog @@ */
+
+/* We don't want libintl.a to depend on any other library.  So we
+   avoid the non-standard function stpcpy.  In GNU C Library this
+   function is available, though.  Also allow the symbol HAVE_STPCPY
+   to be defined.  */
+#if !_LIBC && !HAVE_STPCPY
+static char *
+stpcpy (dest, src)
+     char *dest;
+     const char *src;
+{
+  while ((*dest++ = *src++) != '\0')
+    /* Do nothing. */ ;
+  return dest - 1;
+}
+#endif

@@ -1,19 +1,20 @@
-/* textdomain.c -- implementation of the textdomain(3) function
-   Copyright (C) 1995 Software Foundation, Inc.
+/* Implementation of the textdomain(3) function
+   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
+   Written by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software Foundation,
+   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -27,6 +28,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 # include <string.h>
 #else
 # include <strings.h>
+# ifndef memcpy
+#  define memcpy(Dst, Src, Num) bcopy (Src, Dst, Num)
+# endif
 #endif
 
 #ifdef _LIBC
@@ -50,6 +54,7 @@ extern const char *_nl_current_default_domain;
    prefix.  So we have to make a difference here.  */
 #ifdef _LIBC
 # define TEXTDOMAIN __textdomain
+# define strdup(str) __strdup (str)
 #else
 # define TEXTDOMAIN textdomain__
 #endif
@@ -78,11 +83,15 @@ TEXTDOMAIN (domainname)
       /* If the following malloc fails `_nl_current_default_domain'
 	 will be NULL.  This value will be returned and so signals we
 	 are out of core.  */
+#if defined _LIBC || defined HAVE_STRDUP
+      _nl_current_default_domain = strdup (domainname);
+#else
       size_t len = strlen (domainname) + 1;
       char *cp = (char *) malloc (len);
       if (cp != NULL)
 	memcpy (cp, domainname, len);
       _nl_current_default_domain = cp;
+#endif
     }
 
   if (old != _nl_default_default_domain)
