@@ -97,7 +97,7 @@ BOTEOF
 	esac
 
 	new_infiles=
-	for ping in "$2" ; do 
+	for ping in $2 ; do 
 		new_infiles="${new_infiles} ${infile_prefix}${srcdir}/${ping}"
 	done
 	new_infiles=`echo ${new_infiles} |sed -e 's,^ ,,'`
