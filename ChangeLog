@@ -1,3 +1,9 @@
+2004-10-06  James Henstridge  <james@jamesh.id.au>
+
+	* doc-build/omf.make (uninstall-local-omf): use $(DESTDIR) in
+	uninstall rule.  This is needed to allow packages to distcheck
+	with newer versions of automake.
+
 2004-09-14  James Henstridge  <james@jamesh.id.au>
 
 	* configure.in: bump version number to 2.8.0

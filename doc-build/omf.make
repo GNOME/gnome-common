@@ -45,15 +45,15 @@ install-data-hook-omf:
 	for file in $(omffile); do \
 		$(INSTALL_DATA) $$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
 	done
-	-scrollkeeper-update -p $(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
+	-scrollkeeper-update -p $(DESTDIR)$(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
 
 uninstall-local-omf:
 	-for file in $(srcdir)/*.omf; do \
 		basefile=`basename $$file`; \
-		rm -f $(omf_dest_dir)/$$basefile; \
+		rm -f $(DESTDIR)$(omf_dest_dir)/$$basefile; \
 	done
-	-rmdir $(omf_dest_dir)
-	-scrollkeeper-update -p $(scrollkeeper_localstate_dir)
+	-rmdir $(DESTDIR)$(omf_dest_dir)
+	-scrollkeeper-update -p $(DESTDIR)$(scrollkeeper_localstate_dir)
 
 clean-local-omf:
 	-for file in $(omffile); do \
