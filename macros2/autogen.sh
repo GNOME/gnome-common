@@ -17,6 +17,7 @@ REQUIRED_GTK_DOC_VERSION=${REQUIRED_GTK_DOC_VERSION:-1.0}
 
 # a list of required m4 macros.  Package can set an initial value
 REQUIRED_M4MACROS=${REQUIRED_M4MACROS:-}
+FORBIDDEN_M4MACROS=${FORBIDDEN_M4MACROS:-}
 
 # if GNOME2_DIR set, modify ACLOCAL_FLAGS ...
 if [ -n "$GNOME2_DIR" ]; then
@@ -118,6 +119,13 @@ require_m4macro() {
     esac
 }
 
+forbid_m4macro() {
+    case "$FORBIDDEN_M4MACROS" in
+	$1\ * | *\ $1\ * | *\ $1) ;;
+	*) FORBIDDEN_M4MACROS="$FORBIDDEN_M4MACROS $1" ;;
+    esac
+}
+
 # Usage:
 #     check_m4macros
 # Checks that all the requested macro files are in the aclocal macro path
@@ -125,9 +133,6 @@ require_m4macro() {
 check_m4macros() {
     local macrodirs status macro dir macrofound
 
-    if [ -z "$REQUIRED_M4MACROS" ]; then
-	return 0
-    fi
     # construct list of macro directories
     macrodirs="`$ACLOCAL --print-ac-dir`"
     set - $ACLOCAL_FLAGS
@@ -140,32 +145,54 @@ check_m4macros() {
     done
 
     status=0
-    printbold "Checking for required M4 macros..."
-    # check that each macro file is in one of the macro dirs
-    for macro in $REQUIRED_M4MACROS; do
-	macrofound=false
-	for dir in $macrodirs; do
-	    if [ -f "$dir/$macro" ]; then
-		macrofound=true
-		break
+    if [ -n "$REQUIRED_M4MACROS" ]; then
+	printbold "Checking for required M4 macros..."
+	# check that each macro file is in one of the macro dirs
+	for macro in $REQUIRED_M4MACROS; do
+	    macrofound=false
+	    for dir in $macrodirs; do
+		if [ -f "$dir/$macro" ]; then
+		    macrofound=true
+		    break
+		fi
+	    done
+	    if $macrofound; then
+		:
+	    else
+		printerr "  $macro not found"
+		status=1
 	    fi
 	done
-	if $macrofound; then
-	    :
-	else
-	    printerr "  $macro not found"
-	    status=1
-	fi
-    done
+    fi
+    if [ -n "$FORBIDDEN_M4MACROS" ]; then
+	printbold "Checking for forbidden M4 macros..."
+	# check that each macro file is in one of the macro dirs
+	for macro in $FORBIDDEN_M4MACROS; do
+	    macrofound=false
+	    for dir in $macrodirs; do
+		if [ -f "$dir/$macro" ]; then
+		    macrofound=true
+		    break
+		fi
+	    done
+	    if $macrofound; then
+		printerr "  $macro found (should be cleared from macros dir)"
+		status=1
+	    fi
+	done
+    fi
     if [ "$status" != 0 ]; then
 	printerr "***Error***: some autoconf macros required to build $PKG_NAME"
-	printerr "  were not found in your aclocal path.  Perhaps you need to"
-	printerr "  adjust your ACLOCAL_PATH?"
-        printerr "    $source"
+	printerr "  were not found in your aclocal path, or some forbidden"
+	printerr "  macros were found.  Perhaps you need to adjust your"
+	printerr "  ACLOCAL_PATH?"
 	printerr
     fi
     return $status
 }
+
+# try to catch the case where the macros2/ directory hasn't been cleared out.
+forbid_m4macro gnome-cxx-check.m4
 
 want_libtool=false
 want_gettext=false
@@ -268,7 +295,7 @@ for configure_ac in $configure_files; do
     if test -f $dirname/NO-AUTO-GEN; then
 	echo skipping $dirname -- flagged as no auto-gen
     else
-	printbold "Processing $dirname"
+	printbold "Processing $configure_ac"
 
 	aclocalinclude="$ACLOCAL_FLAGS"
 	printbold "Running $ACLOCAL..."

@@ -1,3 +1,9 @@
+2003-02-24  James Henstridge  <james@daa.com.au>
+
+	* autogen.sh (forbid_m4macro): add function to forbid m4 macros.
+	Forbid gnome-cxx-check.m4, to try and catch setups where stale
+	macros are left on the system.
+
 2003-02-21  James Henstridge  <james@daa.com.au>
 
 	* autogen.sh (version_check): if $variable is set, then assume
