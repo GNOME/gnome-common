@@ -1,3 +1,8 @@
+2003-11-03    <clahey@ximian.com>
+
+	* gnome-common.m4: Removed ENABLE_WERROR and changed name to
+	GNOME_MAINTAINER_MODE_DEFINES.
+
 2003-11-01  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Make version checking work, as pointed out by
