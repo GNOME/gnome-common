@@ -1,3 +1,8 @@
+2005-02-18  Stepan Kasal  <kasal@ucw.cz>
+
+	* macros/autogen.sh: Fix the URL for Automake; don't recommend 1.3
+	  when we need 1.4.
+
 2005-01-03  James Henstridge  <james@jamesh.id.au>
 
 	* macros2/gnome-common.m4 (GNOME_COMMON_INIT): add some code to
