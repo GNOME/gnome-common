@@ -1,3 +1,8 @@
+2004-11-24  Mariano Suárez-Alvarez <mariano@gnome.org>
+
+	* gnome-autogen.sh: grep wants basic regexps, not extended ones: fix the
+	regular expression for INTLTOOL.
+
 2004-11-24  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-autogen.sh: Add support for IT_PROG_INTLTOOL which
