@@ -343,8 +343,6 @@ AC_ARG_WITH(gnome-prefix,[  --with-gnome-prefix=PFX   Prefix where GNOME is inst
             gnome_config_prefix="$withval", gnome_config_prefix="")
 AC_ARG_WITH(gnome-exec-prefix,[  --with-gnome-exec-prefix=PFX Exec prefix where GNOME is installed (optional)],
             gnome_config_exec_prefix="$withval", gnome_config_exec_prefix="")
-AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and run a test GNOME program],
-		    , enable_gnometest=yes)
 
   if test x$gnome_config_exec_prefix != x ; then
      gnome_config_args="$gnome_config_args --exec-prefix=$gnome_config_exec_prefix"
@@ -470,6 +468,4 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
   if test -n "$4"; then
 	AC_MSG_RESULT([])
   fi
-
-  rm -f conf.gnometest
 ])
