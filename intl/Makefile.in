@@ -192,6 +192,13 @@ dist distdir: Makefile $(DISTFILES)
 	    || cp -p $(srcdir)/$$file $(distdir); \
 	done
 
+distcopy: Makefile $(DISTFILES)
+	  additional="$(DISTFILES.normal)";
+	for file in $(DISTFILES.common) $$additional; do \
+	  ln $(srcdir)/$$file ../$(distdir) 2> /dev/null \
+	    || cp -p $(srcdir)/$$file ../$(distdir); \
+	done
+
 dist-libc:
 	tar zcvf intl-glibc.tar.gz $(COMSRCS) $(COMHDRS) libintl.h.glibc
 
