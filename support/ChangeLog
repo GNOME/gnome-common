@@ -2,6 +2,8 @@
 
 	* Makefile.am (gnomesupport.h): Build with `gnomesupport.awk'.
 	(CROSS_COMPILING): Remove.
+	(EXTRA_DIST): Add `gnomesupport.awk'.
+
 	* gnomesupport.awk: New file, to replace `gnomesupport-h.c'.
 	* gnomesupport-h.c: Removed.  Doesn't work well in cross-compiles.
 

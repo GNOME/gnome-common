@@ -29,4 +29,4 @@ gnomesupport.h: gnomesupport.awk $(top_builddir)/config.h
 
 endif
 
-EXTRA_DIST = argp-test.c argp.texi
+EXTRA_DIST = argp-test.c argp.texi gnomesupport.awk
