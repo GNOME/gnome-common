@@ -6,3 +6,4 @@ Makefile
 .libs
 gnomesupport-h
 gnomesupport.h
+gnome-support-2.0.pc
