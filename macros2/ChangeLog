@@ -1,3 +1,8 @@
+2001-06-29  Laszlo Peter <laca@ireland.sun.com>
+
+	* gnome-pkgconfig.m4 (GNOME_PKGCONFIG_CHECK_VERSION): Fix the regexp
+	to process all 6 version numbers.
+
 2001-06-22  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-gettext.m4: N'sync with the gnome1 version, bye bye buggies.
