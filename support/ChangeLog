@@ -1,3 +1,9 @@
+1998-08-16  Martin Baulig  <martin@home-of-linux.org>
+
+	* Makefile.am (EXTRA_DIST): Added all source and header files that
+	are in CVS to make sure everything is included in the distribution
+	no matter which files are used on the build system.
+
 1998-08-15  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (libgnomesupport_la_SOURCES): List `gnomesupport.h'

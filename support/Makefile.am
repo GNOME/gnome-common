@@ -30,4 +30,12 @@ gnomesupport.h: gnomesupport.awk $(top_builddir)/config.h
 
 endif
 
-EXTRA_DIST = argp-test.c argp.texi gnomesupport.awk
+EXTRA_DIST = argp-test.c argp.texi gnomesupport.awk README-gnome \
+	argp-ba.c argp-eexst.c argp-fmtstream.c argp-fmtstream.h \
+	argp-fs-xinl.c argp-help.c argp-namefrob.h argp-parse.c \
+	argp-pv.c argp-pvh.c argp-test.c argp-xinl.c argp.h \
+	easy-vsnprintf.c getopt.c getopt.h getopt1.c gnome-argp.c \
+	gnome-argp.h long-options.c long-options.h memmove.c mkstemp.c \
+	scandir.c strcasecmp.c strerror.c strndup.c strnlen.c strtod.c \
+	strtok_r.c strtol.c strtoul.c vasprintf.c vsnprintf.c error.h \
+	gnomesupport-fake.h error.c
