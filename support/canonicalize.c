@@ -26,6 +26,9 @@
 #include <sys/stat.h>
 #include <errno.h>
 
+#include <libc-symbols.h>
+#include <argp-namefrob.h>
+
 /* Return the canonical absolute name of file NAME.  A canonical name
    does not contain any `.', `..' components nor any repeated path
    separators ('/') or symlinks.  All path components must exist.  If
