@@ -1,3 +1,8 @@
+2003-12-08  Rodney Dawes  <dobey@free.fr>
+
+	* autogen.sh: Update automake checks to check incremental
+	versions in the correct order, Fixes #128691
+
 2003-11-19  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Replace use of -or in a find command with -o.
