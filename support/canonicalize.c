@@ -39,6 +39,12 @@
    that cannot be resolved.  If the path can be resolved, RESOLVED
    holds the same value as the value returned.  */
 
+#ifdef _LIBC
+#define set_errno(e) __set_errno(e)
+#else
+#define set_errno(e) errno = (e)
+#endif
+
 static char *
 canonicalize (const char *name, char *resolved)
 {
@@ -100,7 +106,7 @@ canonicalize (const char *name, char *resolved)
 	    {
 	      if (resolved)
 		{
-		  __set_errno (ENAMETOOLONG);
+		  set_errno (ENAMETOOLONG);
 		  goto error;
 		}
 	      new_size = rpath_limit - rpath;
@@ -127,7 +133,7 @@ canonicalize (const char *name, char *resolved)
 
 	      if (++num_links > MAXSYMLINKS)
 		{
-		  __set_errno (ELOOP);
+		  set_errno (ELOOP);
 		  goto error;
 		}
 
@@ -141,7 +147,7 @@ canonicalize (const char *name, char *resolved)
 
 	      if ((long int) (n + strlen (end)) >= path_max)
 		{
-		  __set_errno (ENAMETOOLONG);
+		  set_errno (ENAMETOOLONG);
 		  goto error;
 		}
 
@@ -180,7 +186,7 @@ realpath (const char *name, char *resolved)
 {
   if (resolved == NULL)
     {
-      __set_errno (EINVAL);
+      set_errno (EINVAL);
       return NULL;
     }
 	
