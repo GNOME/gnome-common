@@ -1,3 +1,13 @@
+1999-03-27  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (supportexecincludedir): Rename from
+	supportincludedir so that `gnomesupport.h' can be installed with
+	`make install-exec'.
+	(supportinclude_HEADERS): Remove.  Don't install popt-gnome.h
+	twice.
+	(error.o): Change `error.c: gnomesupport.h' dependency to
+	`error.o: gnomesupport.h' to reflect actual dependency.
+
 1999-02-19  Martin Baulig  <martin@home-of-linux.org>
 
 	* canonicalize.c: Include <gnome-argp.h> instead of the removed
