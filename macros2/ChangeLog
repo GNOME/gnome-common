@@ -1,3 +1,9 @@
+2003-07-28  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* compiler-flags.m4: Default setting in the
+	GNOME_COMPILE_WARNINGS macro is now "yes". This fixes bug
+	#118479 (another good bit of debugging from Steve Chaplin).
+
 2003-07-20  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* compiler-flags.m4: Remove some redundant options as suggested

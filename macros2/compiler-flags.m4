@@ -7,7 +7,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl ******************************
 
     if test -z "$1" ; then
-	default_compile_warnings=no
+	default_compile_warnings=yes
     else
 	default_compile_warnings="$1"
     fi
