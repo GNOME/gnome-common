@@ -1,5 +1,5 @@
 /* Hierarchial argument parsing help output
-   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
+   Copyright (C) 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Written by Miles Bader <miles@gnu.ai.mit.edu>.
 
@@ -45,6 +45,10 @@
 #include "argp.h"
 #include "argp-fmtstream.h"
 #include "argp-namefrob.h"
+
+/* This is for Gnome only.  */
+#include "gnome-argp.h"
+
 
 /* User-selectable (using an environment variable) formatting parameters.
 

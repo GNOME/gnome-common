@@ -1,0 +1,15 @@
+Note to Gnome hackers:
+
+Some files in this directory are taken verbatim from glibc.
+Do not modify them.  If you find a bug, report it as you would any
+glibc bug.
+
+When updating the glibc files in the master Gnome repository, be sure
+to use "cvs import".  That will ensure that any local changes are
+merged in.
+
+Yes, there are some minor local changes.  Hopefully these will be
+sorted out with the glibc maintainer before long.
+
+- Tom Tromey <tromey@cygnus.com>
+  Wed, Mar 4 1998
