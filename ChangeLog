@@ -1,3 +1,11 @@
+2005-01-03  James Henstridge  <james@jamesh.id.au>
+
+	* macros2/gnome-common.m4 (GNOME_COMMON_INIT): add some code to
+	add the directory given to AC_CONFIG_MACRO_DIR to ACLOCAL_FLAGS.
+
+	* doc-build/xmldocs.make (clean-local-doc): add rule to clean up
+	copied entities if srcdir!=builddir.
+
 2004-10-06  James Henstridge  <james@jamesh.id.au>
 
 	* doc-build/omf.make (uninstall-local-omf): use $(DESTDIR) in
