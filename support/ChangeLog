@@ -1,3 +1,8 @@
+1998-08-02  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* error.c (program_name): Clean up #ifdef logic some more.
+	(HAVE_STRERROR_R): Step on implementation namespace only if _LIBC.
+
 1998-07-30  Martin Baulig  <martin@home-of-linux.org>
 
 	* error.c: Making weak alias `__error' and `__error_at_line'

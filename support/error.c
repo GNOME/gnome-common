@@ -67,28 +67,31 @@ void (*error_print_progname) (
 /* This variable is incremented each time `error' is called.  */
 unsigned int error_message_count;
 
-#if defined _LIBC || HAVE_PROGRAM_INVOCATION_NAME
+#if HAVE_PROGRAM_INVOCATION_NAME || _LIBC
 /* In the GNU C library, there is a predefined variable for this.  */
 
 # define program_name program_invocation_name
 # include <errno.h>
 
-#if defined _LIBC
-/* In GNU libc we want do not want to use the common name `error' directly.
-   Instead make it a weak alias.  */
-# define error __error
-# define error_at_line __error_at_line
-#endif /* _LIBC */
-
-#else /* not _LIBC */
+#else
 
 /* The calling program should define program_name and set it to the
    name of the executing program.  */
 extern char *program_name;
 
-# ifdef HAVE_STRERROR_R
-#  define __strerror_r strerror_r
-# else
+#endif
+
+#ifdef _LIBC
+/* In GNU libc we want do not want to use the common name `error' directly.
+   Instead make it a weak alias.  */
+# define error __error
+# define error_at_line __error_at_line
+
+# define strerror_r __strerror_r
+
+#else /* not _LIBC */
+
+# if ! HAVE_STRERROR_R
 #  if HAVE_STRERROR
 #   ifndef strerror		/* On some systems, strerror is a macro */
 char *strerror ();
@@ -107,7 +110,7 @@ private_strerror (errnum)
 }
 #   define strerror private_strerror
 #  endif /* HAVE_STRERROR */
-# endif	/* HAVE_STRERROR_R */
+# endif	/* ! HAVE_STRERROR_R */
 #endif	/* not _LIBC */
 
 /* Print the program name and error message MESSAGE, which is a printf-style
@@ -156,7 +159,7 @@ error (status, errnum, message, va_alist)
     {
 #if defined HAVE_STRERROR_R || defined _LIBC
       char errbuf[1024];
-      fprintf (stderr, ": %s", __strerror_r (errnum, errbuf, sizeof errbuf));
+      fprintf (stderr, ": %s", strerror_r (errnum, errbuf, sizeof errbuf));
 #else
       fprintf (stderr, ": %s", strerror (errnum));
 #endif
@@ -231,7 +234,7 @@ error_at_line (status, errnum, file_name, line_number, message, va_alist)
     {
 #if defined HAVE_STRERROR_R || defined _LIBC
       char errbuf[1024];
-      fprintf (stderr, ": %s", __strerror_r (errnum, errbuf, sizeof errbuf));
+      fprintf (stderr, ": %s", strerror_r (errnum, errbuf, sizeof errbuf));
 #else
       fprintf (stderr, ": %s", strerror (errnum));
 #endif
