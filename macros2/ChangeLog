@@ -1,3 +1,7 @@
+Mon Aug 12 23:49:41 2002  HideToshi Tajima  <hidetoshi.tajima@sun.com>
+
+	* autogen.sh : use portable -o instead of GNU-ish -or for find test
+
 2002-08-10  Miles Lane  <miles_lane@yahoo.com>
 
 	* autogen.sh: fix the "find" test so that the presence of
