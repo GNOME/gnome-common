@@ -1,6 +1,8 @@
 2000-11-21  Martin Baulig  <martin@home-of-linux.org>
 
-	* Makefile.am (EXTRA_DIST): Put gnome-autogen.sh here.
+	* gnome-autogen.sh.in: New file. Autogen gnome-autogen.sh
+	from it; added GNOME_COMMON_DATA_DIR and make it actually
+	work.
 
 2000-11-20  Martin Baulig  <baulig@suse.de>
 
