@@ -1,3 +1,8 @@
+1998-08-24  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnomesupport.awk: Emit declarations for `setreuid', `setregid'
+	and `getpagesize' if required (GCC_NEED_DECLARATIONS).
+
 1998-08-18  Martin Baulig  <martin@home-of-linux.org>
 
 	* Makefile.am: Added explicit dependency `error.c: gnomesupport.h'.
