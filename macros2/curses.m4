@@ -130,7 +130,7 @@ AC_DEFUN([AC_CHECK_CURSES],[
 	  [  --with-ncurses[=dir]  Compile with ncurses/locate base dir],
 	  if test x$withval = xno ; then
 		search_ncurses=false
-	  elif test x$withval = xyes ; then
+	  elif test x$withval != xyes ; then
 		CURSES_LIBS="$LIBS -L$withval/lib -lncurses"
 		CURSES_INCLUDEDIR="-I$withval/include"
 		search_ncurses=false
