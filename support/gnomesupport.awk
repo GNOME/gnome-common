@@ -72,7 +72,7 @@ END {
       print "             int (*/*cmp*/) (const void *, const void *));";
       print "";
       print "/* Function to compare two `struct dirent's alphabetically.  */";
-      print "int alphasort PARAMS((const void */*a*/, const void */*b*/));";
+      print "int alphasort (const void */*a*/, const void */*b*/);";
     }
 
   if (!have_strerror)
@@ -138,7 +138,7 @@ END {
     }
   
   print ""
-  print "#ifdef /* __cplusplus */";
+  print "#ifdef __cplusplus";
   print "}";
   print "#endif /* __cplusplus */";
   print "";
