@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in.
 
-supportexecincludedir = $(pkglibdir)/include
+supportexecincludedir = $(includedir)/gnome/$(GNOME_INTERFACE_VERSION)
 
 INCLUDES = -D_GNU_SOURCE
 
