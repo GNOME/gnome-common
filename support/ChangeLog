@@ -1,3 +1,9 @@
+1998-03-09  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* easy-vsnprintf.c: New file.  Provides (v)snprintf as simple
+	wrappers to `__vsnprintf'.  
+	* vsnprintf.c: New file.  Empty for now.
+
 Sun Mar  8 17:13:33 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* Makefile.am: Rewrote.  Library now named libgnomesupport, now
