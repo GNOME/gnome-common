@@ -1,3 +1,10 @@
+2003-12-13  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Change the use of head to be 'head -n -1', since
+	the GNU version of head appears to have changed behaviour
+	between version 5.0 and 5.0.9 somewhere. This should be portable
+	across all versions now. Fixed bug #128867.
+
 2003-12-08  Rodney Dawes  <dobey@free.fr>
 
 	* autogen.sh: Update automake checks to check incremental
