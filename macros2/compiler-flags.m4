@@ -13,7 +13,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     fi
 
     AC_ARG_ENABLE(compile-warnings, 
-    [  --enable-compile-warnings=[no/minimum/yes/maximum/error]	Turn on compiler warnings.], [enable_compile_warnings="$default_compile_warnings"], enable_compile_warnings=yes)
+    [  --enable-compile-warnings=[no/minimum/yes/maximum/error]	Turn on compiler warnings.],, [enable_compile_warnings="$default_compile_warnings"])
 
     warnCFLAGS=
     if test "x$GCC" != xyes; then

@@ -1,3 +1,9 @@
+2003-02-27  Mark McLoughlin  <mark@skynet.ie>
+
+	* compiler-flags.m4: fix mixed up order of arguments to
+	AC_ARG_ENABLE that made --enable-compile-warnings not work
+	as expected.
+
 2003-02-24  James Henstridge  <james@daa.com.au>
 
 	* autogen.sh (forbid_m4macro): add function to forbid m4 macros.
