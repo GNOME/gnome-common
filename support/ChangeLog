@@ -1,3 +1,7 @@
+1998-08-05  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (noinst_HEADERS): Add `gnomesupport-fake.h'.
+
 1998-08-02  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* error.c (program_name): Clean up #ifdef logic some more.

@@ -15,7 +15,7 @@ supportinclude_DATA = gnomesupport.h
 
 # These are internal headers: they are used only when compiling and
 # should not be installed
-noinst_HEADERS = argp-fmtstream.h argp-namefrob.h
+noinst_HEADERS = argp-fmtstream.h argp-namefrob.h gnomesupport-fake.h
 
 libgnomesupport_la_SOURCES = long-options.c gnome-argp.c
 libgnomesupport_la_LIBADD  = @LTLIBOBJS@
