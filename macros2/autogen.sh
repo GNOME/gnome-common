@@ -3,10 +3,12 @@
 
 DIE=0
 
-if [ -n "$GNOME2_PATH" ]; then
-	ACLOCAL_FLAGS="-I $GNOME2_PATH/share/aclocal $ACLOCAL_FLAGS"
-	PATH="$GNOME2_PATH/bin:$PATH"
+if [ -n "$GNOME2_DIR" ]; then
+	ACLOCAL_FLAGS="-I $GNOME2_DIR/share/aclocal $ACLOCAL_FLAGS"
+	LD_LIBRARY_PATH="$GNOME2_DIR/lib:$LD_LIBRARY_PATH"
+	PATH="$GNOME2_DIR/bin:$PATH"
 	export PATH
+	export LD_LIBRARY_PATH
 fi
 
 (autoconf --version) < /dev/null > /dev/null 2>&1 || {
