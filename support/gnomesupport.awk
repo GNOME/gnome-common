@@ -8,10 +8,6 @@ BEGIN {
   print "#ifndef GNOMESUPPORT_H";
   print "#define GNOMESUPPORT_H";
   print "";
-  print "#ifdef __cplusplus";
-  print "extern \"C\" {";
-  print "#endif /* __cplusplus */";
-  print "";
   print "#include <stddef.h>		/* for size_t */";
 }
 
@@ -20,12 +16,10 @@ BEGIN {
 
 END {
   if (!def["HAVE_VASPRINTF"] || !def["HAVE_VSNPRINTF"]) {
-    print "";
     print "#include <stdarg.h>";
   }
 
   if (!def["HAVE_SCANDIR"] || def["NEED_DECLARATION_SCANDIR"]) {
-    print "";
     print "#include <sys/types.h>";
 
     if (def["HAVE_DIRENT_H"]) {
@@ -43,6 +37,11 @@ END {
 	print "#include <ndir.h>";
     }
   }
+
+  print "";
+  print "#ifdef __cplusplus";
+  print "extern \"C\" {";
+  print "#endif /* __cplusplus */";
 
   if (def["NEED_DECLARATION_GETHOSTNAME"]) {
     print "";

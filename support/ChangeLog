@@ -1,3 +1,10 @@
+1999-05-27  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnomesupport.awk: Put c++ guards after #includes.
+
+	* gnomesupport-fake.h: Remove dependence on `gnome-argp.h'.  Move
+	relevant declarations here.
+
 1999-05-12  Martin Baulig  <martin@home-of-linux.org>
 
 	* canonicalize.c: Use `set_errno' instead of `__set_errno' and
