@@ -1,3 +1,7 @@
+2003-05-21  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Ignore {arch} subdirectories. Fixes bug #113327.
+
 2003-02-14  Kalpesh Shah <kalpesh.shah@sun.com>
 
 	* check-utmp.m4: initialize UTMP structure properly. 

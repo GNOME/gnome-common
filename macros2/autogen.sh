@@ -117,7 +117,7 @@ xlc )
   am_opt=--include-deps;;
 esac
 
-for coin in `find $srcdir -name configure.in -print -o -name configure.ac -print`
+for coin in `find $srcdir -name '{arch}' -prune -o -name configure.in -print -o -name configure.ac -print`
 do 
   dr=`dirname $coin`
   bn=`basename $coin`
