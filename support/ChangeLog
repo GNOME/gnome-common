@@ -1,3 +1,9 @@
+1998-03-11  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* vsnprintf.c: Actually fill it in.  It is from
+	<URL:http://theos.com/~deraadt/snprintf.c>, with one small fix to
+	actually make it compile. 
+
 1998-03-09  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* easy-vsnprintf.c: New file.  Provides (v)snprintf as simple
