@@ -1,0 +1,5 @@
+2000-05-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-autogen.sh: New file. Moved here from
+	the `macros' directory.
+

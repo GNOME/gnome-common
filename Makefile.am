@@ -1,4 +1,4 @@
-SUBDIRS = macros macros2
+SUBDIRS = bin macros macros2 doc
 
 EXTRA_DIST = gnome-common.spec
 

@@ -17,4 +17,6 @@ AM_PROG_LIBTOOL
 AC_OUTPUT([
 Makefile
 macros/Makefile
-macros2/Makefile])
+macros2/Makefile
+bin/Makefile
+doc/Makefile])
