@@ -1,3 +1,54 @@
+2000-06-23  Stanislav Brabec  <utx@penguin.cz>
+
+	* gnome-pilot.m4: Use 'PISOCK_INCLUDEDIR' in pisock version check.
+
+2000-06-17  Dan Winship  <danw@helixcode.com>
+
+	* autogen.sh: exit immediately if aclocal, autoheader, automake,
+	or autoconf fails, rather than continuing on with broken state.
+	(In the aclocal case, print a hopefully-useful explanatory
+	message.)
+
+2000-06-13  Martin Baulig  <baulig@suse.de>
+
+	* gnome-bonobo-check.am (AM_BONOBO_USES_OAF): New macro.
+	Checks whether Bonobo uses OAF and defines `BONOBO_USES_OAF'
+	if appropriate. Also provides `BONOBO_USES_OAF' automake
+	conditional.
+
+2000-06-13  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am (EXTRA_DIST): Added `gnome-gettext.m4'.
+	(gnome_aclocal_DATA): Added `gnome-gettext.m4'.
+
+2000-05-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-autogen.sh: Moved to the `bin/' directory.
+
+2000-05-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-autogen.sh: If `USE_GNOME_2_MACROS' is set, use the
+	GNOME 2.0 macros from the `macros2' directory.
+
+2000-05-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-common.m4, Makefile.am: Install macros to
+	`$(datadir)/aclocal/gnome-macros' when INSIDE_GNOME_COMMON.
+
+	* gnome-autogen.sh: New file. When using gnome-common instead
+	of the macros/ directory, use this in your autogen.sh.
+
+2000-05-15  Russell Steinthal  <rms39@columbia.edu>
+
+	* gnome-pilot.m4 (PILOT_LIBS): An attempt to fix the gnome-pilot
+	check on Solaris (`$GNOME_CONFIG ...` returns more than one word,
+	so we need quotes around it to keep test from bombing out)
+
+2000-05-01  Dan Winship  <danw@helixcode.com>
+
+	* gnome-pilot.m4 (PILOT_LIBS): "But that trick NEVER works!"
+	"This time for sure!"
+
 Sun Apr 23 12:15:14 2000  George Lebl <jirka@5z.com>
 
 	* gnome.m4: add an extra lib of docklets.  These checks are
