@@ -37,7 +37,7 @@ int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr) {
     char quote = '\0';
     int argvAlloced = POPT_ARGV_ARRAY_GROW_DELTA;
     char ** argv = malloc(sizeof(*argv) * argvAlloced);
-    char ** argv2;
+    const char ** argv2;
     int argc = 0;
     int i, buflen;
 
@@ -93,10 +93,11 @@ int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr) {
 	argc++, buf++;
     }
 
-    dst = malloc(argc * sizeof(*argv) + (buf - bufStart));
+    dst = malloc((argc + 1) * sizeof(*argv) + (buf - bufStart));
     argv2 = (void *) dst;
-    dst += argc * sizeof(*argv);
+    dst += (argc + 1) * sizeof(*argv);
     memcpy(argv2, argv, argc * sizeof(*argv));
+    argv2[argc] = NULL;
     memcpy(dst, bufStart, buf - bufStart);
 
     for (i = 0; i < argc; i++) {
@@ -105,7 +106,7 @@ int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr) {
 
     free(argv);
 
-    *argvPtr = argv2;
+    *argvPtr = (char **)argv2;	/* XXX don't change the API */
     *argcPtr = argc;
 
     return 0;

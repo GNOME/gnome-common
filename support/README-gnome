@@ -6,7 +6,6 @@ ewt@redhat.com, the popt package maintainer.
 - jgarzik@pobox.com 12/24/1998
 
 
-
 Some files in this directory are taken verbatim from glibc.
 Do not modify them.  If you find a bug, report it as you would any
 glibc bug.
