@@ -13,10 +13,12 @@ supportexecinclude_DATA = gnomesupport.h
 # These are internal headers: they are used only when compiling and
 # should not be installed
 noinst_HEADERS = gnomesupport-fake.h \
-		 findme.h poptint.h
+		 findme.h \
+		 popt-gnome.h \
+		 poptint.h
 
 # Hmm... should we move `error.h' here.
-include_HEADERS = popt-gnome.h
+#include_HEADERS = popt-gnome.h
 
 popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
 

@@ -1,3 +1,7 @@
+2002-01-14  Abel Cheung  <maddog@linux.org.hk>
+
+	* Makefile.am: Don't install popt* headers.
+
 1999-05-27  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnomesupport.awk: Put c++ guards after #includes.
