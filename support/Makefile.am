@@ -6,7 +6,7 @@ INCLUDES = -D_GNU_SOURCE
 
 lib_LTLIBRARIES = libgnomesupport.la
 
-supportinclude_HEADERS = popt.h
+supportinclude_HEADERS = popt-gnome.h
 # gnome-argp.h getopt.h long-options.h argp.h error.h
 
 # it is in _DATA since we don't want `gnomesupport.h' to be part of
@@ -22,10 +22,9 @@ noinst_HEADERS = gnomesupport-fake.h \
 include_HEADERS = popt-gnome.h
 
 popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
-#other_sources = long-options.c gnome-argp.c
 
-libgnomesupport_la_SOURCES = gnomesupport.h $(popt_sources) $(other_sources)
-libgnomesupport_la_LIBADD  = @LTLIBOBJS@
+libgnomesupport_la_SOURCES = gnomesupport.h $(popt_sources)
+#libgnomesupport_la_LIBADD  = @LTLIBOBJS@
 libgnomesupport_la_LDFLAGS = -version-info 0:0:0
 
 BUILT_SOURCES = gnomesupport.h
