@@ -102,7 +102,7 @@ AC_DEFUN([GNOME_PILOT_HOOK],[
 		if test x$GNOME_CONFIG = xno; then
 			gnome_cv_pilot_found=no
 		else
-			if $GNOME_CONFIG gpilot 2> /dev/null; then
+			if $GNOME_CONFIG --modversion gpilot 2> /dev/null; then
 				gnome_cv_pilot_found=yes
 			else
 				gnome_cv_pilot_found=no
@@ -117,7 +117,7 @@ AC_DEFUN([GNOME_PILOT_HOOK],[
 		$2
 	else
 		if test x$3 = xfailure; then
-			AC_MSG_ERROR(Gnome-pilot not installed or installation problem)
+			AC_MSG_ERROR(gnome-pilot development package not installed or installation problem)
 		fi
 	fi
 ])
