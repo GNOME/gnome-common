@@ -294,8 +294,8 @@ if $want_gtk_doc; then
 fi
 
 if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
-    version_check gnome-common DOC_COMMON gnome-doc-common" \
-        $REQUIRED_DOC_COMMON_VERSION "" || DIE=1
+    version_check gnome-common DOC_COMMON gnome-doc-common \
+        $REQUIRED_DOC_COMMON_VERSION " " || DIE=1
 fi
 
 check_m4macros || DIE=1

@@ -1,3 +1,7 @@
+2003-06-20  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Fix some strangeness in the gnome-doc-common test.
+
 2003-06-19  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* autogen.sh: Inserted missing "cd $dirname" to effectively
