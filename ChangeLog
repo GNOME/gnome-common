@@ -1,3 +1,7 @@
+2004-02-27  Sven Herzberg  <herzi@abi02.de>
+
+	* macros2/autogen.sh: fix #135557
+
 2004-02-17  Mark McLoughlin  <mark@skynet.ie>
 
 	* doc-build/xmldocs.make: fix one last occurrence of

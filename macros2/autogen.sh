@@ -384,7 +384,7 @@ for configure_ac in $configure_files; do
 	printbold "Running $AUTOCONF..."
 	$AUTOCONF || exit 1
 
-	cd $topdir
+	cd "$topdir"
     fi
 done
 
