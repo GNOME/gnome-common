@@ -24,7 +24,7 @@ END {
     print "#include <stdarg.h>";
   }
 
-  if (!def["HAVE_SCANDIR"]) {
+  if (!def["HAVE_SCANDIR"] || def["NEED_DECLARATION_SCANDIR"]) {
     print "";
     print "#include <sys/types.h>";
 
