@@ -1,3 +1,8 @@
+2002-05-10  Chema Celorio  <chema@celorio.com>
+
+	* compiler-flags.m4: fix GNOME_COMPILE_WARNINGS to work when a parameter is
+	passed. The arguments to AC_ARG_ENABLE where swapped
+
 2002-04-01  jacob berkman  <jacob@ximian.com>
 
 	* gnome-x-checks.m4 (GNOME2_X_CHECKS): kill bogus clearing of
