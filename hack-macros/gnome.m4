@@ -453,7 +453,7 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
 	  AC_SUBST(GNORBA_CFLAGS)
 	  AC_SUBST(GNORBA_LIBS)
 	elif test -n "$module"; then
-	  if $GNOME_CONFIG $gnome_config_args --cflags $module 2>/dev/null; then
+	  if $GNOME_CONFIG $gnome_config_args --cflags $module >/dev/null 2>&1; then
 		tmp_bsnom=`echo $module | tr a-z A-Z`
 		eval $tmp_bsnom'_CFLAGS'=\"`$GNOME_CONFIG $gnome_config_args --cflags $module`\"
 		eval $tmp_bsnom'_LIBS'=\"`$GNOME_CONFIG $gnome_config_args --libs $module`\"
