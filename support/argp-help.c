@@ -35,9 +35,8 @@
    When compiling libc, the _ macro is predefined.  */
 #ifdef HAVE_LIBINTL_H
 # include <libintl.h>
-# define _(msgid)       gettext (msgid)
 #else
-# define _(msgid)       (msgid)
+# define dgettext(domain, msgid) (msgid)
 # define gettext(msgid) (msgid)
 #endif
 #endif
@@ -184,16 +183,18 @@ fill_in_uparams (const struct argp_state *state)
 		{
 		  if (unspec && !un->is_bool)
 		    __argp_failure (state, 0, 0,
-			   _("%.*s: ARGP_HELP_FMT parameter requires a value"),
-				    (int)var_len, var);
+				    dgettext (state->root_argp->argp_domain, "\
+%.*s: ARGP_HELP_FMT parameter requires a value"),
+				    (int) var_len, var);
 		  else
 		    *(int *)((char *)&uparams + un->uparams_offs) = val;
 		  break;
 		}
 	    if (! un->name)
 	      __argp_failure (state, 0, 0,
-			      _("%.*s: Unknown ARGP_HELP_FMT parameter"),
-			      (int)var_len, var);
+			      dgettext (state->root_argp->argp_domain, "\
+%.*s: Unknown ARGP_HELP_FMT parameter"),
+			      (int) var_len, var);
 
 	    var = arg;
 	    if (*var == ',')
@@ -202,7 +203,8 @@ fill_in_uparams (const struct argp_state *state)
 	else if (*var)
 	  {
 	    __argp_failure (state, 0, 0,
-			    _("Garbage in ARGP_HELP_FMT: %s"), var);
+			    dgettext (state->root_argp->argp_domain,
+				      "Garbage in ARGP_HELP_FMT: %s"), var);
 	    break;
 	  }
       }
@@ -496,8 +498,8 @@ static inline int
 hol_entry_short_iterate (const struct hol_entry *entry,
 			 int (*func)(const struct argp_option *opt,
 				     const struct argp_option *real,
-				     void *cookie),
-			 void *cookie)
+				     const char *domain, void *cookie),
+			 const char *domain, void *cookie)
 {
   unsigned nopts;
   int val = 0;
@@ -510,7 +512,7 @@ hol_entry_short_iterate (const struct hol_entry *entry,
 	if (!oalias (opt))
 	  real = opt;
 	if (ovisible (opt))
-	  val = (*func)(opt, real, cookie);
+	  val = (*func)(opt, real, domain, cookie);
 	so++;
       }
 
@@ -521,8 +523,8 @@ static inline int
 hol_entry_long_iterate (const struct hol_entry *entry,
 			int (*func)(const struct argp_option *opt,
 				    const struct argp_option *real,
-				    void *cookie),
-			void *cookie)
+				    const char *domain, void *cookie),
+			const char *domain, void *cookie)
 {
   unsigned nopts;
   int val = 0;
@@ -534,7 +536,7 @@ hol_entry_long_iterate (const struct hol_entry *entry,
 	if (!oalias (opt))
 	  real = opt;
 	if (ovisible (opt))
-	  val = (*func)(opt, real, cookie);
+	  val = (*func)(opt, real, domain, cookie);
       }
 
   return val;
@@ -543,7 +545,7 @@ hol_entry_long_iterate (const struct hol_entry *entry,
 /* Iterator that returns true for the first short option.  */
 static inline int
 until_short (const struct argp_option *opt, const struct argp_option *real,
-	     void *cookie)
+	     const char *domain, void *cookie)
 {
   return oshort (opt) ? opt->key : 0;
 }
@@ -552,7 +554,8 @@ until_short (const struct argp_option *opt, const struct argp_option *real,
 static char
 hol_entry_first_short (const struct hol_entry *entry)
 {
-  return hol_entry_short_iterate (entry, until_short, 0);
+  return hol_entry_short_iterate (entry, until_short,
+				  entry->argp->argp_domain, 0);
 }
 
 /* Returns the first valid long option in ENTRY, or 0 if there is none.  */
@@ -676,7 +679,8 @@ canon_doc_option (const char **name)
 /* Order ENTRY1 & ENTRY2 by the order which they should appear in a help
    listing.  */
 static int
-hol_entry_cmp (const struct hol_entry *entry1, const struct hol_entry *entry2)
+hol_entry_cmp (const struct hol_entry *entry1,
+	       const struct hol_entry *entry2)
 {
   /* The group numbers by which the entries should be ordered; if either is
      in a cluster, then this is just the group within the cluster.  */
@@ -871,13 +875,13 @@ space (argp_fmtstream_t stream, size_t ensure)
    optional argument.  */
 static void
 arg (const struct argp_option *real, const char *req_fmt, const char *opt_fmt,
-     argp_fmtstream_t stream)
+     const char *domain, argp_fmtstream_t stream)
 {
   if (real->arg)
     if (real->flags & OPTION_ARG_OPTIONAL)
-      __argp_fmtstream_printf (stream, opt_fmt, gettext (real->arg));
+      __argp_fmtstream_printf (stream, opt_fmt, dgettext (domain, real->arg));
     else
-      __argp_fmtstream_printf (stream, req_fmt, gettext (real->arg));
+      __argp_fmtstream_printf (stream, req_fmt, dgettext (domain, real->arg));
 }
 
 /* Helper functions for hol_entry_help.  */
@@ -938,7 +942,7 @@ static void
 print_header (const char *str, const struct argp *argp,
 	      struct pentry_state *pest)
 {
-  const char *tstr = gettext (str);
+  const char *tstr = dgettext (argp->argp_domain, str);
   const char *fstr = filter_doc (tstr, ARGP_KEY_HELP_HEADER, argp, pest->state);
 
   if (fstr)
@@ -1036,7 +1040,7 @@ hol_entry_help (struct hol_entry *entry, const struct argp_state *state,
 	    __argp_fmtstream_putc (stream, '-');
 	    __argp_fmtstream_putc (stream, *so);
 	    if (!have_long_opt || uparams.dup_args)
-	      arg (real, " %s", "[%s]", stream);
+	      arg (real, " %s", "[%s]", state->root_argp->argp_domain, stream);
 	    else if (real->arg)
 	      hhstate->suppressed_dup_arg = 1;
 	  }
@@ -1055,7 +1059,9 @@ hol_entry_help (struct hol_entry *entry, const struct argp_state *state,
 	    /* Calling gettext here isn't quite right, since sorting will
 	       have been done on the original; but documentation options
 	       should be pretty rare anyway...  */
-	    __argp_fmtstream_puts (stream, gettext (opt->name));
+	    __argp_fmtstream_puts (stream,
+				   dgettext (state->root_argp->argp_domain,
+					     opt->name));
 	  }
     }
   else
@@ -1070,7 +1076,8 @@ hol_entry_help (struct hol_entry *entry, const struct argp_state *state,
 	    comma (uparams.long_opt_col, &pest);
 	    __argp_fmtstream_printf (stream, "--%s", opt->name);
 	    if (first_long_opt || uparams.dup_args)
-	      arg (real, "=%s", "[=%s]", stream);
+	      arg (real, "=%s", "[=%s]", state->root_argp->argp_domain,
+		   stream);
 	    else if (real->arg)
 	      hhstate->suppressed_dup_arg = 1;
 	  }
@@ -1089,7 +1096,8 @@ hol_entry_help (struct hol_entry *entry, const struct argp_state *state,
       goto cleanup;		/* Just return, after cleaning up.  */
   else
     {
-      const char *tstr = real->doc ? gettext (real->doc) : 0;
+      const char *tstr = real->doc ? dgettext (state->root_argp->argp_domain,
+					       real->doc) : 0;
       const char *fstr = filter_doc (tstr, real->key, entry->argp, state);
       if (fstr && *fstr)
 	{
@@ -1136,7 +1144,7 @@ hol_help (struct hol *hol, const struct argp_state *state,
 
   if (hhstate.suppressed_dup_arg && uparams.dup_args_note)
     {
-      const char *tstr = _("\
+      const char *tstr = dgettext (state->root_argp->argp_domain, "\
 Mandatory or optional arguments to long options are also mandatory or \
 optional for any corresponding short options.");
       const char *fstr = filter_doc (tstr, ARGP_KEY_HELP_DUP_ARGS_NOTE,
@@ -1159,7 +1167,7 @@ optional for any corresponding short options.");
 static int
 add_argless_short_opt (const struct argp_option *opt,
 		       const struct argp_option *real,
-		       void *cookie)
+		       const char *domain, void *cookie)
 {
   char **snao_end = cookie;
   if (!(opt->arg || real->arg)
@@ -1173,7 +1181,7 @@ add_argless_short_opt (const struct argp_option *opt,
 static int
 usage_argful_short_opt (const struct argp_option *opt,
 			const struct argp_option *real,
-			void *cookie)
+			const char *domain, void *cookie)
 {
   argp_fmtstream_t stream = cookie;
   const char *arg = opt->arg;
@@ -1184,7 +1192,7 @@ usage_argful_short_opt (const struct argp_option *opt,
 
   if (arg && !(flags & OPTION_NO_USAGE))
     {
-      arg = gettext (arg);
+      arg = dgettext (domain, arg);
 
       if (flags & OPTION_ARG_OPTIONAL)
 	__argp_fmtstream_printf (stream, " [-%c[%s]]", opt->key, arg);
@@ -1205,7 +1213,7 @@ usage_argful_short_opt (const struct argp_option *opt,
 static int
 usage_long_opt (const struct argp_option *opt,
 		const struct argp_option *real,
-		void *cookie)
+		const char *domain, void *cookie)
 {
   argp_fmtstream_t stream = cookie;
   const char *arg = opt->arg;
@@ -1217,7 +1225,7 @@ usage_long_opt (const struct argp_option *opt,
   if (! (flags & OPTION_NO_USAGE))
     if (arg)
       {
-	arg = gettext (arg);
+	arg = dgettext (domain, arg);
 	if (flags & OPTION_ARG_OPTIONAL)
 	  __argp_fmtstream_printf (stream, " [--%s[=%s]]", opt->name, arg);
 	else
@@ -1244,7 +1252,8 @@ hol_usage (struct hol *hol, argp_fmtstream_t stream)
       for (entry = hol->entries, nentries = hol->num_entries
 	   ; nentries > 0
 	   ; entry++, nentries--)
-	hol_entry_short_iterate (entry, add_argless_short_opt, &snao_end);
+	hol_entry_short_iterate (entry, add_argless_short_opt,
+				 entry->argp->argp_domain, &snao_end);
       if (snao_end > short_no_arg_opts)
 	{
 	  *snao_end++ = 0;
@@ -1255,13 +1264,15 @@ hol_usage (struct hol *hol, argp_fmtstream_t stream)
       for (entry = hol->entries, nentries = hol->num_entries
 	   ; nentries > 0
 	   ; entry++, nentries--)
-	hol_entry_short_iterate (entry, usage_argful_short_opt, stream);
+	hol_entry_short_iterate (entry, usage_argful_short_opt,
+				 entry->argp->argp_domain, stream);
 
       /* Finally, a list of long options (whew!).  */
       for (entry = hol->entries, nentries = hol->num_entries
 	   ; nentries > 0
 	   ; entry++, nentries--)
-	hol_entry_long_iterate (entry, usage_long_opt, stream);
+	hol_entry_long_iterate (entry, usage_long_opt,
+				entry->argp->argp_domain, stream);
     }
 }
 
@@ -1318,7 +1329,7 @@ argp_args_usage (const struct argp *argp, const struct argp_state *state,
   char *our_level = *levels;
   int multiple = 0;
   const struct argp_child *child = argp->children;
-  const char *tdoc = gettext (argp->args_doc), *nl = 0;
+  const char *tdoc = dgettext (argp->argp_domain, argp->args_doc), *nl = 0;
   const char *fdoc = filter_doc (tdoc, ARGP_KEY_HELP_ARGS_DOC, argp, state);
 
   if (fdoc)
@@ -1383,7 +1394,7 @@ argp_doc (const struct argp *argp, const struct argp_state *state,
   void *input = 0;
   int anything = 0;
   size_t inp_text_limit = 0;
-  const char *doc = gettext (argp->doc);
+  const char *doc = dgettext (argp->argp_domain, argp->doc);
   const struct argp_child *child = argp->children;
 
   if (doc)
@@ -1507,9 +1518,14 @@ _help (const struct argp *argp, const struct argp_state *state, FILE *stream,
 	  int old_wm = __argp_fmtstream_set_wmargin (fs, uparams.usage_indent);
 	  char *levels = pattern_levels;
 
-	  __argp_fmtstream_printf (fs, "%s %s",
-				   _(first_pattern ? "Usage:" : "  or: "),
-				   name);
+	  if (first_pattern)
+	    __argp_fmtstream_printf (fs, "%s %s",
+				     dgettext (argp->argp_domain, "Usage:"),
+				     name);
+	  else
+	    __argp_fmtstream_printf (fs, "%s %s",
+				     dgettext (argp->argp_domain, "  or: "),
+				     name);
 
 	  /* We set the lmargin as well as the wmargin, because hol_usage
 	     manually wraps options with newline to avoid annoying breaks.  */
@@ -1519,7 +1535,8 @@ _help (const struct argp *argp, const struct argp_state *state, FILE *stream,
 	    /* Just show where the options go.  */
 	    {
 	      if (hol->num_entries > 0)
-		__argp_fmtstream_puts (fs, _(" [OPTION...]"));
+		__argp_fmtstream_puts (fs, dgettext (argp->argp_domain,
+						     " [OPTION...]"));
 	    }
 	  else
 	    /* Actually print the options.  */
@@ -1546,7 +1563,7 @@ _help (const struct argp *argp, const struct argp_state *state, FILE *stream,
 
   if (flags & ARGP_HELP_SEE)
     {
-      __argp_fmtstream_printf (fs, _("\
+      __argp_fmtstream_printf (fs, dgettext (argp->argp_domain, "\
 Try `%s --help' or `%s --usage' for more information.\n"),
 			       name, name);
       anything = 1;
@@ -1573,7 +1590,8 @@ Try `%s --help' or `%s --usage' for more information.\n"),
     {
       if (anything)
 	__argp_fmtstream_putc (fs, '\n');
-      __argp_fmtstream_printf (fs, _("Report bugs to %s.\n"),
+      __argp_fmtstream_printf (fs, dgettext (argp->argp_domain,
+					     "Report bugs to %s.\n"),
  			       argp_program_bug_address);
       anything = 1;
     }

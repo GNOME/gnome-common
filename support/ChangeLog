@@ -1,3 +1,8 @@
+Fri Mar  6 20:10:55 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* argp-help.c, argp-parse.c, argp.h: Imported new versions from
+	glibc, while preserving local changes.
+
 Wed Mar  4 00:58:27 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* Makefile.am (libsupport_a_SOURCES): Added gnome-argp.c.
