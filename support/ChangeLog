@@ -1,3 +1,8 @@
+Fri Mar 13 21:30:34 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* argp.texi: Imported from glibc.
+	* Makefile.am (EXTRA_DIST): Added argp.texi.
+
 1998-03-12  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (noinst_HEADERS): Don't install argp-fmtstream.h and

@@ -18,4 +18,4 @@ libgnomesupport_la_LDFLAGS = -version-info 0:0:0
 
 endif
 
-EXTRA_DIST = argp-test.c
+EXTRA_DIST = argp-test.c argp.texi
