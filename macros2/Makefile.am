@@ -1,7 +1,8 @@
 ## Please update this variable if any new macros are created
 
 HACK_MACROS=					\
-  gnome.m4
+  gnome.m4					\
+  gnome-common.m4
 
 EXTRA_DIST=$(HACK_MACROS) autogen.sh
 MAINTAINERCLEANFILES=macros2.dep
