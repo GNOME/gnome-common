@@ -1,3 +1,7 @@
+2000-11-21  Martin Baulig  <martin@home-of-linux.org>
+
+	* Makefile.am (EXTRA_DIST): Put gnome-autogen.sh here.
+
 2000-11-20  Martin Baulig  <baulig@suse.de>
 
 	* gnome-autogen.sh: Initialize GNOME_DATADIR from
