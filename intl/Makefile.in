@@ -180,7 +180,7 @@ maintainer-clean: distclean
 
 # GNU gettext needs not contain the file `VERSION' but contains some
 # other files which should not be distributed in other packages.
-distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
+distdir = $(top_srcdir)/$(PACKAGE)-$(VERSION)/$(subdir)
 dist distdir: Makefile $(DISTFILES)
 	if test "$(PACKAGE)" = gettext; then \
 	  additional="$(DISTFILES.gettext)"; \
@@ -195,8 +195,8 @@ dist distdir: Makefile $(DISTFILES)
 distcopy: Makefile $(DISTFILES)
 	  additional="$(DISTFILES.normal)";
 	for file in $(DISTFILES.common) $$additional; do \
-	  ln $(srcdir)/$$file ../$(distdir) 2> /dev/null \
-	    || cp -p $(srcdir)/$$file ../$(distdir); \
+	  ln $(srcdir)/$$file $(distdir) 2> /dev/null \
+	    || cp -p $(srcdir)/$$file $(distdir); \
 	done
 
 dist-libc:
