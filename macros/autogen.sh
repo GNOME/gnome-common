@@ -173,7 +173,7 @@ do
 	fi
       fi
       echo "Running aclocal-1.4 $aclocalinclude ..."
-      aclocal-1.4 $aclocalinclude || {
+      aclocal-1.4 $aclocalinclude || aclocal $aclocalinclude || {
 	echo
 	echo "**Error**: aclocal-1.4 failed. This may mean that you have not"
 	echo "installed all of the packages you need, or you may need to"
@@ -189,6 +189,7 @@ do
       fi
       echo "Running automake-1.4 --gnu $am_opt ..."
       automake-1.4 --add-missing --gnu $am_opt ||
+			automake --add-missing --gnu $am_opt ||
 	{ echo "**Error**: automake-1.4 failed."; exit 1; }
       echo "Running autoconf ..."
       autoconf || { echo "**Error**: autoconf failed."; exit 1; }
