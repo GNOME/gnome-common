@@ -1,3 +1,21 @@
+1998-11-04  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnomesupport-fake.h: Include gnomesupport.h unconditionally.
+	* Makefile.am: Build libgnomesupport.la unconditionally.
+	(popt_sources): List `popt' sources.
+	(libgnomesupport_la_SOURCES): Include $popt_sources.
+	(include_HEADERS): Install `popt.h'.
+	(noinst_HEADERSS): Don't install poptint.h and findme.h.
+	* popt.c: New file.  From the POPT package.  Replacement for
+	argp/getopt.
+	* poptparse.c: Likewise.
+	* popthelp.c: Likewise.
+	* poptconfig.c: Likewise.
+	* findme.c: Likewise.
+	* findme.h: Likewise.
+	* popt.h: Likewise.
+	* poptint.h: Likewise.
+	
 1998-09-02  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* canonicalize.c (realpath): Remove `weak_alias'.

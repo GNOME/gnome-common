@@ -5,12 +5,11 @@
 # include <config.h>
 #endif
 
-/* This is required to get `size_t' on some systems. */
+#include <stddef.h>
+/* ??? This is required to get `size_t' on some systems.  */
 #include <sys/types.h>
 
-#ifdef NEED_GNOMESUPPORT_H
 #include <gnomesupport.h>
-#endif
 
 #include <gnome-argp.h>
 
