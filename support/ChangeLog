@@ -1,3 +1,15 @@
+1998-04-13  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* scandir.c (<sys/types.h>): Include.
+	* gnomesupport-h.c (!HAVE_SCANDIR): Do all the `dirent' wrangling
+	only if `scandir' is needed.  Also, include <sys/types.h> in all
+	cases. 
+
+1998-04-13  Seth Alves  <alves@twitch.cp.domain.net>
+
+	* gnomesupport-h.c (HAVE_DIRENT_H): FreeBSD needs <sys/types.h>
+	before <dirent.h>.
+	
 1998-04-12  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (supportincludedir): Is now $(pkglibdir)/include.

@@ -37,35 +37,43 @@ extern \"C\" {
 ");
 #endif
 
-#if HAVE_DIRENT_H
+#ifndef HAVE_SCANDIR
+  /* FreeBSD apparently needs this before <dirent.h>.
+     Anyway, it is a good idea to include <sys/types.h> before including
+     any other <sys/...> header.  */
   puts("\
 #include <sys/types.h>
 ");
+
+  /* The following tests and #defines are based on the tests suggested
+     for AC_HEADER_DIRENT in the autoconf manual.  */
+# if HAVE_DIRENT_H
   puts("\
 #include <dirent.h>
 #define NAMLEN(dirent) strlen((dirent)->d_name)
 ");
-#else
+# else /* not HAVE_DIRENT_H */
   puts("\
 #define dirent direct
 #define NAMLEN(dirent) (dirent)->d_namlen
 ");
-# if HAVE_SYS_NDIR_H
+#  if HAVE_SYS_NDIR_H
   puts("\
 #include <sys/ndir.h>
 ");
-# endif
-# if HAVE_SYS_DIR_H
+#  endif /* HAVE_SYS_NDIR_H */
+#  if HAVE_SYS_DIR_H
   puts("\
 #include <sys/dir.h>
 ");
-# endif
-# if HAVE_NDIR_H
+#  endif /* HAVE_SYS_DIR_H */
+#  if HAVE_NDIR_H
   puts("\
 #include <ndir.h>
 ");
-# endif
-#endif
+#  endif /* HAVE_NDIR_H */
+# endif /* not HAVE_DIRENT_H */
+#endif /* not HAVE_SCANDIR */
 
   puts("\
 #undef PARAMS

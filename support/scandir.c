@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/types.h>
 
 #if HAVE_DIRENT_H
 # include <dirent.h>
