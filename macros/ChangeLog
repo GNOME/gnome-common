@@ -1,3 +1,7 @@
+2003-01-07  Rodney Dawes  <dobey@ximian.com>
+
+	* autogen.sh: Fall back to automake/aclocal if no -1.4 version exists
+
 2002-09-20  JP Rosevear  <jpr@ximian.com>
 
 	* gnome-pilot.m4: fix problem where -lpisync was not linked in if
