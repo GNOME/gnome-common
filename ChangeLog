@@ -1,3 +1,7 @@
+2001-12-11  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in: Up to 1.2.4.
+
 2001-09-20 Glynn Foster <glynn.foster@sun.com>
 
 	* macros2/gnome-x-checks.m4: replaced  
