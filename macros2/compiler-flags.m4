@@ -36,7 +36,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     maximum|error)
 	warning_flags="-Wall -Wunused -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
 	CFLAGS="$warning_flags $CFLAGS"
-	for option in -Wsign-promo -Wno-sign-compare; do
+	for option in -Wno-sign-compare; do
 		SAVE_CFLAGS="$CFLAGS"
 		CFLAGS="$CFLAGS $option"
 		AC_MSG_CHECKING([whether gcc understands $option])

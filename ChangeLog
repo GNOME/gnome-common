@@ -1,3 +1,8 @@
+2003-07-04  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
+	* macros2/compiler-flags.m4: don't use -Wsign-promo, it is 
+	C++ only and causes warnings with gcc 3.3 when used on C.
+
 2003-06-24  Marco Pesenti Gritti  <marco@it.gnome.org>
 
 	* macros2/autogen.sh:
