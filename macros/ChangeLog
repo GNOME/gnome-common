@@ -1,3 +1,8 @@
+2003-06-28  Sebastian Rittau  <srittau@jroger.in-berlin.de>
+
+	* gnome-x-checks.m4: Add third argument to AC_DEFINE for
+	GNOME_HAVE_LIBSM.
+
 2002-05-15  JP Rosevear  <jpr@ximian.com>
 
 	* gnome-pilot.m4: Fix quoting for AC_MSG_*
