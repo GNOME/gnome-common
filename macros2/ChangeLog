@@ -1,3 +1,8 @@
+2004-01-25  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* autogen.sh: Deprecate the use of GNOME2_DIR and allow the use
+	of GNOME2_PATH (bug #130516).
+
 2004-01-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Run intltoolize after automake, since intltoolize
