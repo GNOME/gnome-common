@@ -1,3 +1,9 @@
+2003-07-20  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* compiler-flags.m4: Remove some redundant options as suggested
+	by Steve Chaplin in bug #115475. The warnings list looks simpler
+	now, but is no less functional.
+
 2003-07-15  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* autogen.sh: Fix a typo when reporting "forbidden" m4 macros.

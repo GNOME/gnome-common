@@ -28,13 +28,13 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 	warning_flags=
 	;;
     minimum)
-	warning_flags="-Wall -Wunused"
+	warning_flags="-Wall"
 	;;
     yes)
-	warning_flags="-Wall -Wunused -Wmissing-prototypes -Wmissing-declarations"
+	warning_flags="-Wall -Wmissing-prototypes"
 	;;
     maximum|error)
-	warning_flags="-Wall -Wunused -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
+	warning_flags="-Wall -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
 	CFLAGS="$warning_flags $CFLAGS"
 	for option in -Wno-sign-compare; do
 		SAVE_CFLAGS="$CFLAGS"
