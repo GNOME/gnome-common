@@ -215,7 +215,7 @@ want_intltool=false
 want_pkg_config=false
 want_gtk_doc=false
 
-configure_files="`find $srcdir -name configure.ac -print -or -name configure.in -print`"
+configure_files="`find $srcdir -name '{arch}' -prune -o -name configure.ac -print -or -name configure.in -print`"
 for configure_ac in $configure_files; do
     if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null; then
 	want_libtool=true
