@@ -9,13 +9,10 @@
 extern char *strndup (const char *s, size_t n);
 #endif
 
-#ifndef HAVE_PROGRAM_INVOCATION_SHORT_NAME
+/* Some systems, like Red Hat 4.0, define these but don't declare
+   them.  Hopefully it is safe to always declare them here.  */
 extern char *program_invocation_short_name;
-#endif
-
-#ifndef HAVE_PROGRAM_INVOCATION_NAME
 extern char *program_invocation_name;
-#endif
 
 #define __mempcpy(To,From,Len) (memcpy ((To), (From), (Len)) + (Len))
 
