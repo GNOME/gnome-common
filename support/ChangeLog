@@ -1,6 +1,6 @@
 1998-03-11  Raja R Harinath  <harinath@cs.umn.edu>
 
-	* getopt.h: Prototype getopt() for C++ too.  (Local fix).
+	* getopt.h: Don't mention getopt() for C++.  (Local fix).
 
 	* vsnprintf.c: Actually fill it in.  It is from
 	<URL:http://theos.com/~deraadt/snprintf.c>, with one small fix to
