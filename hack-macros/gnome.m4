@@ -461,7 +461,7 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
 	  	AC_MSG_RESULT([*** $module library is not installed])
 	  	ifelse([$3], , :, [$3])
 		gnome_m4_notfound=yes
-	  echo
+	  fi
 	fi
 	if test "$gnome_m4_notfound" = no; then
 	  echo $ac_n " $module" 1>&6
