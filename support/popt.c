@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <libintl.h>
 
 #if HAVE_ALLOCA_H
 # include <alloca.h>
