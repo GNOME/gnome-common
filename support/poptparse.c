@@ -9,11 +9,14 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef HAVE_ALLOCA_H
+#include <alloca.h>
+#endif
 
 #include "popt-gnome.h"
 
 int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
-    char * buf = strcpy(alloca(strlen(s) + 1), s);
+    char * buf;
     char * bufStart = buf;
     char * src, * dst;
     char quote = '\0';
@@ -23,6 +26,7 @@ int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
     int argc = 0;
     int i;
 
+    buf = strcpy(alloca(strlen(s) + 1), s);
     src = s;
     dst = buf;
     argv[argc] = buf;
