@@ -44,6 +44,18 @@ END {
     }
   }
 
+  if (def["NEED_DECLARATION_GETHOSTNAME"]) {
+    print "";
+    print "/* Get name of current host.  */";
+    print "int gethostname(char */*name*/, int /*namelen*/);";
+  }
+  
+  if (!def["HAVE_MEMMOVE"]) {
+    print "";
+    print "/* Copies len bytes from src to dest. */";
+    print "void * memmove (void */*dest*/, const void */*src*/, size_t /*len*/);";
+  }
+
   if (!def["HAVE_MKSTEMP"]) {
     print "";
     print "/* Generate a unique temporary file name from TEMPLATE.";
@@ -153,12 +165,6 @@ END {
     print "               char */*fmt*/, va_list /*ap*/);";
     print "int snprintf (char */*str*/, size_t /*maxlen*/,";
     print "              char */*fmt*/, ...);";
-  }
-
-  if (!def["HAVE_MEMMOVE"]) {
-    print "";
-    print "/* Copies len bytes from src to dest. */";
-    print "void * memmove (void */*dest*/, const void */*src*/, size_t /*len*/);";
   }
 
   print "";

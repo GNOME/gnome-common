@@ -1,6 +1,10 @@
+1998-07-15  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnomesupport.awk (gethostname): Emit declaration.
+
 1998-07-15  Martin Baulig  <baulig@Stud.Informatik.uni-trier.de>
 
-	* gnomesupport-h.c (memmove strtod strtol strtoul): Emit
+	* gnomesupport.awk (memmove strtod strtol strtoul): Emit
 	declarations.
 
 	* memmove.c: New file.  Imported from GNU libiberty.
