@@ -4,7 +4,7 @@ supportexecincludedir = $(pkglibdir)/include
 
 INCLUDES = -D_GNU_SOURCE
 
-lib_LTLIBRARIES = libgnomesupport.la
+lib_LTLIBRARIES = libgnomesupport-2.0.la
 
 # it is in _DATA since we don't want `gnomesupport.h' to be part of
 # the distributed `.tar.gz' file
@@ -20,9 +20,9 @@ include_HEADERS = popt-gnome.h
 
 popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
 
-libgnomesupport_la_SOURCES = gnomesupport.h $(popt_sources) gnome-argp.c
-libgnomesupport_la_LIBADD  = @LTLIBOBJS@
-libgnomesupport_la_LDFLAGS = -version-info 0:0:0
+libgnomesupport_2_0_la_SOURCES = gnomesupport.h $(popt_sources) gnome-argp.c
+libgnomesupport_2_0_la_LIBADD  = @LTLIBOBJS@
+libgnomesupport_2_0_la_LDFLAGS = -version-info 0:0:0
 
 BUILT_SOURCES = gnomesupport.h
 
