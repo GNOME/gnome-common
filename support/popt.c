@@ -308,9 +308,12 @@ int poptGetNextOpt(poptContext con) {
 	    }
 
 	    /* Make a copy we can hack at */
-	    localOptString = optString = 
-			strcpy(alloca(strlen(origOptString) + 1), 
-			origOptString);
+#ifdef strdupa
+	    localOptString = optString = strdupa (origOptString);
+#else
+	    localOptString = optString = alloca(strlen(origOptString) + 1);
+	    strcpy(optString, origOptString);
+#endif
 
 	    if (!optString[0])
 		return POPT_ERROR_BADOPT;
