@@ -1,5 +1,8 @@
 2003-02-19  James Henstridge  <james@daa.com.au>
 
+	* Makefile.am (GNOME2_MACROS): remove check-utmp.m4 (copied it to
+	libzvt, which is the only thing using it).
+
 	* gnome-deprecated-macros.m4(GNOME_CHECK_CXX): AC_REQUIRE does not
 	work within AU_DEFUN, so change to a simple call to AC_PROG_CXX.
 

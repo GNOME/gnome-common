@@ -4,7 +4,6 @@ GNOME2_MACROS = \
   compiler-flags.m4 \
   curses.m4 \
   gnome-common.m4 \
-  check-utmp.m4 \
   gnome-deprecated-macros.m4
 
 EXTRA_DIST = $(GNOME2_MACROS) autogen.sh
