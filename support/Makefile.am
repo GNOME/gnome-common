@@ -16,7 +16,8 @@ noinst_HEADERS = gnomesupport-fake.h \
 		 findme.h poptint.h
 
 # Hmm... should we move `error.h' here.
-include_HEADERS = popt-gnome.h
+gnomeincludedir=$(includedir)/gnome-1.0
+gnomeinclude_HEADERS = popt-gnome.h
 
 popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
 
