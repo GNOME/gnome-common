@@ -84,7 +84,7 @@ END {
     print "int mkstemp (char */*template*/);";
   }
   
-  if (!def["HAVE_SCANDIR"]) {
+  if (!def["HAVE_SCANDIR"] || def["NEED_DECLARATION_SCANDIR"]) {
     print "";
     print "/* Scan the directory DIR, calling SELECTOR on each directory";
     print "   entry.  Entries for which SELECTOR returns nonzero are";
