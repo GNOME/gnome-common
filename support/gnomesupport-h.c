@@ -39,6 +39,9 @@ extern \"C\" {
 
 #if HAVE_DIRENT_H
   puts("\
+#include <sys/types.h>
+");
+  puts("\
 #include <dirent.h>
 #define NAMLEN(dirent) strlen((dirent)->d_name)
 ");
