@@ -1,3 +1,8 @@
+1999-02-19  Martin Baulig  <martin@home-of-linux.org>
+
+	* canonicalize.c: Include <gnome-argp.h> instead of the removed
+	<argp-namefrob.h>.
+
 1999-02-17  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* poptint.h: Removed the suspicious `#ifdef HAVE_DGETTEXT...'
