@@ -1,3 +1,7 @@
+Thu Aug 24 02:28:57 2000  George Lebl <jirka@5z.com>
+
+	* gnome-x-checks.m4: use the correct name in AC_PROVIDE
+
 2000-08-06  Martin Baulig  <baulig@suse.de>
 
 	* gnome-x-checks.m4 (GNOME_X_CHECKS): Renamed

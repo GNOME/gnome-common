@@ -76,5 +76,5 @@ dnl	AC_MSG_RESULT("$dev_gtk")
 	AC_REQUIRE([GNOME_PTHREAD_CHECK])
         LDFLAGS="$saved_ldflags"
 
-	AC_PROVIDE([GNOME_X_CHECKS])
+	AC_PROVIDE([GNOME2_X_CHECKS])
 ])
