@@ -16,17 +16,45 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
-#include <dirent.h>
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+
+#if HAVE_DIRENT_H
+# include <dirent.h>
+# define NAMLEN(dirent) strlen((dirent)->d_name)
+#else
+# define dirent direct
+# define NAMLEN(dirent) (dirent)->d_namlen
+# if HAVE_SYS_NDIR_H
+#  include <sys/ndir.h>
+# endif
+# if HAVE_SYS_DIR_H
+#  include <sys/dir.h>
+# endif
+# if HAVE_NDIR_H
+#  include <ndir.h>
+# endif
+#endif
+
+#undef PARAMS
+#if defined (__GNUC__) || __STDC__
+# define PARAMS(args) args
+#else
+# define PARAMS(args) ()
+#endif
+
+#define set_errno(e) (errno = (e))
 
 int
 scandir (dir, namelist, select, cmp)
      const char *dir;
      struct dirent ***namelist;
-     int (*select) __P ((struct dirent *));
-     int (*cmp) __P ((const void *, const void *));
+     int (*select) PARAMS ((struct dirent *));
+     int (*cmp) PARAMS ((const void *, const void *));
 {
   DIR *dp = opendir (dir);
   struct dirent **v = NULL;
@@ -38,16 +66,16 @@ scandir (dir, namelist, select, cmp)
     return -1;
 
   save = errno;
-  __set_errno (0);
+  set_errno (0);
 
   i = 0;
-  while ((d = __readdir (dp)) != NULL)
+  while ((d = readdir (dp)) != NULL)
     if (select == NULL || (*select) (d))
       {
 	size_t dsize;
 
 	/* Ignore errors from select or readdir */
-	__set_errno (0);
+	set_errno (0);
 
 	if (i == vsize)
 	  {
@@ -60,13 +88,13 @@ scandir (dir, namelist, select, cmp)
 	    if (new == NULL)
 	      {
 	      lose:
-		__set_errno (ENOMEM);
+		set_errno (ENOMEM);
 		break;
 	      }
 	    v = new;
 	  }
 
-	dsize = &d->d_name[_D_ALLOC_NAMLEN (d)] - (char *) d;
+	dsize = &d->d_name[1 + NAMLEN (d)] - (char *) d;
 	v[i] = (struct dirent *) malloc (dsize);
 	if (v[i] == NULL)
 	  goto lose;
@@ -81,12 +109,12 @@ scandir (dir, namelist, select, cmp)
       while (i > 0)
 	free (v[--i]);
       free (v);
-      __set_errno (save);
+      set_errno (save);
       return -1;
     }
 
   (void) closedir (dp);
-  __set_errno (save);
+  set_errno (save);
 
   /* Sort the list if we have a comparison function to sort with.  */
   if (cmp != NULL)

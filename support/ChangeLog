@@ -1,3 +1,23 @@
+1998-04-08  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* scandir.c: Import from GNU libc.
+	Remove assumptions that this file is compiled inside GLIBC.
+	Here are the ChangeLog entries when I imported it originally into
+	`gwp':
+
+	1998-02-08  Raja R Harinath  <harinath@cs.umn.edu>
+        	* scandir.c (scandir): Revert change of `1998-02-07'.  
+		Don't use d_reclen, but fix the expression used to
+		figure out the length.
+
+	1998-02-07  Raja R Harinath  <harinath@cs.umn.edu>
+	        * scandir.c (scandir): Use `d_reclen' field to get length
+		of record.
+
+	1998-02-06  Raja R Harinath  <harinath@cs.umn.edu>
+	        * scandir.c: New file.  Replacement function copied from
+		glibc, edited to not step on implementation namespace.
+
 1998-03-28  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* vasprintf.c (int_vasprintf): Imported from GNU libit-0.4.
