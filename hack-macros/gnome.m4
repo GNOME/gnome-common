@@ -429,11 +429,7 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
   fi
   for module in $4 ""; do
 	gnome_m4_notfound=no
-	if test -f $tmp_gnome_libdir/${module}Conf.sh; then
-		tmp_bsnom=`echo $module | tr a-z A-Z`
-		eval $tmp_bsnom'_CFLAGS'=\"`$GNOME_CONFIG $gnome_config_args --cflags $module`\"
-		eval $tmp_bsnom'_LIBS'=\"`$GNOME_CONFIG $gnome_config_args --libs $module`\"
-	elif test "$module" = zvt; then
+	if test "$module" = zvt; then
 	  ZVT_LIBS="`$GNOME_CONFIG $gnome_config_args --libs zvt`"
 	  AC_SUBST(ZVT_LIBS)
 	elif test "$module" = gtk; then
@@ -457,10 +453,15 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
 	  AC_SUBST(GNORBA_CFLAGS)
 	  AC_SUBST(GNORBA_LIBS)
 	elif test -n "$module"; then
+	  if $GNOME_CONFIG $gnome_config_args --cflags $module 2>/dev/null; then
+		tmp_bsnom=`echo $module | tr a-z A-Z`
+		eval $tmp_bsnom'_CFLAGS'=\"`$GNOME_CONFIG $gnome_config_args --cflags $module`\"
+		eval $tmp_bsnom'_LIBS'=\"`$GNOME_CONFIG $gnome_config_args --libs $module`\"
+	  else
+	  	AC_MSG_RESULT([*** $module library is not installed])
+	  	ifelse([$3], , :, [$3])
+		gnome_m4_notfound=yes
 	  echo
-	  AC_MSG_RESULT([*** $module library is not installed])
-	  ifelse([$3], , :, [$3])
-	  gnome_m4_notfound=yes
 	fi
 	if test "$gnome_m4_notfound" = no; then
 	  echo $ac_n " $module" 1>&6
