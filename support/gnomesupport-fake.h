@@ -5,7 +5,10 @@
 # include <config.h>
 #endif
 
+#ifdef NEED_GNOMESUPPORT_H
 #include <gnomesupport.h>
+#endif
+
 #include <gnome-argp.h>
 
 /* Override some of config.h.
