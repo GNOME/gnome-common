@@ -36,17 +36,17 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
     GNOMEUI_LIBS="`$GNOME_CONFIG $gnome_config_args --libs gnomeui`"
 
     gnome_config_major_version=`$GNOME_CONFIG $gnome_config_args --version | \
-           sed 's/[^0-9]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\1/'`
+           sed 's/[[^0-9]]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\1/'`
     gnome_config_minor_version=`$GNOME_CONFIG $gnome_config_args --version | \
-           sed 's/[^0-9]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
+           sed 's/[[^0-9]]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
     gnome_config_micro_version=`$GNOME_CONFIG $gnome_config_args --version | \
-           sed 's/[^0-9]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
+           sed 's/[[^0-9]]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
     needed_major_version=`echo $min_gnome_version | \
-           sed 's/[^0-9]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\1/'`
+           sed 's/[[^0-9]]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\1/'`
     needed_minor_version=`echo $min_gnome_version | \
-           sed 's/[^0-9]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
+           sed 's/[[^0-9]]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
     needed_micro_version=`echo $min_gnome_version | \
-           sed 's/[^0-9]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
+           sed 's/[[^0-9]]*\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
 
     if test $gnome_config_major_version -lt $needed_major_version; then
 	ifelse([$3], , :, [$3])
@@ -79,6 +79,7 @@ AC_ARG_ENABLE(gnometest, [  --disable-gnometest       Do not try to compile and 
        echo "*** your path, or set the GNOME_CONFIG environment variable to the"
        echo "*** full path to gnome-config."
      else
+	:
      fi
      GNOME_CFLAGS=""
      GNOME_LIBS=""
