@@ -22,7 +22,7 @@
 1998-08-15  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (libgnomesupport_la_SOURCES): List `gnomesupport.h'
-	here in the hope that it'll ensure that it is built.
+	here to ensure that it is built.
 
 1998-08-05  Raja R Harinath  <harinath@cs.umn.edu>
 
