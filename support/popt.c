@@ -52,7 +52,7 @@ static void invokeCallbacks(poptContext con, const struct poptOption * table,
 	} else if (((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK) &&
 		   ((!post && (opt->argInfo & POPT_CBFLAG_PRE)) ||
 		    ( post && (opt->argInfo & POPT_CBFLAG_POST)))) {
-	    cb = opt->arg;
+	    cb = (poptCallbackType)opt->arg;
 	    cb(con, post ? POPT_CALLBACK_REASON_POST : POPT_CALLBACK_REASON_PRE,
 	       NULL, NULL, opt->descrip);
 	}
@@ -92,6 +92,8 @@ poptContext poptGetContext(char * name, int argc, char ** argv,
 }
 
 void poptResetContext(poptContext con) {
+    int i;
+
     con->os = con->optionStack;
     con->os->currAlias = NULL;
     con->os->nextCharArg = NULL;
@@ -102,6 +104,10 @@ void poptResetContext(poptContext con) {
     con->nextLeftover = 0;
     con->restLeftover = 0;
     con->doExec = NULL;
+
+    for (i = 0; i < con->finalArgvCount; i++)
+	free(con->finalArgv[i]);
+
     con->finalArgvCount = 0;
 }
 
@@ -223,7 +229,18 @@ static void execCommand(poptContext con) {
 #ifdef __hpux
     setresuid(getuid(), getuid(),-1);
 #else
+/*
+ * XXX " ... on BSD systems setuid() should be preferred over setreuid()"
+ * XXX 	sez' Timur Bakeyev <mc@bat.ru>
+ * XXX	from Norbert Warmuth <nwarmuth@privat.circular.de>
+ */
+#if defined(HAVE_SETUID)
+    setuid(getuid());
+#elif defined (HAVE_SETREUID)
     setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
+#else
+    ; /* Can't drop privileges */
+#endif
 #endif
 
     execvp(argv[0], argv);
@@ -231,13 +248,17 @@ static void execCommand(poptContext con) {
 
 static const struct poptOption * findOption(const struct poptOption * table,
 					    const char * longName,
-					    const char shortName,
+					    char shortName,
 					    poptCallbackType * callback,
 					    void ** callbackData,
 					    int singleDash) {
     const struct poptOption * opt = table;
     const struct poptOption * opt2;
     const struct poptOption * cb = NULL;
+
+    /* This happens when a single - is given */
+    if (singleDash && !shortName && !*longName)
+	shortName = '-';
 
     while (opt->longName || opt->shortName || opt->arg) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
@@ -264,7 +285,7 @@ static const struct poptOption * findOption(const struct poptOption * table,
     *callbackData = NULL;
     *callback = NULL;
     if (cb) {
-	*callback = cb->arg;
+	*callback = (poptCallbackType)cb->arg;
 	if (!(cb->argInfo & POPT_CBFLAG_INC_DATA))
 	    *callbackData = cb->descrip;
     }
@@ -397,7 +418,7 @@ int poptGetNextOpt(poptContext con) {
 		  case POPT_ARG_INT:
 		  case POPT_ARG_LONG:
 		    aLong = strtol(con->os->nextArg, &end, 0);
-		    if (*end) 
+		    if (!(end && *end == '\0')) 
 			return POPT_ERROR_BADNUMBER;
 
 		    if (aLong == LONG_MIN || aLong == LONG_MAX)
@@ -492,6 +513,7 @@ void poptFreeContext(poptContext con) {
     if (con->appName) free(con->appName);
     if (con->aliases) free(con->aliases);
     if (con->otherHelp) free(con->otherHelp);
+    if (con->execPath) free(con->execPath);
     free(con);
 }
 
