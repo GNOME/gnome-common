@@ -1,3 +1,10 @@
+2003-02-21  James Henstridge  <james@daa.com.au>
+
+	* autogen.sh (version_check): if $variable is set, then assume
+	it is correct and skip the version check.
+	(autoconf): check for autoconf2.50 first, so we don't trigger
+	Debian's sometimes broken autoconf version sniffer.
+
 2003-02-19  James Henstridge  <james@daa.com.au>
 
 	* Makefile.am (GNOME2_MACROS): remove check-utmp.m4 (copied it to

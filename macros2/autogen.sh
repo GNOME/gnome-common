@@ -73,6 +73,12 @@ version_check() {
     source=$5
     status=1
 
+    checkprog=`eval echo "\\$$variable"`
+    if [ -n "$checkprog" ]; then
+	printbold "using $checkprog for $package"
+	return 0
+    fi
+
     printbold "checking for $package >= $min_version..."
     for checkprog in $checkprogs; do
 	echo -n "  testing $checkprog... "
@@ -192,7 +198,7 @@ done
 
 DIE=0
 
-version_check autoconf AUTOCONF 'autoconf autoconf-2.53' $REQUIRED_AUTOCONF_VERSION \
+version_check autoconf AUTOCONF 'autoconf2.50 autoconf autoconf-2.53' $REQUIRED_AUTOCONF_VERSION \
     "http://ftp.gnu.org/pub/gnu/autoconf/autoconf-$REQUIRED_AUTOCONF_VERSION.tar.gz" || DIE=1
 AUTOHEADER=`echo $AUTOCONF | sed s/autoconf/autoheader/`
 
