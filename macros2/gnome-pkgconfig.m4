@@ -45,7 +45,7 @@ AC_DEFUN([GNOME_CHECK_PKGCONFIG],[
 	fi
 	AC_MSG_CHECKING(for pkg-config)
 	if test x$have_pkgconfig = xyes ; then
-	    pkgconfig_required_version=0.7
+	    pkgconfig_required_version=0.8
 	    pkgconfig_version=`pkg-config --version`
 	    GNOME_PKGCONFIG_CHECK_VERSION($pkgconfig_version, $pkgconfig_required_version, [have_pkgconfig=yes], [have_pkgconfig=no])
 	fi
