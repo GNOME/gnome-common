@@ -153,15 +153,54 @@ do
       fi
 
       echo "Running aclocal $aclocalinclude ..."
-      aclocal-1.4 $aclocalinclude
+      aclocal-1.4 $aclocalinclude || {
+        echo
+	echo "**Error**: \`aclocal' failed. Please fix the warnings"
+        echo "(probably missing development files) and try again."
+	DIE=1
+      }
+
+      if test "$DIE" -eq 1; then
+        exit 1
+      fi
+
       if grep "^AM_CONFIG_HEADER" $bn >/dev/null; then
 	echo "Running autoheader..."
-	autoheader
+	autoheader || {
+          echo
+          echo "**Error**: \`autoheader' failed. Please fix the warnings"
+	  echo "(probably missing development files) and try again."
+	  DIE=1
+      }
+
+      if test "$DIE" -eq 1; then
+        exit 1
+      fi
+
       fi
       echo "Running automake --gnu $am_opt ..."
-      automake-1.4 --add-missing --gnu $am_opt
+      automake-1.4 --add-missing --gnu $am_opt || {
+        echo
+	echo "**Error**: \`automake' failed. Please fix the warnings"
+	echo "(probably missing development files) and try again."
+	DIE=1
+      }
+
+      if test "$DIE" -eq 1; then
+        exit 1
+      fi
+
       echo "Running autoconf ..."
-      autoconf
+      autoconf || {
+        echo
+	echo "**Error**: \`autoconf' failed. Please fix the warnings"
+	echo "(probably missing development files) and try again."
+	DIE=1
+      }
+
+      if test "$DIE" -eq 1; then
+        exit 1
+      fi
     )
   fi
 done
