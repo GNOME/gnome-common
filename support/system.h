@@ -7,7 +7,7 @@
 #include <fcntl.h>
 #include <limits.h>
 
-#if HAVE_MCHECK_H 
+#if HAVE_MCHECK_H
 #include <mcheck.h>
 #endif
 
@@ -25,7 +25,7 @@
 #include <libc.h>
 #endif
 
-/* AIX requires this to be the first thing in the file.  */ 
+/* AIX requires this to be the first thing in the file.  */
 #ifndef __GNUC__
 # if HAVE_ALLOCA_H
 #  include <alloca.h>
