@@ -1,5 +1,9 @@
 2000-07-24  Martin Baulig  <baulig@suse.de>
 
+	* gnome-x-checks.m4: Check for GTK+ 2.0.
+
+2000-07-24  Martin Baulig  <baulig@suse.de>
+
 	* autogen.sh: Make it work with AM_GNOME2_GETTEXT.
 	* check-utmp.m4: New file.
 
