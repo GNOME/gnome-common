@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if test -n "$USE_GNOME_2_MACROS" ; then
+if test -n "$USE_GNOME2_MACROS" ; then
   export GNOME_COMMON_MACROS_DIR=`gnome-config --datadir`/aclocal/gnome2-macros
 else
   export GNOME_COMMON_MACROS_DIR=`gnome-config --datadir`/aclocal/gnome-macros
