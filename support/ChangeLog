@@ -1,3 +1,7 @@
+1998-12-15  Martin Baulig  <martin@home-of-linux.org>
+
+	* Makefile.am (EXTRA_DIST): Add all source and header files here.
+
 1998-12-02  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (EXTRA_DIST): Add back `gnomesupport.awk' and

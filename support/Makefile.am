@@ -35,4 +35,11 @@ gnomesupport.h: gnomesupport.awk $(top_builddir)/config.h
 	$(AWK) -f $(srcdir)/gnomesupport.awk < $(top_builddir)/config.h > gsh-t
 	mv gsh-t gnomesupport.h
 
-EXTRA_DIST = gnomesupport.awk README-gnome easy-vsnprintf.c
+EXTRA_DIST = gnomesupport.awk README-gnome \
+	canonicalize.c easy-vsnprintf.c error.c error.h \
+	findme.c findme.h getopt.c getopt.h getopt1.c \
+	gnome-argp.c gnome-argp.h gnomesupport-fake.h \
+	memmove.c mkstemp.c popt-gnome.h popt.c poptconfig.c \
+	popthelp.c poptint.h poptparse.c scandir.c strcasecmp.c \
+	strerror.c strndup.c strnlen.c strtod.c strtok_r.c strtol.c \
+	strtoul.c vasprintf.c vsnprintf.c
