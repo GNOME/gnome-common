@@ -319,7 +319,7 @@ if [ "$DIE" -eq 1 ]; then
   exit 1
 fi
 
-if test -z "$*"; then
+if [ "$#" = 0 ]; then
   printerr "**Warning**: I am going to run \`configure' with no arguments."
   printerr "If you wish to pass any to it, please specify them on the"
   printerr \`$0\'" command line."
@@ -330,8 +330,10 @@ topdir=`pwd`
 for configure_ac in $configure_files; do 
     dirname=`dirname $configure_ac`
     basename=`basename $configure_ac`
-    if test -f $dirname/NO-AUTO-GEN; then
+    if [ -f $dirname/NO-AUTO-GEN ]; then
 	echo skipping $dirname -- flagged as no auto-gen
+    elif [ ! -w $dirname ]; then
+        echo skipping $dirname -- directory is read only
     else
 	printbold "Processing $configure_ac"
 	cd $dirname

@@ -1,5 +1,9 @@
 2004-10-28  James Henstridge  <james@jamesh.id.au>
 
+	* gnome-autogen.sh: if the directory is read only, skip it.  This
+	helps in cases where a directory from a failed "make distcheck" is
+	lying around.  Should fix bug #136093.
+
 	* gnome-autogen.sh (m4dir): fix up the AC_CONFIG_MACRO_DIR check
 	to work with sub-package configure.in's.
 
