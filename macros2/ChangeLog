@@ -1,3 +1,10 @@
+2003-03-07  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	
+	* autogen.sh: Replace PACKAGE with PKG_NAME, since PKG_NAME is
+	what is defined by the various applications' autogen.sh. Also,
+	call autopoint rather than gettextize when appropriate (when
+	AM_GNU_GETTEXT_VERSION is present).
+
 2003-02-27  Mark McLoughlin  <mark@skynet.ie>
 
 	* compiler-flags.m4: fix mixed up order of arguments to

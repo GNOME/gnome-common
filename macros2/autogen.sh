@@ -2,7 +2,7 @@
 # Run this to generate all the initial makefiles, etc.
 
 #name of package
-PACKAGE=${PACKAGE:-Package}
+PKG_NAME=${PKG_NAME:-Package}
 srcdir=${srcdir:-.}
 
 # default version requirements ...
@@ -316,8 +316,13 @@ for configure_ac in $configure_files; do
 	    printbold "Running $GLIB_GETTEXTIZE... Ignore non-fatal messages."
 	    echo "no" | $GLIB_GETTEXTIZE --force --copy || exit 1
 	elif grep "^AM_GNU_GETTEXT" $basename >/dev/null; then
-	    printbold "Running $GETTEXTIZE... Ignore non-fatal messages."
-	    echo "no" | $GETTEXTIZE --force --copy || exit 1
+	   if grep "^AM_GNU_GETTEXT_VERSION" $basename > /dev/null; then
+	   	printbold "Running autopoint..."
+		autopoint --force || exit 1
+	   else
+	    	printbold "Running $GETTEXTIZE... Ignore non-fatal messages."
+	    	echo "no" | $GETTEXTIZE --force --copy || exit 1
+	   fi
 	fi
 	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
 	    printbold "Running $INTLTOOLIZE..."
