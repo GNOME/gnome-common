@@ -5,7 +5,7 @@ GNOME2_MACROS=					\
 	gnome-fileutils.m4 gnome-gettext.m4 gnome-gnorba-check.m4 \
 	gnome-pthread-check.m4 gnome-support.m4 \
 	gnome-x-checks.m4 gnome.m4 linger.m4 need-declaration.m4 \
-	aclocal-include.m4 check-utmp.m4
+	check-utmp.m4
 
 EXTRA_DIST=$(GNOME2_MACROS) autogen.sh
 MAINTAINERCLEANFILES=macros2.dep

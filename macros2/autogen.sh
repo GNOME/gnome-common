@@ -94,32 +94,9 @@ do
     echo skipping $dr -- flagged as no auto-gen
   else
     echo processing $dr
-    macrodirs=`sed -n -e 's,AM_ACLOCAL_INCLUDE(\(.*\)),\1,gp' < $coin`
     ( cd $dr
-      macrosdir=`find . -name macros -print`
-      for i in $macrodirs; do
-	if test -f $i/gnome-gettext.m4; then
-	  DELETEFILES="$DELETEFILES $i/gnome-gettext.m4"
-	fi
-      done
 
-      echo "deletefiles is $DELETEFILES"
       aclocalinclude="$ACLOCAL_FLAGS"
-      for k in $aclocalinclude; do
-  	if test -d $k; then
-	  if [ -f $k/gnome.m4 -a "$GNOME_INTERFACE_VERSION" = "1" ]; then
-	    rm -f $DELETEFILES
-	  fi
-        fi
-      done
-      for k in $macrodirs; do
-  	if test -d $k; then
-          aclocalinclude="$aclocalinclude -I $k"
-	  if [ -f $k/gnome.m4 -a "$GNOME_INTERFACE_VERSION" = "1" ]; then
-	    rm -f $DELETEFILES
-	  fi
-        fi
-      done
       if grep "^AM_GNU_GETTEXT" configure.in >/dev/null; then
 	if grep "sed.*POTFILES" configure.in >/dev/null; then
 	  : do nothing -- we still have an old unmodified configure.in

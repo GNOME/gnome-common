@@ -1,4 +1,7 @@
-2000-07-24  Martin Baulig  <baulig@suse.de>
+2000-07-24  Martin Baulig  <martin@home-of-linux.org>
+
+	* autogen.sh: Removed some old crap in it.
+	* aclocal-include.m4: Removed.
 
 	* gnome-x-checks.m4: Check for GTK+ 2.0.
 
