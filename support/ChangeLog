@@ -68,7 +68,7 @@
 1998-12-02  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (EXTRA_DIST): Add back `gnomesupport.awk' and
-	`README-gnome'. 
+	`README-gnome'.
 
 1998-11-06  Raja R Harinath  <harinath@cs.umn.edu>
 
@@ -93,7 +93,7 @@
 	* findme.h: Likewise.
 	* popt.h: Likewise.
 	* poptint.h: Likewise.
-	
+
 1998-09-02  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* canonicalize.c (realpath): Remove `weak_alias'.
@@ -161,7 +161,7 @@
 	* gnomesupport-fake.h: New file.  Fake in HAVE_* for functions
 	that are provided by `gnomesupport' rather than `libc'.
 	* error.c: Include gnomesupport-fake.h.
-	(program_name): Define to `program_invocation_name' if 
+	(program_name): Define to `program_invocation_name' if
 	HAVE_PROGRAM_INVOCATION_NAME.
 
 1998-07-29  Martin Baulig  <martin@home-of-linux.org>
@@ -253,7 +253,7 @@ Thu May 21 21:21:12 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* argp-help.c (argp_doc): Backed out previous "fix". :-)
 	As pointed out it was dead wrong.
-	
+
 1998-05-09  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* argp-help.c (argp_doc): Removed a compiler warning.
@@ -261,20 +261,20 @@ Thu May 21 21:21:12 1998  Tom Tromey  <tromey@cygnus.com>
 1998-04-14  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnomesupport-h.c (main): Make gnomesupport.h include stddef.h
-	unconditionally. 
+	unconditionally.
 
 1998-04-13  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* scandir.c (<sys/types.h>): Include.
 	* gnomesupport-h.c (!HAVE_SCANDIR): Do all the `dirent' wrangling
 	only if `scandir' is needed.  Also, include <sys/types.h> in all
-	cases. 
+	cases.
 
 1998-04-13  Seth Alves  <alves@twitch.cp.domain.net>
 
 	* gnomesupport-h.c (HAVE_DIRENT_H): FreeBSD needs <sys/types.h>
 	before <dirent.h>.
-	
+
 1998-04-12  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (supportincludedir): Is now $(pkglibdir)/include.
@@ -289,7 +289,7 @@ Thu May 21 21:21:12 1998  Tom Tromey  <tromey@cygnus.com>
 	which contains prototypes for many of the functions in
 	`libgnomesupport'.  This method is used to ensure that prototypes
 	appear only for those functions that are provided by
-	`libgnomesupport'. 
+	`libgnomesupport'.
 
 	* scandir.c (alphasort): New utility function.
 
@@ -301,7 +301,7 @@ Thu May 21 21:21:12 1998  Tom Tromey  <tromey@cygnus.com>
 	`gwp':
 
 	1998-02-08  Raja R Harinath  <harinath@cs.umn.edu>
-        	* scandir.c (scandir): Revert change of `1998-02-07'.  
+        	* scandir.c (scandir): Revert change of `1998-02-07'.
 		Don't use d_reclen, but fix the expression used to
 		figure out the length.
 
@@ -335,12 +335,12 @@ Fri Mar 13 21:30:34 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* vsnprintf.c: Actually fill it in.  It is from
 	<URL:http://theos.com/~deraadt/snprintf.c>, with one small fix to
-	actually make it compile. 
+	actually make it compile.
 
 1998-03-09  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* easy-vsnprintf.c: New file.  Provides (v)snprintf as simple
-	wrappers to `__vsnprintf'.  
+	wrappers to `__vsnprintf'.
 	* vsnprintf.c: New file.  Empty for now.
 
 Sun Mar  8 17:13:33 1998  Tom Tromey  <tromey@cygnus.com>
@@ -386,5 +386,5 @@ Wed Mar  4 00:58:27 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* strcasecmp.c: New file, copied from `glibc'.  Used to provide
 	replacement `strcasecmp' file.
-	
+
 
