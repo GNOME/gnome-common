@@ -28,6 +28,10 @@
 #include <limits.h>
 #include <getopt.h>
 
+#ifdef HAVE_ALLOCA_H
+#include <alloca.h>
+#endif
+
 #ifndef _
 /* This is for other GNU distributions with internationalized messages.
    When compiling libc, the _ macro is predefined.  */
@@ -38,6 +42,7 @@
 # define gettext(msgid) (msgid)
 #endif
 #define N_(msgid) (msgid)
+#define _(msgid) msgid
 #endif
 
 #if _LIBC - 0
@@ -522,9 +527,9 @@ parser_init (struct parser *parser, const struct argp *argp,
     return ENOMEM;
 
   parser->groups = parser->storage;
-  parser->child_inputs = parser->storage + GLEN;
-  parser->long_opts = parser->storage + GLEN + CLEN;
-  parser->short_opts = parser->storage + GLEN + CLEN + LLEN;
+  parser->child_inputs = (void **)((char *)parser->storage + GLEN);
+  parser->long_opts = (struct option *)((char *)parser->storage + GLEN + CLEN);
+  parser->short_opts = (char *)parser->storage + GLEN + CLEN + LLEN;
 
   memset (parser->child_inputs, 0, szs.num_child_inputs * sizeof (void *));
   parser_convert (parser, argp, flags);
@@ -777,7 +782,7 @@ parser_parse_opt (struct parser *parser, int opt, char *val)
        with each option.  */
     {
       static const char bad_key_err[] =
-	N_("(PROGRAM ERROR) Option should have been recognized!?");
+	_("(PROGRAM ERROR) Option should have been recognized!?");
       if (group_key == 0)
 	__argp_error (&parser->state, "-%c: %s", opt,
 		      dgettext (parser->argp->argp_domain, bad_key_err));

@@ -14,6 +14,6 @@ extern char *strndup (const char *s, size_t n);
 extern char *program_invocation_short_name;
 extern char *program_invocation_name;
 
-#define __mempcpy(To,From,Len) (memcpy ((To), (From), (Len)) + (Len))
+#define __mempcpy(To,From,Len) ((char *)memcpy ((To), (From), (Len)) + (Len))
 
 #endif /* __GNOME_ARGP_H__ */
