@@ -54,6 +54,23 @@ AC_DEFUN([GNOME_WITH_VFS],[
   fi
 
   dnl
+  dnl Samba support
+  dnl
+  smbfs=""
+  SAMBAFILES=""
+  AC_ARG_WITH(samba,
+  	  [--with-samba	            Support smb virtual file system],[
+  	  if test "x$withval != xno"; then
+  		  AC_DEFINE(WITH_SMBFS)
+	          vfs_flags="$vfs_flags, smbfs"
+		  smbfs="smbfs.o"
+		  SAMBAFILES="\$(SAMBAFILES)"
+  	  fi
+  ])
+  AC_SUBST(smbfs)
+  AC_SUBST(SAMBAFILES)
+  
+  dnl
   dnl The termnet support
   dnl
   termnet=false
