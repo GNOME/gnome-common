@@ -9,6 +9,7 @@
 # be used in projects which are not available under the GNU Public License
 # but which still want to provide support for the GNU gettext functionality.
 # Please note that the actual code is *not* freely available.
+#
 
 # serial 5
 
