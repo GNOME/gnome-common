@@ -1,10 +1,10 @@
 ## Process this file with automake to produce Makefile.in.
 
-supportexecincludedir = $(pkglibdir)/include
+supportexecincludedir = $(includedir)/gnome/$(GNOME_INTERFACE_VERSION)
 
 INCLUDES = -D_GNU_SOURCE
 
-lib_LTLIBRARIES = libgnomesupport-2.0.la
+lib_LTLIBRARIES = libgnomesupport-1.3.la
 
 # it is in _DATA since we don't want `gnomesupport.h' to be part of
 # the distributed `.tar.gz' file
@@ -12,19 +12,18 @@ supportexecinclude_DATA = gnomesupport.h
 
 # These are internal headers: they are used only when compiling and
 # should not be installed
-noinst_HEADERS = gnomesupport-fake.h \
-		 findme.h \
-		 popt-gnome.h \
-		 poptint.h
+#noinst_HEADERS = gnomesupport-fake.h \
+#		 findme.h poptint.h system.h
 
 # Hmm... should we move `error.h' here.
 #include_HEADERS = popt-gnome.h
 
-popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
+#popt_sources = findme.c poptconfig.c poptparse.c popt.c popthelp.c
+popt_sources=
 
-libgnomesupport_2_0_la_SOURCES = gnomesupport.h $(popt_sources) gnome-argp.c
-libgnomesupport_2_0_la_LIBADD  = @LTLIBOBJS@
-libgnomesupport_2_0_la_LDFLAGS = -version-info 0:0:0
+libgnomesupport_1_3_la_SOURCES = gnomesupport.h $(popt_sources) gnome-argp.c
+libgnomesupport_1_3_la_LIBADD  = @LTLIBOBJS@
+libgnomesupport_1_3_la_LDFLAGS = -version-info 0:0:0
 
 BUILT_SOURCES = gnomesupport.h
 
@@ -43,4 +42,7 @@ EXTRA_DIST = gnomesupport.awk README-gnome \
 	memmove.c mkstemp.c popt-gnome.h popt.c poptconfig.c \
 	popthelp.c poptint.h poptparse.c scandir.c strcasecmp.c \
 	strerror.c strndup.c strnlen.c strtod.c strtok_r.c strtol.c \
-	strtoul.c vasprintf.c vsnprintf.c
+	strtoul.c vasprintf.c vsnprintf.c gnome-support-2.0.pc.in
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gnome-support-2.0.pc

@@ -2,41 +2,7 @@
    file accompanying popt source distributions, available from 
    ftp://ftp.redhat.com/pub/code/popt */
 
-/* AIX requires this to be the first thing in the file.  */
-#ifndef __GNUC__
-# if HAVE_ALLOCA_H
-#  include <alloca.h>
-# else
-#  ifdef _AIX
-#   pragma alloca
-#  else
-#   ifndef alloca /* predefined by HP cc +Olibcalls */
-char *alloca ();
-#   endif
-#  endif
-# endif
-#endif
-    
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#ifdef __NeXT
-/* access macros are not declared in non posix mode in unistd.h -
- don't try to use posix on NeXTstep 3.3 ! */ 
-#include <libc.h>
-#endif
-
-#ifndef _AIX
-# if HAVE_ALLOCA_H
-#  include <alloca.h>
-# endif
-#endif
-
+#include "system.h"
 #include "findme.h"
 
 const char * findProgramPath(const char * argv0) {
@@ -48,7 +14,7 @@ const char * findProgramPath(const char * argv0) {
     /* If there is a / in the argv[0], it has to be an absolute
        path */
     if (strchr(argv0, '/'))
-	return strdup(argv0);
+	return xstrdup(argv0);
 
     if (!path) return NULL;
 
