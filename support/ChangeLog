@@ -1,3 +1,7 @@
+1998-05-09  Kjartan Maraas  <kmaraas@fib.hl.no>
+
+	* argp-help.c (argp_doc): Removed a compiler warning.
+
 1998-04-14  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnomesupport-h.c (main): Make gnomesupport.h include stddef.h
