@@ -1,3 +1,10 @@
+2005-07-18  Christian Persch  <chpe@cvs.gnome.org>
+
+	* macros2/gnome-autogen.sh:
+
+	When configure.{in,ac} contains GNOME_DOC_INIT, actually call
+	gnome-doc-prepare.
+
 2005-03-21  Sven Herzberg  <herzi@gnome-de.org>
 
 	* macros2/gnome-autogen.sh: added support for the gnome-doc-utils

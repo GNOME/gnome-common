@@ -368,6 +368,10 @@ for configure_ac in $configure_files; do
 	    printbold "Running gnome-doc-common..."
 	    gnome-doc-common --copy || exit 1
 	fi
+	if grep "^GNOME_DOC_INIT" $basename >/dev/null; then
+	    printbold "Running $GNOME_DOC_PREPARE..."
+	    $GNOME_DOC_PREPARE --copy || exit 1
+	fi
 
         # Now run aclocal to pull in any additional macros needed
 
