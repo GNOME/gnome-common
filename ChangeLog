@@ -1,3 +1,7 @@
+2005-07-25  James Henstridge  <james@jamesh.id.au>
+
+	* configure.in: bump release number.
+
 2005-07-19  Shaun McCance  <shaunm@gnome.org>
 
 	* macros2/gnome-autogen.sh:
