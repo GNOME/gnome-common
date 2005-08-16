@@ -237,6 +237,17 @@ for configure_ac in $configure_files; do
     if grep "^GNOME_DOC_INIT" $configure_ac >/dev/null; then
         want_gnome_doc_utils=true
     fi
+
+    # check to make sure gnome-common macros can be found ...
+    if grep "^GNOME_COMMON_INIT" $configure_ac >/dev/null ||
+       grep "^GNOME_DEBUG_CHECK" $configure_ac >/dev/null ||
+       grep "^GNOME_MAINTAINER_MODE_DEFINES" $configure_ac >/dev/null; then
+        require_m4macro gnome-common.m4
+    fi
+    if grep "^GNOME_COMPILE_WARNINGS" $configure_ac >/dev/null ||
+       grep "^GNOME_CXX_WARNINGS" $configure_ac >/dev/null; then
+        require_m4macro gnome-compiler-flags.m4
+    fi
 done
 
 DIE=0

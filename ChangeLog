@@ -1,3 +1,10 @@
+2005-08-16  James Henstridge  <james@jamesh.id.au>
+
+	* macros2/gnome-autogen.sh: add checks for gnome-common macro
+	names, and call require_m4macro for the appropriate names.  This
+	can help detect $ACLOCAL_FLAGS problems earlier.  Addresses bug
+	#312125.
+
 2005-07-25  James Henstridge  <james@jamesh.id.au>
 
 	* configure.in: bump release number.
