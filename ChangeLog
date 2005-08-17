@@ -1,5 +1,12 @@
 2005-08-17  Stepan Kasal  <kasal@ucw.cz>
 
+	* macros2/gnome-autogen.sh (add_to_cm_macrodirs): New function,
+	prevents duplicates in $cm_macrodirs.
+	(check_m4macros): Use it.  Read the dirlist file, if it is supported
+	by the version of Automake actually in use.
+
+2005-08-17  Stepan Kasal  <kasal@ucw.cz>
+
 	* macros2/gnome-autogen.sh (version_check): Set $variable_VERSION
 	  to the actual version number of the tool.
 

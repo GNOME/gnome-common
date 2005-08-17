@@ -131,16 +131,42 @@ forbid_m4macro() {
 }
 
 # Usage:
+#     add_to_cm_macrodirs dirname
+# Adds the dir to $cm_macrodirs, if it's not there yet.
+add_to_cm_macrodirs() {
+    case $cm_macrodirs in
+    "$1 "* | *" $1 "* | *" $1") ;;
+    *) cm_macrodirs="$cm_macrodirs $1";;
+    esac
+}
+
+# Usage:
 #     check_m4macros
 # Checks that all the requested macro files are in the aclocal macro path
 # Uses REQUIRED_M4MACROS and ACLOCAL variables.
 check_m4macros() {
     # construct list of macro directories
-    cm_macrodirs="`$ACLOCAL --print-ac-dir`"
+    cm_macrodirs=`$ACLOCAL --print-ac-dir`
+    # aclocal also searches a version specific dir, eg. /usr/share/aclocal-1.9
+    # but it contains only Automake's own macros, so we can ignore it.
+
+    # Read the dirlist file, supported by Automake >= 1.7.
+    if compare_versions 1.7 $AUTOMAKE_VERSION && [ -s $cm_macrodirs/dirlist ]; then
+	cm_dirlist=`sed 's/[ 	]*#.*//;/^$/d' $cm_macrodirs/dirlist`
+	if [ -n "$cm_dirlist" ] ; then
+	    for cm_dir in $cm_dirlist; do
+		if [ -d $cm_dir ]; then
+		    add_to_cm_macrodirs $cm_dir
+		fi
+	    done
+	fi
+    fi
+
+    # Parse $ACLOCAL_FLAGS
     set - $ACLOCAL_FLAGS
     while [ $# -gt 0 ]; do
 	if [ "$1" = "-I" ]; then
-	    cm_macrodirs="$cm_macrodirs $2"
+	    add_to_cm_macrodirs "$2"
 	    shift
 	fi
 	shift
