@@ -215,7 +215,7 @@ want_gnome_doc_utils=false
 
 configure_files="`find $srcdir -name '{arch}' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
-    if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null || \
+    if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null ||
        grep "^LT_INIT" $configure_ac >/dev/null; then
 	want_libtool=true
     fi
@@ -225,7 +225,8 @@ for configure_ac in $configure_files; do
     if grep "^AM_GLIB_GNU_GETTEXT" $configure_ac >/dev/null; then
 	want_glib_gettext=true
     fi
-    if grep "^\(AC\|IT\)_PROG_INTLTOOL" $configure_ac >/dev/null; then
+    if grep "^AC_PROG_INTLTOOL" $configure_ac >/dev/null ||
+       grep "^IT_PROG_INTLTOOL" $configure_ac >/dev/null; then
 	want_intltool=true
     fi
     if grep "^PKG_CHECK_MODULES" $configure_ac >/dev/null; then
@@ -347,7 +348,7 @@ for configure_ac in $configure_files; do
         # details.
 
         # programs that might install new macros get run before aclocal
-	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null || \
+	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null ||
 	   grep "^LT_INIT" $basename >/dev/null; then
 	    printbold "Running $LIBTOOLIZE..."
 	    $LIBTOOLIZE --force --copy || exit 1
@@ -366,7 +367,8 @@ for configure_ac in $configure_files; do
 	   fi
 	fi
 
-	if grep "^\(AC\|IT\)_PROG_INTLTOOL" $basename >/dev/null; then
+	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null ||
+           grep "^IT_PROG_INTLTOOL" $basename >/dev/null; then
 	    printbold "Running $INTLTOOLIZE..."
 	    $INTLTOOLIZE --force --copy --automake || exit 1
 	fi
