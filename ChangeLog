@@ -1,3 +1,8 @@
+2005-08-17  Stepan Kasal  <kasal@ucw.cz>
+
+	* macros2/gnome-autogen.sh (version_check): Set $variable_VERSION
+	  to the actual version number of the tool.
+
 2005-08-17  James Henstridge  <james@jamesh.id.au>
 
 	* macros2/gnome-autogen.sh: pass --force to gnome-doc-prepare to
