@@ -1,3 +1,5 @@
+==================== 2.11.92 ====================
+
 2005-02-18  Stepan Kasal  <kasal@ucw.cz>
 
 	* macros/autogen.sh: Fix the URL for Automake; don't recommend 1.3
