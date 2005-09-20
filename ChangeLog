@@ -1,3 +1,8 @@
+2005-09-20  Stepan Kasal  <kasal@ucw.cz>
+
+	* macros2/gnome-autogen.sh: Prefer newer versions of Automake.
+	From bug #305641.
+
 2005-09-20  James Henstridge  <james@jamesh.id.au>
 
 	* configure.in: bump version to 2.12.0
