@@ -1,5 +1,7 @@
 2005-09-20  James Henstridge  <james@jamesh.id.au>
 
+	* configure.in: bump version to 2.12.0
+
 	* macros2/gnome-autogen.sh (configure_files): when searching for
 	configure.in files, skip directories starting with a dot.  This
 	avoids Bzr, Quilt and Subversion bookkeeping directories among
