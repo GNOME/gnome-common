@@ -1,3 +1,9 @@
+2005-10-24  James Henstridge  <james@jamesh.id.au>
+
+	* macros2/gnome-autogen.sh (configure_files): update find
+	expression to not exclude ".." from search.  Fixes non-srcdir
+	builds (where $srcdir might be "..").  Fixes bug #319496.
+
 2005-09-20  Stepan Kasal  <kasal@ucw.cz>
 
 	* macros2/gnome-autogen.sh: Prefer newer versions of Automake.

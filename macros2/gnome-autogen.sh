@@ -240,7 +240,7 @@ want_pkg_config=false
 want_gtk_doc=false
 want_gnome_doc_utils=false
 
-configure_files="`find $srcdir -name '{arch}' -prune -o -name '.?*' -prune -o -name configure.ac -print -o -name configure.in -print`"
+configure_files="`find $srcdir -name '{arch}' -prune -o -name '.??*' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
     if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null ||
        grep "^LT_INIT" $configure_ac >/dev/null; then
