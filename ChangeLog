@@ -1,3 +1,9 @@
+2006-03-10  James Henstridge  <james@jamesh.id.au>
+
+	* macros2/gnome-autogen.sh (configure_files): skip directories
+	called "_darcs", similar to the handling of other VCS metadata
+	dirs.  Fixes bug #321860.
+
 2005-10-24  James Henstridge  <james@jamesh.id.au>
 
 	* macros2/gnome-autogen.sh (configure_files): update find
