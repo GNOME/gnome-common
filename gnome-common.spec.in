@@ -1,5 +1,5 @@
 Name: gnome-common
-Summary: gnome-common contains usefull things common to building gnome packages
+Summary: gnome-common contains useful things common to building gnome packages
 Version: @VERSION@
 Release: 0
 License: GPL
