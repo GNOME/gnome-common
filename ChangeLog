@@ -1,3 +1,9 @@
+2006-10-20  Bastien Nocera  <hadess@hadess.net>
+
+	* macros2/gnome-autogen.sh: exit from the check_m4macros function as
+	soon as we have detected some undefined macros, rather than leaving
+	the developer wondering what the problem is
+
 2006-05-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-common.spec.in: Fix a typo.

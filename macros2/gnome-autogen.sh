@@ -141,6 +141,17 @@ add_to_cm_macrodirs() {
 }
 
 # Usage:
+#     print_m4macros_error
+# Prints an error message saying that autoconf macros were misused
+print_m4macros_error() {
+    printerr "***Error***: some autoconf macros required to build $PKG_NAME"
+    printerr "  were not found in your aclocal path, or some forbidden"
+    printerr "  macros were found.  Perhaps you need to adjust your"
+    printerr "  ACLOCAL_FLAGS?"
+    printerr
+}
+
+# Usage:
 #     check_m4macros
 # Checks that all the requested macro files are in the aclocal macro path
 # Uses REQUIRED_M4MACROS and ACLOCAL variables.
@@ -202,6 +213,10 @@ check_m4macros() {
 	    fi
 	done
     fi
+    if [ "$cm_status" != 0 ]; then
+        print_m4macros_error
+        return $cm_status
+    fi
     if [ -n "$FORBIDDEN_M4MACROS" ]; then
 	printbold "Checking for forbidden M4 macros..."
 	# check that each macro file is in one of the macro dirs
@@ -220,11 +235,7 @@ check_m4macros() {
 	done
     fi
     if [ "$cm_status" != 0 ]; then
-	printerr "***Error***: some autoconf macros required to build $PKG_NAME"
-	printerr "  were not found in your aclocal path, or some forbidden"
-	printerr "  macros were found.  Perhaps you need to adjust your"
-	printerr "  ACLOCAL_FLAGS?"
-	printerr
+        print_m4macros_error
     fi
     return $cm_status
 }
