@@ -1,3 +1,7 @@
+2006-12-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* macros2/gnome-autogen.sh: Make automake 1.10 work too.
+
 2006-10-20  Bastien Nocera  <hadess@hadess.net>
 
 	* macros2/gnome-autogen.sh: exit from the check_m4macros function as
