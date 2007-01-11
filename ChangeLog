@@ -1,5 +1,10 @@
 2007-01-11  Christian Persch  <chpe@svn.gnome.org>
 
+	* macros2/gnome-autogen.sh: Default to AM 1.9. Bug #323868, patch by
+	Christian Kirbach.
+
+2007-01-11  Christian Persch  <chpe@svn.gnome.org>
+
 	* macros2/gnome-common.m4: Define more deprecation symbols.
 	Bug #343441.
 
