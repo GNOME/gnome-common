@@ -1,3 +1,8 @@
+2007-01-29  Christian Persch  <chpe@svn.gnome.org>
+
+	* macros2/gnome-compiler-flags.m4:
+	Fix --enable-cxx-warnings checks. Bug #360693.
+
 2007-01-12  Shaun McCance  <shaunm@gnome.org>
 
 	* macros2/gnome-autogen.sh:

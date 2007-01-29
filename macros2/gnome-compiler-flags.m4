@@ -95,11 +95,11 @@ AC_DEFUN([GNOME_CXX_WARNINGS],[
 
   AC_MSG_CHECKING(what warning flags to pass to the C++ compiler)
   warnCXXFLAGS=
-  if test "x$GCC" != xyes; then
-    enable_compile_warnings=no
+  if test "x$GXX" != xyes; then
+    enable_cxx_warnings=no
   fi
   if test "x$enable_cxx_warnings" != "xno"; then
-    if test "x$GCC" = "xyes"; then
+    if test "x$GXX" = "xyes"; then
       case " $CXXFLAGS " in
       *[\ \	]-Wall[\ \	]*) ;;
       *) warnCXXFLAGS="-Wall -Wno-unused" ;;
@@ -122,7 +122,7 @@ AC_DEFUN([GNOME_CXX_WARNINGS],[
    AC_MSG_CHECKING(what language compliance flags to pass to the C++ compiler)
    complCXXFLAGS=
    if test "x$enable_iso_cxx" != "xno"; then
-     if test "x$GCC" = "xyes"; then
+     if test "x$GXX" = "xyes"; then
       case " $CXXFLAGS " in
       *[\ \	]-ansi[\ \	]*) ;;
       *) complCXXFLAGS="$complCXXFLAGS -ansi" ;;
