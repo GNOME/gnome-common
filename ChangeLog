@@ -1,5 +1,9 @@
 2007-04-09  Christian Persch  <chpe@gnome.org>
 
+	* configure.in: Bump version to 2.19.0.
+
+2007-04-09  Christian Persch  <chpe@gnome.org>
+
 	=== Release 2.18.0 ===
 
 	* autogen.sh: Use automake 1.9.
