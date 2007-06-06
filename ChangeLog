@@ -1,3 +1,7 @@
+2007-06-06  Christian Persch  <chpe@gnome.org>
+
+	* doc-build/gnome-doc-common.in: Add datarootdir substitution.
+
 2007-04-09  Christian Persch  <chpe@gnome.org>
 
 	* configure.in: Bump version to 2.19.0.
