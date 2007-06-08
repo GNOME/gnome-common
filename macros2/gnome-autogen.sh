@@ -368,7 +368,7 @@ if [ "$DIE" -eq 1 ]; then
   exit 1
 fi
 
-if [ "$#" = 0 ]; then
+if [ "$#" = 0 -a "x$NOCONFIGURE" = "x" ]; then
   printerr "**Warning**: I am going to run \`configure' with no arguments."
   printerr "If you wish to pass any to it, please specify them on the"
   printerr \`$0\'" command line."

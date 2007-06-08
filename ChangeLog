@@ -1,3 +1,9 @@
+2007-06-08  Christian Persch  <chpe@gnome.org>
+
+	* macros2/gnome-autogen.sh: Don't print warning about missing
+	arguments if we're not going to run configure. Bug #445584, patch by
+	"Cygwin Ports maintainer" (yselkowitz%40users.sourceforge.net).
+
 2007-06-06  Christian Persch  <chpe@gnome.org>
 
 	* doc-build/gnome-doc-common.in: Add datarootdir substitution.
