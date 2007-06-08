@@ -23,19 +23,25 @@ FORBIDDEN_M4MACROS=${FORBIDDEN_M4MACROS:-}
 
 # Not all echo versions allow -n, so we check what is possible. This test is
 # based on the one in autoconf.
-case `echo "testing\c"; echo 1,2,3`,`echo -n testing; echo 1,2,3` in
-  *c*,-n*) ECHO_N= ;;
-  *c*,*  ) ECHO_N=-n ;;
-  *)       ECHO_N= ;;
+ECHO_C=
+ECHO_N=
+case `echo -n x` in
+-n*)
+  case `echo 'x\c'` in
+  *c*) ;;
+  *)   ECHO_C='\c';;
+  esac;;
+*)
+  ECHO_N='-n';;
 esac
 
 # some terminal codes ...
 boldface="`tput bold 2>/dev/null`"
 normal="`tput sgr0 2>/dev/null`"
 printbold() {
-    echo $ECHO_N "$boldface"
+    echo $ECHO_N "$boldface" $ECHO_C
     echo "$@"
-    echo $ECHO_N "$normal"
+    echo $ECHO_N "$normal" $ECHO_C
 }    
 printerr() {
     echo "$@" >&2
@@ -85,7 +91,7 @@ version_check() {
     fi
     printbold "checking for $vc_package $vc_comparator $vc_min_version..."
     for vc_checkprog in $vc_checkprogs; do
-	echo $ECHO_N "  testing $vc_checkprog... "
+	echo $ECHO_N "  testing $vc_checkprog... " $ECHO_C
 	if $vc_checkprog --version < /dev/null > /dev/null 2>&1; then
 	    vc_actual_version=`$vc_checkprog --version | head -n 1 | \
                                sed 's/^.*[ 	]\([0-9.]*[a-z]*\).*$/\1/'`

@@ -1,5 +1,10 @@
 2007-06-08  Christian Persch  <chpe@gnome.org>
 
+	* macros2/gnome-autogen.sh: Don't print extra newlines when /bin/sh
+	isn't bash. Bug #130346.
+
+2007-06-08  Christian Persch  <chpe@gnome.org>
+
 	* macros2/gnome-autogen.sh: Don't print warning about missing
 	arguments if we're not going to run configure. Bug #445584, patch by
 	"Cygwin Ports maintainer" (yselkowitz%40users.sourceforge.net).
