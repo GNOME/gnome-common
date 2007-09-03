@@ -257,18 +257,7 @@ want_pkg_config=false
 want_gtk_doc=false
 want_gnome_doc_utils=false
 
-if [ -z "$CONFIGURE_AC_FILES" ]; then
-  configure_files="`find $srcdir -name '{arch}' -prune -o -name '_darcs' -prune -o -name '.??*' -prune -o -name configure.ac -print -o -name configure.in -print`"
-else
-  for configure_ac in $CONFIGURE_AC_FILES; do
-    if [ ! -f $configure_ac ]; then
-      printerr "Removing $configure_ac from CONFIGURE_AC_FILES: it does not exist"
-    else
-      configure_files="$configure_files $configure_ac"
-    fi
-  done
-fi
-
+configure_files="`find $srcdir -name '{arch}' -prune -o -name '_darcs' -prune -o -name '.??*' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
     dirname=`dirname $configure_ac`
     if [ -f $dirname/NO-AUTO-GEN ]; then
