@@ -1,3 +1,12 @@
+2007-12-21  Sven Herzberg  <herzi@gnome-de.org>
+
+	Reviewed by: Christian Persch
+
+	Abort when the first dependency fails. Fixes bug 469115.
+
+	* macros2/gnome-autogen.sh: don't use the DIE variable anymore and
+	abort on the first dependency failure
+
 2007-06-08  Christian Persch  <chpe@gnome.org>
 
 	* macros2/gnome-autogen.sh: Don't print extra newlines when /bin/sh
