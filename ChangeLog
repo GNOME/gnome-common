@@ -1,3 +1,8 @@
+2008-11-25  Vincent Untz  <vuntz@gnome.org>
+
+	* macros2/gnome-common.m4: add -DWNCK_DISABLE_DEPRECATED
+	-DLIBSOUP_DISABLE_DEPRECATED to DISABLE_DEPRECATED
+
 2008-09-22  Christian Persch  <chpe@gnome.org>
 
 	=== Release 2.24.0 ===
