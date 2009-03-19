@@ -53,6 +53,11 @@
 
 2007-01-29  Christian Persch  <chpe@svn.gnome.org>
 
+    	* Add -Wno-portability to automake invocation. Bug #529120, patch by Philip
+	Van Hoof.
+
+2007-01-29  Christian Persch  <chpe@svn.gnome.org>
+
 	* macros2/gnome-compiler-flags.m4:
 	Fix --enable-cxx-warnings checks. Bug #360693.
 
