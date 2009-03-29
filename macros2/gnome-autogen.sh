@@ -257,6 +257,7 @@ want_intltool=false
 want_pkg_config=false
 want_gtk_doc=false
 want_gnome_doc_utils=false
+want_maintainer_mode=false
 
 configure_files="`find $srcdir -name '{arch}' -prune -o -name '_darcs' -prune -o -name '.??*' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
@@ -287,6 +288,11 @@ for configure_ac in $configure_files; do
     fi
     if grep "^GNOME_DOC_INIT" $configure_ac >/dev/null; then
         want_gnome_doc_utils=true
+    fi
+
+    # check that AM_MAINTAINER_MODE is used
+    if grep "^AM_MAINTAINER_MODE" $configure_ac >/dev/null; then
+	want_maintainer_mode=true
     fi
 
     # check to make sure gnome-common macros can be found ...
@@ -484,7 +490,11 @@ for configure_ac in $configure_files; do
     fi
 done
 
-conf_flags="--enable-maintainer-mode"
+conf_flags=""
+
+if $want_maintainer_mode; then
+    conf_flags="--enable-maintainer-mode"
+fi
 
 if test x$NOCONFIGURE = x; then
     printbold Running $srcdir/configure $conf_flags "$@" ...

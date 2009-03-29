@@ -1,3 +1,10 @@
+2009-03-28  Rodney Dawes  <dobey@gnome.org>
+
+	* macros2/gnome-autogen.sh:
+	Only pass --enable-maintainer-mode when AM_MAINTAINER_MODE is present
+
+	FIxes #577037
+
 2008-11-25  Vincent Untz  <vuntz@gnome.org>
 
 	* macros2/gnome-common.m4: add -DWNCK_DISABLE_DEPRECATED
