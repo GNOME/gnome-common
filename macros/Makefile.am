@@ -35,7 +35,7 @@ if INSIDE_GNOME_COMMON
 gnome_aclocaldir = $(datadir)/aclocal/gnome-macros
 
 gnome-macros.dep: Makefile.am
-	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=$(gnome_aclocaldir)/%)' > $@
+	$(AM_V_GEN) echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=$(gnome_aclocaldir)/%)' > $@
 
 gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 \
 	gnome-gettext.m4 autogen.sh

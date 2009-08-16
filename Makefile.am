@@ -9,7 +9,7 @@ EXTRA_DIST = \
 
 # Build ChangeLog from GIT  history
 ChangeLog:
-	@if test -d $(top_srcdir)/.git; then \
+	$(AM_V_GEN) if test -d $(top_srcdir)/.git; then \
 		GIT_DIR="$(top_srcdir)/.git" git log --stat > $@; \
 	fi
 
