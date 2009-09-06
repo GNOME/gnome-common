@@ -8,6 +8,8 @@ EXTRA_DIST = \
 	doc/usage.txt \
 	ChangeLog.pre-git
 
+DISTCHECK_CONFIGURE_FLAGS = --disable-silent-rules
+
 # Build ChangeLog from GIT  history
 ChangeLog:
 	$(AM_V_GEN) if test -d $(top_srcdir)/.git; then \
