@@ -2,6 +2,7 @@ SUBDIRS = macros2 doc-build
 
 EXTRA_DIST = \
 	autogen.sh \
+	gnome-common.doap \
 	gnome-common.spec \
 	gnome-common.spec.in \
 	doc/usage.txt \
