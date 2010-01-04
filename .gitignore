@@ -1,1 +1,12 @@
 ChangeLog
+/aclocal.m4
+/autom4te.cache
+/config.log
+/config.status
+/configure
+doc-build/gnome-doc-common
+/gnome-common.spec
+/install-sh
+/missing
+Makefile
+Makefile.in
