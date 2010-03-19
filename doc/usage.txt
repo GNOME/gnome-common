@@ -11,7 +11,7 @@ script in your module that looks something like this:
 
 ---- Cut Here ----
 #!/bin/sh
-srcdir=`basename $0`
+srcdir=`dirname $0`
 [ -z "$srcdir" ] && srcdir=.
 
 PKG_NAME=mypackage
