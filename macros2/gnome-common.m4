@@ -1,11 +1,11 @@
 # gnome-common.m4
 #
-# serial 2
+# serial 3
 # 
 
 dnl GNOME_COMMON_INIT
 
-AC_DEFUN([GNOME_COMMON_INIT],
+AU_DEFUN([GNOME_COMMON_INIT],
 [
   dnl this macro should come after AC_CONFIG_MACRO_DIR
   AC_BEFORE([AC_CONFIG_MACRO_DIR], [$0])
@@ -18,7 +18,10 @@ AC_DEFUN([GNOME_COMMON_INIT],
   fi
 
   AC_SUBST([ACLOCAL_AMFLAGS])
-])
+],
+[[$0: This macro is deprecated. You should set put "ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}"
+in your top-level Makefile.am, instead, where "m4" is the macro directory set
+with AC_CONFIG_MACRO_DIR() in your configure.ac]])
 
 AC_DEFUN([GNOME_DEBUG_CHECK],
 [
