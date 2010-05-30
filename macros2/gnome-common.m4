@@ -1,4 +1,6 @@
 # gnome-common.m4
+#
+# serial 2
 # 
 
 dnl GNOME_COMMON_INIT
