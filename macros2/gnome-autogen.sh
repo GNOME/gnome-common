@@ -295,6 +295,10 @@ for configure_ac in $configure_files; do
 	want_maintainer_mode=true
     fi
 
+    if grep "^YELP_HELP_INIT" $configure_ac >/dev/null; then
+        require_m4macro yelp.m4
+    fi
+
     # check to make sure gnome-common macros can be found ...
     if grep "^GNOME_COMMON_INIT" $configure_ac >/dev/null ||
        grep "^GNOME_DEBUG_CHECK" $configure_ac >/dev/null ||
