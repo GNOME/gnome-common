@@ -332,6 +332,9 @@ for configure_ac in $configure_files; do
        grep "^GNOME_CXX_WARNINGS" $configure_ac >/dev/null; then
         require_m4macro gnome-compiler-flags.m4
     fi
+    if grep "^GNOME_CODE_COVERAGE" $configure_ac >/dev/null; then
+        require_m4macro gnome-code-coverage.m4
+    fi
 done
 
 #tell Mandrake autoconf wrapper we want autoconf 2.5x, not 2.13

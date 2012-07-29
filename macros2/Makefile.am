@@ -2,7 +2,8 @@
 
 GNOME2_MACROS = \
   gnome-common.m4 \
-  gnome-compiler-flags.m4
+  gnome-compiler-flags.m4 \
+  gnome-code-coverage.m4
 
 EXTRA_DIST = $(GNOME2_MACROS) gnome-autogen.sh
 
