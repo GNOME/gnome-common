@@ -45,7 +45,9 @@ omf_timestamp: $(omffile)
 install-data-hook-omf:
 	$(mkinstalldirs) $(DESTDIR)$(omf_dest_dir)
 	for file in $(omffile); do \
-		$(INSTALL_DATA) $$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
+		absfile=$(srcdir)/$$file.out; \
+		test -r $$file.out && absfile=$$file.out; \
+		$(INSTALL_DATA) $$absfile $(DESTDIR)$(omf_dest_dir)/$$file; \
 	done
 	-scrollkeeper-update -p $(DESTDIR)$(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
 
