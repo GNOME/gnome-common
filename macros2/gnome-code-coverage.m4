@@ -118,10 +118,10 @@ endif
 # Capture code coverage data
 code-coverage-capture: code-coverage-capture-hook
 ifdef CODE_COVERAGE_ENABLED
-	$(LCOV) --directory $(CODE_COVERAGE_DIRECTORY) --capture --output-file $(CODE_COVERAGE_OUTPUT_FILE).tmp --test-name "$(PACKAGE_NAME)-$(PACKAGE_VERSION)" --no-checksum --compat-libtool $(CODE_COVERAGE_LCOV_OPTIONS)
-	$(LCOV) --directory $(CODE_COVERAGE_DIRECTORY) --remove $(CODE_COVERAGE_OUTPUT_FILE).tmp "/tmp/*" --output-file $(CODE_COVERAGE_OUTPUT_FILE)
+	$(LCOV) --directory $(CODE_COVERAGE_DIRECTORY) --capture --output-file "$(CODE_COVERAGE_OUTPUT_FILE).tmp" --test-name "$(PACKAGE_NAME)-$(PACKAGE_VERSION)" --no-checksum --compat-libtool $(CODE_COVERAGE_LCOV_OPTIONS)
+	$(LCOV) --directory $(CODE_COVERAGE_DIRECTORY) --remove "$(CODE_COVERAGE_OUTPUT_FILE).tmp" "/tmp/*" --output-file "$(CODE_COVERAGE_OUTPUT_FILE)"
 	-rm -f $(CODE_COVERAGE_OUTPUT_FILE).tmp
-	LANG=C $(GENHTML) --prefix $(CODE_COVERAGE_DIRECTORY) --output-directory $(CODE_COVERAGE_OUTPUT_DIRECTORY) --title "$(PACKAGE_NAME)-$(PACKAGE_VERSION) Code Coverage" --legend --show-details $(CODE_COVERAGE_OUTPUT_FILE) $(CODE_COVERAGE_GENHTML_OPTIONS)
+	LANG=C $(GENHTML) --prefix $(CODE_COVERAGE_DIRECTORY) --output-directory "$(CODE_COVERAGE_OUTPUT_DIRECTORY)" --title "$(PACKAGE_NAME)-$(PACKAGE_VERSION) Code Coverage" --legend --show-details "$(CODE_COVERAGE_OUTPUT_FILE)" $(CODE_COVERAGE_GENHTML_OPTIONS)
 	@echo "file://$(abs_builddir)/$(CODE_COVERAGE_OUTPUT_DIRECTORY)/index.html"
 else
 	@echo "Need to reconfigure with --enable-code-coverage"
