@@ -22,6 +22,13 @@ dnl Makefile.am:
 dnl    @GNOME_CODE_COVERAGE_RULES@
 dnl    my_program_LIBS = … $(CODE_COVERAGE_LDFLAGS) …
 dnl    my_program_CFLAGS = … $(CODE_COVERAGE_CFLAGS) …
+dnl
+dnl This results in a “check-code-coverage” rule being added to any Makefile.am
+dnl which includes “@GNOME_CODE_COVERAGE_RULES@” (assuming the module has been
+dnl configured with --enable-code-coverage). Running `make check-code-coverage`
+dnl in that directory will run the module’s test suite (`make check`) and build
+dnl a code coverage report detailing the code which was touched, then print the
+dnl URI for the report.
 
 AC_DEFUN([GNOME_CODE_COVERAGE],[
 	dnl Check for --enable-code-coverage
