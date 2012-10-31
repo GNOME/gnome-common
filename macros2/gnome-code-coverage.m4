@@ -11,8 +11,7 @@ dnl Note that all optimisation flags in CFLAGS must be disabled when code
 dnl coverage is enabled.
 dnl
 dnl Derived from Makefile.decl in GLib, originally licenced under LGPLv2.1+.
-dnl This file is licenced under GPLv3. For the full gnome-common licence
-dnl (GPLv3), see the COPYING file.
+dnl This file is licenced under LGPLv2.1+.
 dnl
 dnl Usage example:
 dnl configure.ac:
