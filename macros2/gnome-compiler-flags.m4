@@ -52,9 +52,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 	warning_flags="$base_warn_flags $base_error_flags"
 	;;
     maximum|error)
-	warning_flags="$base_warn_flags $base_error_flags \
-	-Wdeclaration-after-statement \
-	"
+	warning_flags="$base_warn_flags $base_error_flags"
 	;;
     *)
 	AC_MSG_ERROR(Unknown argument '$enable_compile_warnings' to --enable-compile-warnings)
