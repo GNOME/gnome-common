@@ -30,7 +30,6 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 	warning_flags="\
 	-Wall \
  	-Wstrict-prototypes \
-	-Waggregate-return \
 	-Werror=missing-prototypes \
 	-Werror=implicit-function-declaration \
 	-Werror=pointer-arith \
@@ -43,7 +42,6 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 	warning_flags="\
 	-Wall \
 	-Wstrict-prototypes \
-	-Waggregate-return \
 	-Wdeclaration-after-statement \
 	-Werror=missing-prototypes \
 	-Werror=implicit-function-declaration \
