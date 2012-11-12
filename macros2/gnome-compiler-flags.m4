@@ -27,10 +27,33 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 	warning_flags="-Wall"
 	;;
     yes)
-	warning_flags="-Wall -Wstrict-prototypes -Waggregate-return -Werror=missing-prototypes -Werror=implicit-function-declaration -Werror=pointer-arith -Werror=init-self -Werror=format-security -Werror=format=2 -Werror=missing-include-dirs"
+	warning_flags="\
+	-Wall \
+ 	-Wstrict-prototypes \
+	-Waggregate-return \
+	-Werror=missing-prototypes \
+	-Werror=implicit-function-declaration \
+	-Werror=pointer-arith \
+	-Werror=init-self \
+	-Werror=format-security \
+	-Werror=format=2 \
+	-Werror=missing-include-dirs"
 	;;
     maximum|error)
-	warning_flags="-Wall -Wstrict-prototypes -Waggregate-return -Wdeclaration-after-statement -Werror=missing-prototypes -Werror=implicit-function-declaration -Werror=pointer-arith -Werror=init-self -Werror=format-security -Werror=format=2 -Werror=missing-include-dirs -Wnested-externs -Wno-sign-compare"
+	warning_flags="\
+	-Wall \
+	-Wstrict-prototypes \
+	-Waggregate-return \
+	-Wdeclaration-after-statement \
+	-Werror=missing-prototypes \
+	-Werror=implicit-function-declaration \
+	-Werror=pointer-arith \
+	-Werror=init-self \
+	-Werror=format-security \
+	-Werror=format=2 \
+	-Werror=missing-include-dirs \
+	-Wnested-externs \
+	-Wno-sign-compare"
 	;;
     *)
 	AC_MSG_ERROR(Unknown argument '$enable_compile_warnings' to --enable-compile-warnings)
