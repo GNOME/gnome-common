@@ -54,7 +54,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     maximum|error)
 	warning_flags="$base_warn_flags $base_error_flags \
 	-Wdeclaration-after-statement \
-	-Wno-sign-compare"
+	"
 	;;
     *)
 	AC_MSG_ERROR(Unknown argument '$enable_compile_warnings' to --enable-compile-warnings)
