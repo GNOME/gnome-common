@@ -19,6 +19,27 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     warning_flags=
     realsave_CFLAGS="$CFLAGS"
 
+    dnl These are warning flags that aren't marked as fatal.  Can be
+    dnl overridden on a per-project basis with -Wno-foo.
+    base_warn_flags=" \
+        -Wall \
+	-Wstrict-prototypes \
+    "
+
+    dnl These compiler flags typically indicate very broken or suspicious
+    dnl code.  Some of them such as implicit-function-declaration are
+    dnl just not default because gcc compiles a lot of legacy code.
+    dnl We choose to make this set into explicit errors.
+    base_error_flags=" \
+	-Werror=missing-prototypes \
+	-Werror=implicit-function-declaration \
+	-Werror=pointer-arith \
+	-Werror=init-self \
+	-Werror=format-security \
+	-Werror=format=2 \
+	-Werror=missing-include-dirs \
+    "
+
     case "$enable_compile_warnings" in
     no)
 	warning_flags=
@@ -27,29 +48,11 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 	warning_flags="-Wall"
 	;;
     yes)
-	warning_flags="\
-	-Wall \
- 	-Wstrict-prototypes \
-	-Werror=missing-prototypes \
-	-Werror=implicit-function-declaration \
-	-Werror=pointer-arith \
-	-Werror=init-self \
-	-Werror=format-security \
-	-Werror=format=2 \
-	-Werror=missing-include-dirs"
+	warning_flags="$base_warn_flags $base_error_flags"
 	;;
     maximum|error)
-	warning_flags="\
-	-Wall \
-	-Wstrict-prototypes \
+	warning_flags="$base_warn_flags $base_error_flags \
 	-Wdeclaration-after-statement \
-	-Werror=missing-prototypes \
-	-Werror=implicit-function-declaration \
-	-Werror=pointer-arith \
-	-Werror=init-self \
-	-Werror=format-security \
-	-Werror=format=2 \
-	-Werror=missing-include-dirs \
 	-Wnested-externs \
 	-Wno-sign-compare"
 	;;
