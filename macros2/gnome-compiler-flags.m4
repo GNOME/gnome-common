@@ -24,6 +24,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     base_warn_flags=" \
         -Wall \
 	-Wstrict-prototypes \
+	-Wnested-externs \
     "
 
     dnl These compiler flags typically indicate very broken or suspicious
@@ -53,7 +54,6 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     maximum|error)
 	warning_flags="$base_warn_flags $base_error_flags \
 	-Wdeclaration-after-statement \
-	-Wnested-externs \
 	-Wno-sign-compare"
 	;;
     *)
