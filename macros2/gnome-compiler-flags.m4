@@ -23,8 +23,8 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl overridden on a per-project basis with -Wno-foo.
     base_warn_flags=" \
         -Wall \
-	-Wstrict-prototypes \
-	-Wnested-externs \
+        -Wstrict-prototypes \
+        -Wnested-externs \
     "
 
     dnl These compiler flags typically indicate very broken or suspicious
@@ -32,31 +32,31 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl just not default because gcc compiles a lot of legacy code.
     dnl We choose to make this set into explicit errors.
     base_error_flags=" \
-	-Werror=missing-prototypes \
-	-Werror=implicit-function-declaration \
-	-Werror=pointer-arith \
-	-Werror=init-self \
-	-Werror=format-security \
-	-Werror=format=2 \
-	-Werror=missing-include-dirs \
+        -Werror=missing-prototypes \
+        -Werror=implicit-function-declaration \
+        -Werror=pointer-arith \
+        -Werror=init-self \
+        -Werror=format-security \
+        -Werror=format=2 \
+        -Werror=missing-include-dirs \
     "
 
     case "$enable_compile_warnings" in
     no)
-	warning_flags=
-	;;
+        warning_flags=
+        ;;
     minimum)
-	warning_flags="-Wall"
-	;;
+        warning_flags="-Wall"
+        ;;
     yes)
-	warning_flags="$base_warn_flags $base_error_flags"
-	;;
+        warning_flags="$base_warn_flags $base_error_flags"
+        ;;
     maximum|error)
-	warning_flags="$base_warn_flags $base_error_flags"
-	;;
+        warning_flags="$base_warn_flags $base_error_flags"
+        ;;
     *)
-	AC_MSG_ERROR(Unknown argument '$enable_compile_warnings' to --enable-compile-warnings)
-	;;
+        AC_MSG_ERROR(Unknown argument '$enable_compile_warnings' to --enable-compile-warnings)
+        ;;
     esac
 
     if test "$enable_compile_warnings" = "error" ; then
