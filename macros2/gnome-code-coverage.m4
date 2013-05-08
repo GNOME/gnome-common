@@ -120,7 +120,7 @@ code_coverage_quiet_0 = --quiet
 
 # Use recursive makes in order to ignore errors during check
 check-code-coverage:
-ifdef CODE_COVERAGE_ENABLED
+ifeq ($(CODE_COVERAGE_ENABLED),yes)
 	-$(MAKE) $(AM_MAKEFLAGS) -k check
 	$(MAKE) $(AM_MAKEFLAGS) code-coverage-capture
 else
@@ -129,7 +129,7 @@ endif
 
 # Capture code coverage data
 code-coverage-capture: code-coverage-capture-hook
-ifdef CODE_COVERAGE_ENABLED
+ifeq ($(CODE_COVERAGE_ENABLED),yes)
 	$(LCOV) $(code_coverage_quiet) --directory $(CODE_COVERAGE_DIRECTORY) --capture --output-file "$(CODE_COVERAGE_OUTPUT_FILE).tmp" --test-name "$(PACKAGE_NAME)-$(PACKAGE_VERSION)" --no-checksum --compat-libtool $(CODE_COVERAGE_LCOV_OPTIONS)
 	$(LCOV) $(code_coverage_quiet) --directory $(CODE_COVERAGE_DIRECTORY) --remove "$(CODE_COVERAGE_OUTPUT_FILE).tmp" "/tmp/*" $(CODE_COVERAGE_IGNORE_PATTERN) --output-file "$(CODE_COVERAGE_OUTPUT_FILE)"
 	-@rm -f $(CODE_COVERAGE_OUTPUT_FILE).tmp
@@ -142,11 +142,13 @@ endif
 # Hook rule executed before code-coverage-capture, overridable by the user
 code-coverage-capture-hook:
 
+ifeq ($(CODE_COVERAGE_ENABLED),yes)
 clean: code-coverage-clean
 code-coverage-clean:
 	-$(LCOV) --directory $(top_builddir) -z
 	-rm -rf $(CODE_COVERAGE_OUTPUT_FILE) $(CODE_COVERAGE_OUTPUT_FILE).tmp $(CODE_COVERAGE_OUTPUT_DIRECTORY)
 	-find . -name "*.gcda" -o -name "*.gcov" -delete
+endif
 
 GITIGNOREFILES ?=
 GITIGNOREFILES += $(CODE_COVERAGE_OUTPUT_FILE) $(CODE_COVERAGE_OUTPUT_DIRECTORY)
