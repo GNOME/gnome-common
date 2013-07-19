@@ -8,7 +8,7 @@ REQUIRED_AUTOMAKE_VERSION=1.9
 
 PKG_NAME="Gnome Common Macros"
 
-(test -f $srcdir/configure.in \
+(test -f $srcdir/configure.ac \
 ## put other tests here
 ) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
