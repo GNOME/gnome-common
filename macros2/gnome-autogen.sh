@@ -404,15 +404,15 @@ for configure_ac in $configure_files; do
 	    $GNOME_DOC_PREPARE --force --copy || exit 1
 	fi
 
-	# Now that all the macros are sorted, run autoreconf ...
-	printbold "Running autoreconf..."
-	autoreconf --verbose --force --install -Wno-portability || exit 1
-
 	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null ||
            grep "^IT_PROG_INTLTOOL" $basename >/dev/null; then
 	    printbold "Running $INTLTOOLIZE..."
 	    $INTLTOOLIZE --force --copy --automake || exit 1
 	fi
+
+	# Now that all the macros are sorted, run autoreconf ...
+	printbold "Running autoreconf..."
+	autoreconf --verbose --force --install -Wno-portability || exit 1
 
 	cd "$topdir"
     fi
