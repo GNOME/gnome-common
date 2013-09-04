@@ -2,6 +2,11 @@ dnl GNOME_COMPILE_WARNINGS
 dnl Turn on many useful compiler warnings and substitute the result into
 dnl WARN_CFLAGS
 dnl For now, only works on GCC
+dnl Pass the default value of the --enable-compile-warnings configure option as
+dnl the first argument to the macro, defaulting to 'yes'.
+dnl Additional warning/error flags can be passed as an optional second argument.
+dnl
+dnl For example: GNOME_COMPILE_WARNINGS([maximum],[-Werror=some-flag -Wfoobar])
 AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl ******************************
     dnl More compiler warnings
@@ -41,6 +46,11 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
         -Werror=missing-include-dirs \
     "
 
+    dnl Additional warning or error flags provided by the module author to
+    dnl allow stricter standards to be imposed on a per-module basis.
+    dnl The author can pass -W or -Werror flags here as they see fit.
+    additional_flags="m4_default([$2],[])"
+
     case "$enable_compile_warnings" in
     no)
         warning_flags=
@@ -49,10 +59,10 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
         warning_flags="-Wall"
         ;;
     yes)
-        warning_flags="$base_warn_flags $base_error_flags"
+        warning_flags="$base_warn_flags $base_error_flags $additional_flags"
         ;;
     maximum|error)
-        warning_flags="$base_warn_flags $base_error_flags"
+        warning_flags="$base_warn_flags $base_error_flags $additional_flags"
         ;;
     *)
         AC_MSG_ERROR(Unknown argument '$enable_compile_warnings' to --enable-compile-warnings)
