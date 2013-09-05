@@ -1,3 +1,8 @@
+# gnome-compiler-flags.m4
+#
+# serial 2
+#
+
 dnl GNOME_COMPILE_WARNINGS
 dnl Turn on many useful compiler warnings and substitute the result into
 dnl WARN_CFLAGS
