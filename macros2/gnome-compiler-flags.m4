@@ -63,10 +63,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     minimum)
         warning_flags="-Wall"
         ;;
-    yes)
-        warning_flags="$base_warn_flags $base_error_flags $additional_flags"
-        ;;
-    maximum|error)
+    yes|maximum|error)
         warning_flags="$base_warn_flags $base_error_flags $additional_flags"
         ;;
     *)
