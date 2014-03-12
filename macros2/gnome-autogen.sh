@@ -151,14 +151,14 @@ print_m4macros_error() {
     printerr "***Error***: some autoconf macros required to build $PKG_NAME"
     printerr "  were not found in your aclocal path, or some forbidden"
     printerr "  macros were found.  Perhaps you need to adjust your"
-    printerr "  ACLOCAL_FLAGS?"
+    printerr "  ACLOCAL_PATH?"
     printerr
 }
 
 # Usage:
 #     check_m4macros
 # Checks that all the requested macro files are in the aclocal macro path
-# Uses REQUIRED_M4MACROS and ACLOCAL variables.
+# Uses REQUIRED_M4MACROS and ACLOCAL_PATH variables.
 check_m4macros() {
     # construct list of macro directories
     cm_macrodirs=`aclocal --print-ac-dir`
@@ -177,15 +177,12 @@ check_m4macros() {
 	fi
     fi
 
-    # Parse $ACLOCAL_FLAGS
-    set - $ACLOCAL_FLAGS
-    while [ $# -gt 0 ]; do
-	if [ "$1" = "-I" ]; then
-	    add_to_cm_macrodirs "$2"
-	    shift
-	fi
-	shift
+    # Parse $ACLOCAL_PATH
+    IFS="${IFS=	 }"; save_IFS="$IFS"; IFS=":"
+    for dir in ${ACLOCAL_PATH}; do
+	add_to_cm_macrodirs "$dir"
     done
+    IFS="$save_IFS"
 
     cm_status=0
     if [ -n "$REQUIRED_M4MACROS" ]; then
