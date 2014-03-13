@@ -6,6 +6,7 @@ test "$PKG_NAME" || PKG_NAME=Package
 test "$srcdir" || srcdir=.
 
 # default version requirements ...
+test "$REQUIRED_AUTOMAKE_VERSION" || REQUIRED_AUTOMAKE_VERSION=1.11.2
 test "$REQUIRED_AUTORECONF_VERSION" || REQUIRED_AUTORECONF_VERSION=2.53
 test "$REQUIRED_GLIB_GETTEXT_VERSION" || REQUIRED_GLIB_GETTEXT_VERSION=2.2.0
 test "$REQUIRED_INTLTOOL_VERSION" || REQUIRED_INTLTOOL_VERSION=0.25
@@ -250,6 +251,9 @@ want_pkg_config=false
 want_gtk_doc=false
 want_gnome_doc_utils=false
 want_maintainer_mode=false
+
+version_check automake AUTOMAKE automake $REQUIRED_AUTOMAKE_VERSION \
+    "http://ftp.gnu.org/pub/gnu/automake/automake-$REQUIRED_AUTOMAKE_VERSION.tar.xz"
 
 version_check autoreconf AUTORECONF autoreconf $REQUIRED_AUTORECONF_VERSION \
     "http://ftp.gnu.org/pub/gnu/autoconf/autoconf-$REQUIRED_AUTORECONF_VERSION.tar.xz"
