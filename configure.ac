@@ -1,6 +1,6 @@
 AC_PREREQ(2.54)
-AC_INIT([gnome-common], [3.10.0],
-        [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-common])
+AC_INIT([gnome-common], [3.12.0],
+        [https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-common])
 
 AC_CONFIG_SRCDIR([macros2/gnome-autogen.sh])
 
