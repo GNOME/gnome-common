@@ -23,18 +23,13 @@ AU_DEFUN([GNOME_COMMON_INIT],
 in your top-level Makefile.am, instead, where "m4" is the macro directory set
 with AC_CONFIG_MACRO_DIR() in your configure.ac]])
 
-AC_DEFUN([GNOME_DEBUG_CHECK],
+AU_DEFUN([GNOME_DEBUG_CHECK],
 [
-	AC_ARG_ENABLE([debug],
-                      AC_HELP_STRING([--enable-debug],
-                                     [turn on debugging]),,
-                      [enable_debug=no])
-
-	if test x$enable_debug = xyes ; then
-	    AC_DEFINE(GNOME_ENABLE_DEBUG, 1,
-		[Enable additional debugging at the expense of performance and size])
-	fi
-])
+	AX_CHECK_ENABLE_DEBUG([no],[GNOME_ENABLE_DEBUG])
+],
+[[$0: This macro is deprecated. You should use AX_CHECK_ENABLE_DEBUG instead and
+replace uses of GNOME_ENABLE_DEBUG with ENABLE_DEBUG.
+See: https://savannah.gnu.org/patch/?8452]])
 
 dnl GNOME_MAINTAINER_MODE_DEFINES ()
 dnl define DISABLE_DEPRECATED
