@@ -1,4 +1,4 @@
-SUBDIRS = macros2 doc-build
+SUBDIRS = macros2
 
 EXTRA_DIST = \
 	autogen.sh \

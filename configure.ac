@@ -16,8 +16,6 @@ AM_MAINTAINER_MODE([enable])
 AC_CONFIG_FILES([
 Makefile
 macros2/Makefile
-doc-build/Makefile
-doc-build/gnome-doc-common
 ])
 
 AC_OUTPUT

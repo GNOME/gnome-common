@@ -12,7 +12,6 @@ test "$REQUIRED_GLIB_GETTEXT_VERSION" || REQUIRED_GLIB_GETTEXT_VERSION=2.2.0
 test "$REQUIRED_INTLTOOL_VERSION" || REQUIRED_INTLTOOL_VERSION=0.25
 test "$REQUIRED_PKG_CONFIG_VERSION" || REQUIRED_PKG_CONFIG_VERSION=0.14.0
 test "$REQUIRED_GTK_DOC_VERSION" || REQUIRED_GTK_DOC_VERSION=1.0
-test "$REQUIRED_DOC_COMMON_VERSION" || REQUIRED_DOC_COMMON_VERSION=2.3.0
 test "$REQUIRED_GNOME_DOC_UTILS_VERSION" || REQUIRED_GNOME_DOC_UTILS_VERSION=0.4.2
 
 # a list of required m4 macros.  Package can set an initial value
@@ -332,11 +331,6 @@ if $want_gnome_doc_utils; then
         "http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils/"
 fi
 
-if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
-    version_check gnome-common DOC_COMMON gnome-doc-common \
-        $REQUIRED_DOC_COMMON_VERSION " "
-fi
-
 check_m4macros
 
 if [ "$#" = 0 -a "x$NOCONFIGURE" = "x" ]; then
@@ -376,10 +370,6 @@ for configure_ac in $configure_files; do
 	    $GTKDOCIZE --copy || exit 1
 	fi
 
-	if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
-	    printbold "Running gnome-doc-common..."
-	    gnome-doc-common --copy || exit 1
-	fi
 	if grep "^GNOME_DOC_INIT" $basename >/dev/null; then
 	    printbold "Running $GNOME_DOC_PREPARE..."
 	    $GNOME_DOC_PREPARE --force --copy || exit 1
