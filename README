@@ -1,10 +1,9 @@
-This module contains various files needed to bootstrap Gnome 2 modules
-built from CVS.  It contains the following components:
+This module contains various files needed to bootstrap GNOME modules
+built from git.  It contains the following components:
  1. A common "autogen.sh" script that can be used to configure a
-    source directory checked out from CVS.
+    source directory checked out from git.
  2. Some commonly used macros (quite a small set these days -- macros
     should be packaged with their respective modules).
- 3. Some files used to build user documentation.
 
 To make use of the common autogen script, create a stub autogen.sh
 script in your module that looks something like this:
@@ -17,22 +16,21 @@ srcdir=`dirname $0`
 PKG_NAME=mypackage
 REQUIRED_AUTOMAKE_VERSION=1.7
 
-if [ ! -f "$srcdir/somefile-that-is-only-in-mypackage" ]; then
+if [ ! -f "$srcdir/configure.ac" ]; then
  echo "$srcdir doesn't look like source directory for $PKG_NAME" >&2
  exit 1
 fi
 
-. gnome-autogen.sh
+which gnome-autogen.sh || {
+	echo "You need to install gnome-common from GNOME Git"
+	exit 1
+}
+
+. gnome-autogen.sh "$@"
 ---- Cut Here ----
 
 Then put the following in your configure.ac or configure.in file:
-  GNOME_COMMON_INIT
-
-This macro is equivalent to the following two lines (which you can use
-instead if you don't want to depend on gnome-common macros):
-  AC_SUBST([ACLOCAL_AMFLAGS], ["\${ACLOCAL_FLAGS}"])
-
-Or if you are using the AC_CONFIG_MACRO_DIR macro:
+  AC_CONFIG_MACRO_DIR([m4])
   AC_SUBST([ACLOCAL_AMFLAGS], ["-I $ac_macro_dir \${ACLOCAL_FLAGS}"])
 
 This will make sure that autoconf macros will be found when you
