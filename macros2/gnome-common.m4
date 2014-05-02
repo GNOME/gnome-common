@@ -34,7 +34,7 @@ See: https://savannah.gnu.org/patch/?8452]])
 dnl GNOME_MAINTAINER_MODE_DEFINES ()
 dnl define DISABLE_DEPRECATED
 dnl
-AC_DEFUN([GNOME_MAINTAINER_MODE_DEFINES],
+AU_DEFUN([GNOME_MAINTAINER_MODE_DEFINES],
 [
 	AC_REQUIRE([AM_MAINTAINER_MODE])
 
@@ -47,4 +47,6 @@ AC_DEFUN([GNOME_MAINTAINER_MODE_DEFINES],
 	fi
 
 	AC_SUBST(DISABLE_DEPRECATED)
-])
+],
+[[$0: This macro is deprecated. All of the modules it disables deprecations for
+are obsolete. Remove it and all uses of DISABLE_DEPRECATED.]])
