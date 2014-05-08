@@ -20,8 +20,9 @@ AC_ARG_ENABLE([compile-warnings],
 
 dnl GNOME_COMPILE_WARNINGS
 dnl Turn on many useful compiler warnings and substitute the result into
-dnl WARN_CFLAGS
-dnl For now, only works on GCC
+dnl WARN_CFLAGS for C and WARN_CXXFLAGS for C++.
+dnl Use AC_LANG_PUSH to set the language before calling this macro, or it will
+dnl use C as the default.
 dnl Pass the default value of the --enable-compile-warnings configure option as
 dnl the first argument to the macro, defaulting to 'yes'.
 dnl Additional warning/error flags can be passed as an optional second argument.
@@ -34,9 +35,10 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl More compiler warnings
     dnl ******************************
 
-    if test "x$GCC" != xyes; then
-	enable_compile_warnings=no
-    fi
+    AS_CASE([$ac_compile],
+            [[*'$CFLAGS '*]], [warn_lang=C warn_cc=$CC warn_conftest="conftest.[$]{ac_ext-c}"],
+            [[*'$CXXFLAGS '*]], [warn_lang='C++' warn_cc=$CXX warn_conftest="conftest.[$]{ac_ext-cc}"],
+            [AC_MSG_ERROR([[current language is neither C nor C++]])])
 
     warning_flags=
     realsave_CFLAGS="$CFLAGS"
@@ -87,26 +89,33 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
         warning_flags="$warning_flags -Werror"
     fi
 
-    dnl Check whether GCC supports the warning options
+    dnl Keep in mind that the dummy source must be devoid of any
+    dnl problems that might cause diagnostics.
+    AC_LANG_CONFTEST([AC_LANG_SOURCE([[
+int main(int argc, char** argv) { return (argv != 0) ? argc : 0; }
+]])])
+
+    dnl Check whether compile supports the warning options
     for option in $warning_flags; do
-	save_CFLAGS="$CFLAGS"
-	CFLAGS="$CFLAGS $option"
-	AC_MSG_CHECKING([whether gcc understands $option])
-	AC_TRY_COMPILE([], [],
-	    has_option=yes,
-	    has_option=no,)
-	CFLAGS="$save_CFLAGS"
-	AC_MSG_RESULT([$has_option])
-	if test $has_option = yes; then
-	    tested_warning_flags="$tested_warning_flags $option"
-	fi
-	unset has_option
-	unset save_CFLAGS
+      # Test whether the compiler accepts the flag.  Look at standard output,
+      # since GCC only shows a warning message if an option is not supported.
+      warn_cc_out=`$warn_cc $tested_warning_flags $option -c "$warn_conftest" 2>&1 || echo failed`
+      rm -f "conftest.[$]{OBJEXT-o}"
+
+      AS_IF([test "x$warn_cc_out" = x],
+            [AS_IF([test "x$tested_warning_flags" = x],
+                   [tested_warning_flags=$option],
+                   [tested_warning_flags="$tested_warning_flags $option"])],
+[cat <<_WARNEOF >&AS_MESSAGE_LOG_FD
+$warn_cc: $warn_cc_out
+_WARNEOF
+])
     done
     unset option
-    CFLAGS="$realsave_CFLAGS"
-    AC_MSG_CHECKING(what warning flags to pass to the C compiler)
-    AC_MSG_RESULT($tested_warning_flags)
+    rm -f "$mm_conftest"
+
+    AC_MSG_CHECKING([what warning flags to pass to the $warn_lang compiler])
+    AC_MSG_RESULT([$tested_warning_flags])
 
     AC_ARG_ENABLE(iso-c,
                   AS_HELP_STRING([--enable-iso-c],
@@ -129,8 +138,10 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
     fi
     AC_MSG_RESULT($complCFLAGS)
 
-    WARN_CFLAGS="$tested_warning_flags $complCFLAGS"
-    AC_SUBST(WARN_CFLAGS)
+dnl TODO use m4 to avoid AS_IF
+    AS_IF([test "x$warn_lang" = "xC"],
+          [AC_SUBST([WARN_CFLAGS], [$tested_warning_flags $complCFLAGS])],
+          [AC_SUBST([WARN_CXXFLAGS], [$tested_warning_flags $complCFLAGS])])
 ])
 
 dnl For C++, do basically the same thing.
