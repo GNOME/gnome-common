@@ -1,7 +1,22 @@
 # gnome-compiler-flags.m4
 #
-# serial 2
+# serial 3
 #
+
+dnl _GNOME_ARG_ENABLE_COMPILE_WARNINGS
+dnl
+dnl Helper macro of GNOME_COMPILE_WARNINGS(). Pulled in through AC_REQUIRE() so
+dnl that it is only expanded once.
+dnl
+m4_define([_GNOME_ARG_ENABLE_COMPILE_WARNINGS],
+[dnl
+AC_PROVIDE([$0])[]dnl
+AC_ARG_ENABLE([compile-warnings],
+              [AS_HELP_STRING([[--enable-compile-warnings=@<:@no/minimum/yes/maximum/error@:>@]],
+                              [Turn on compiler warnings])],
+              [enable_compile_warnings=$enableval],
+              [enable_compile_warnings=yes])[]dnl
+])
 
 dnl GNOME_COMPILE_WARNINGS
 dnl Turn on many useful compiler warnings and substitute the result into
@@ -13,14 +28,11 @@ dnl Additional warning/error flags can be passed as an optional second argument.
 dnl
 dnl For example: GNOME_COMPILE_WARNINGS([maximum],[-Werror=some-flag -Wfoobar])
 AC_DEFUN([GNOME_COMPILE_WARNINGS],[
+    AC_REQUIRE([_GNOME_ARG_ENABLE_COMPILE_WARNINGS])[]dnl
+
     dnl ******************************
     dnl More compiler warnings
     dnl ******************************
-
-    AC_ARG_ENABLE(compile-warnings, 
-                  AS_HELP_STRING([--enable-compile-warnings=@<:@no/minimum/yes/maximum/error@:>@],
-                                 [Turn on compiler warnings]),,
-                  [enable_compile_warnings="m4_default([$1],[yes])"])
 
     if test "x$GCC" != xyes; then
 	enable_compile_warnings=no
