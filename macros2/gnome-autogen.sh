@@ -17,7 +17,6 @@ test "$REQUIRED_GNOME_DOC_UTILS_VERSION" || REQUIRED_GNOME_DOC_UTILS_VERSION=0.4
 
 # a list of required m4 macros.  Package can set an initial value
 test "$REQUIRED_M4MACROS" || REQUIRED_M4MACROS=
-test "$FORBIDDEN_M4MACROS" || FORBIDDEN_M4MACROS=
 
 # Not all echo versions allow -n, so we check what is possible. This test is
 # based on the one in autoconf.
@@ -129,13 +128,6 @@ require_m4macro() {
     esac
 }
 
-forbid_m4macro() {
-    case "$FORBIDDEN_M4MACROS" in
-	$1\ * | *\ $1\ * | *\ $1) ;;
-	*) FORBIDDEN_M4MACROS="$FORBIDDEN_M4MACROS $1" ;;
-    esac
-}
-
 # Usage:
 #     add_to_cm_macrodirs dirname
 # Adds the dir to $cm_macrodirs, if it's not there yet.
@@ -220,31 +212,11 @@ check_m4macros() {
         print_m4macros_error
         exit $cm_status
     fi
-    if [ -n "$FORBIDDEN_M4MACROS" ]; then
-	printbold "Checking for forbidden M4 macros..."
-	# check that each macro file is in one of the macro dirs
-	for cm_macro in $FORBIDDEN_M4MACROS; do
-	    cm_macrofound=false
-	    for cm_dir in $cm_macrodirs; do
-		if [ -f "$cm_dir/$cm_macro" ]; then
-		    cm_macrofound=true
-		    break
-		fi
-	    done
-	    if $cm_macrofound; then
-		printerr "  $cm_macro found (should be cleared from macros dir)"
-		cm_status=1
-	    fi
-	done
-    fi
     if [ "$cm_status" != 0 ]; then
         print_m4macros_error
 	exit $cm_status
     fi
 }
-
-# try to catch the case where the macros2/ directory hasn't been cleared out.
-forbid_m4macro gnome-cxx-check.m4
 
 want_glib_gettext=false
 want_intltool=false
