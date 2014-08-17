@@ -58,7 +58,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 
     case "$enable_compile_warnings" in
     no)
-        warning_flags=
+        warning_flags="-w"
         ;;
     minimum)
         warning_flags="-Wall"
