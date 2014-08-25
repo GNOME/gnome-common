@@ -12,6 +12,7 @@ GNOME2_MACROS = \
 # them submitted upstream.
 AUTOCONF_ARCHIVE_MACROS = \
 	ax_check_enable_debug.m4 \
+	ax_code_coverage.m4 \
 	$(NULL)
 
 EXTRA_DIST = $(GNOME2_MACROS) $(AUTOCONF_ARCHIVE_MACROS) gnome-autogen.sh
