@@ -3,7 +3,6 @@ SUBDIRS = macros2 doc-build
 EXTRA_DIST = \
 	autogen.sh \
 	gnome-common.doap \
-	doc/usage.txt \
 	ChangeLog.pre-git
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-silent-rules
