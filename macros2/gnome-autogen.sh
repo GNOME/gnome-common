@@ -12,7 +12,6 @@ test "$REQUIRED_GLIB_GETTEXT_VERSION" || REQUIRED_GLIB_GETTEXT_VERSION=2.2.0
 test "$REQUIRED_INTLTOOL_VERSION" || REQUIRED_INTLTOOL_VERSION=0.25
 test "$REQUIRED_PKG_CONFIG_VERSION" || REQUIRED_PKG_CONFIG_VERSION=0.14.0
 test "$REQUIRED_GTK_DOC_VERSION" || REQUIRED_GTK_DOC_VERSION=1.0
-test "$REQUIRED_GNOME_DOC_UTILS_VERSION" || REQUIRED_GNOME_DOC_UTILS_VERSION=0.4.2
 
 # a list of required m4 macros.  Package can set an initial value
 test "$REQUIRED_M4MACROS" || REQUIRED_M4MACROS=
@@ -221,7 +220,6 @@ want_glib_gettext=false
 want_intltool=false
 want_pkg_config=false
 want_gtk_doc=false
-want_gnome_doc_utils=false
 want_maintainer_mode=false
 
 version_check automake AUTOMAKE automake $REQUIRED_AUTOMAKE_VERSION \
@@ -265,9 +263,6 @@ for configure_ac in $configure_files; do
     fi
     if grep "^GTK_DOC_CHECK" $configure_ac >/dev/null; then
 	want_gtk_doc=true
-    fi
-    if grep "^GNOME_DOC_INIT" $configure_ac >/dev/null; then
-        want_gnome_doc_utils=true
     fi
 
     # check that AM_MAINTAINER_MODE is used
@@ -326,11 +321,6 @@ if $want_gtk_doc; then
     require_m4macro gtk-doc.m4
 fi
 
-if $want_gnome_doc_utils; then
-    version_check gnome-doc-utils GNOME_DOC_PREPARE gnome-doc-prepare $REQUIRED_GNOME_DOC_UTILS_VERSION \
-        "http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils/"
-fi
-
 check_m4macros
 
 if [ "$#" = 0 -a "x$NOCONFIGURE" = "x" ]; then
@@ -368,11 +358,6 @@ for configure_ac in $configure_files; do
 	if grep "^GTK_DOC_CHECK" $basename >/dev/null; then
 	    printbold "Running $GTKDOCIZE..."
 	    $GTKDOCIZE --copy || exit 1
-	fi
-
-	if grep "^GNOME_DOC_INIT" $basename >/dev/null; then
-	    printbold "Running $GNOME_DOC_PREPARE..."
-	    $GNOME_DOC_PREPARE --force --copy || exit 1
 	fi
 
 	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null ||
