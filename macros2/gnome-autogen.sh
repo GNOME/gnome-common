@@ -284,6 +284,10 @@ for configure_ac in $configure_files; do
         require_m4macro appdata-xml.m4
     fi
 
+    if grep "^APPSTREAM_XML" $configure_ac >/dev/null; then
+        require_m4macro appstream-xml.m4
+    fi
+
     # check to make sure gnome-common macros can be found ...
     if grep "^GNOME_COMMON_INIT" $configure_ac >/dev/null ||
        grep "^GNOME_DEBUG_CHECK" $configure_ac >/dev/null ||
