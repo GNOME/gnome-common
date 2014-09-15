@@ -29,7 +29,7 @@ AU_DEFUN([GNOME_DEBUG_CHECK],
 ],
 [[$0: This macro is deprecated. You should use AX_CHECK_ENABLE_DEBUG instead and
 replace uses of GNOME_ENABLE_DEBUG with ENABLE_DEBUG.
-See: https://savannah.gnu.org/patch/?8452]])
+See: http://www.gnu.org/software/autoconf-archive/ax_check_enable_debug.html#ax_check_enable_debug]])
 
 dnl GNOME_MAINTAINER_MODE_DEFINES ()
 dnl define DISABLE_DEPRECATED

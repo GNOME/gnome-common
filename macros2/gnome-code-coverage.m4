@@ -38,4 +38,4 @@ AU_DEFUN([GNOME_CODE_COVERAGE],[
 ],
 [[$0: This macro is deprecated. You should use AX_CODE_COVERAGE instead and
 replace uses of GNOME_CODE_COVERAGE_RULES with CODE_COVERAGE_RULES.
-See: https://savannah.gnu.org/patch/?8451]])
+See: http://www.gnu.org/software/autoconf-archive/ax_code_coverage.html#ax_code_coverage]])
