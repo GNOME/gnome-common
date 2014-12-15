@@ -1,6 +1,6 @@
 # gnome-compiler-flags.m4
 #
-# serial 2
+# serial 3
 #
 
 dnl GNOME_COMPILE_WARNINGS
@@ -49,6 +49,7 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
         -Werror=format-security \
         -Werror=format=2 \
         -Werror=missing-include-dirs \
+        -Werror=return-type \
     "
 
     dnl Additional warning or error flags provided by the module author to
