@@ -45,6 +45,23 @@ printerr() {
     echo "$@" >&2
 }
 
+check_deprecated() {
+    variable=$1
+
+    if set | grep "^$variable=" > /dev/null; then
+        printerr "***Warning*** $1 is deprecated, you may remove it from autogen.sh"
+    fi
+}
+
+check_deprecated REQUIRED_GNOME_DOC_UTILS_VERSION
+check_deprecated REQUIRED_DOC_COMMON_VERSION
+check_deprecated USE_COMMON_DOC_BUILD
+check_deprecated FORBIDDEN_M4MACROS
+check_deprecated GNOME2_DIR
+check_deprecated GNOME2_PATH
+check_deprecated USE_GNOME2_MACROS
+check_deprecated PKG_NAME
+
 PKG_NAME=`autoconf --trace "AC_INIT:$1" "$srcdir/configure.ac"`
 
 # Usage:
