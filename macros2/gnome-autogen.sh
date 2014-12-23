@@ -1,8 +1,6 @@
 #!/bin/sh
 # Run this to generate all the initial makefiles, etc.
 
-#name of package
-test "$PKG_NAME" || PKG_NAME=Package
 test "$srcdir" || srcdir=.
 
 # default version requirements ...
@@ -46,6 +44,8 @@ printbold() {
 printerr() {
     echo "$@" >&2
 }
+
+PKG_NAME=`autoconf --trace "AC_INIT:$1" "$srcdir/configure.ac"`
 
 # Usage:
 #     compare_versions MIN_VERSION ACTUAL_VERSION
