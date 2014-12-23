@@ -1,8 +1,6 @@
 #!/bin/sh
 # Run this to generate all the initial makefiles, etc.
 
-test "$srcdir" || srcdir=.
-
 # default version requirements ...
 test "$REQUIRED_AUTOMAKE_VERSION" || REQUIRED_AUTOMAKE_VERSION=1.11.2
 test "$REQUIRED_AUTORECONF_VERSION" || REQUIRED_AUTORECONF_VERSION=2.53
@@ -61,6 +59,11 @@ check_deprecated GNOME2_DIR
 check_deprecated GNOME2_PATH
 check_deprecated USE_GNOME2_MACROS
 check_deprecated PKG_NAME
+
+if [ -z "$srcdir" ]; then
+    printerr "***Warning*** \$srcdir is not defined, out of dir autogen is broken!"
+    srcdir=.
+fi
 
 PKG_NAME=`autoconf --trace "AC_INIT:$1" "$srcdir/configure.ac"`
 
