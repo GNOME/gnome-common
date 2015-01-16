@@ -1,6 +1,6 @@
 # gnome-compiler-flags.m4
 #
-# serial 3
+# serial 4
 #
 
 dnl GNOME_COMPILE_WARNINGS
@@ -12,7 +12,7 @@ dnl the first argument to the macro, defaulting to 'yes'.
 dnl Additional warning/error flags can be passed as an optional second argument.
 dnl
 dnl For example: GNOME_COMPILE_WARNINGS([maximum],[-Werror=some-flag -Wfoobar])
-AC_DEFUN([GNOME_COMPILE_WARNINGS],[
+AU_DEFUN([GNOME_COMPILE_WARNINGS],[
     dnl ******************************
     dnl More compiler warnings
     dnl ******************************
@@ -120,7 +120,10 @@ AC_DEFUN([GNOME_COMPILE_WARNINGS],[
 
     WARN_CFLAGS="$tested_warning_flags $complCFLAGS"
     AC_SUBST(WARN_CFLAGS)
-])
+],
+[[$0: This macro is deprecated. You should use AX_COMPILER_FLAGS instead and
+eliminate use of --enable-iso-c.
+See: http://www.gnu.org/software/autoconf-archive/ax_compiler_flags.html#ax_compiler_flags]])
 
 dnl For C++, do basically the same thing.
 
