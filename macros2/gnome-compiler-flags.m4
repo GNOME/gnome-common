@@ -127,7 +127,7 @@ See: http://www.gnu.org/software/autoconf-archive/ax_compiler_flags.html#ax_comp
 
 dnl For C++, do basically the same thing.
 
-AC_DEFUN([GNOME_CXX_WARNINGS],[
+AU_DEFUN([GNOME_CXX_WARNINGS],[
   AC_ARG_ENABLE(cxx-warnings,
                 AS_HELP_STRING([--enable-cxx-warnings=@<:@no/minimum/yes@:>@]
                                [Turn on compiler warnings.]),,
@@ -178,4 +178,7 @@ AC_DEFUN([GNOME_CXX_WARNINGS],[
 
   WARN_CXXFLAGS="$CXXFLAGS $warnCXXFLAGS $complCXXFLAGS"
   AC_SUBST(WARN_CXXFLAGS)
-])
+],
+[[$0: This macro is deprecated. You should use AX_COMPILER_FLAGS instead and
+eliminate use of --enable-iso-cxx.
+See: http://www.gnu.org/software/autoconf-archive/ax_compiler_flags.html#ax_compiler_flags]])
