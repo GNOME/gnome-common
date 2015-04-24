@@ -65,7 +65,7 @@ if [ -z "$srcdir" ]; then
     srcdir=.
 fi
 
-PKG_NAME=`autoconf --trace "AC_INIT:$1" "$srcdir/configure.ac"`
+PKG_NAME=`autoconf --trace='AC_INIT:$1' "$srcdir/configure.ac"`
 
 # Usage:
 #     compare_versions MIN_VERSION ACTUAL_VERSION
