@@ -13,6 +13,14 @@ if test -z "$enable_maintainer_mode"; then
 fi
 AM_MAINTAINER_MODE([enable])
 
+AC_ARG_WITH([autoconf-archive],
+            [AS_HELP_STRING([--with-autoconf-archive],
+                            [Enable parallel-installability with autoconf-archive, by disabling installation of its M4 macros])],
+            [], [with_autoconf_archive=no])
+
+AM_CONDITIONAL([WITH_AUTOCONF_ARCHIVE],
+               [test "x$with_autoconf_archive" != "xno"])
+
 AC_CONFIG_FILES([
 Makefile
 macros2/Makefile
