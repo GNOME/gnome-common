@@ -4,7 +4,7 @@ AC_INIT([gnome-common], [3.14.0],
 
 AC_CONFIG_SRCDIR([macros2/gnome-autogen.sh])
 
-AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
+AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-xz])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([no])])
 
