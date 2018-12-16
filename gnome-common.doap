@@ -7,7 +7,7 @@
   <name xml:lang="en">Common files</name>
   <shortdesc xml:lang="en">A module that is required only when building GNOME from the repository.</shortdesc>
   <download-page rdf:resource="http://download.gnome.org/sources/gnome-common/" />
-  <bug-database rdf:resource="http://bugzilla.gnome.org/browse.cgi?product=gnome-common" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/gnome-common/issues/" />
   <!-- <category rdf:resource="http://api.gnome.org/doap-extensions#development" /> -->
 
   <maintainer>
